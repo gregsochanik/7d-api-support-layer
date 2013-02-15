@@ -54,15 +54,17 @@
     <Reference Include="ServiceStack.Text">
       <HintPath>..\..\packages\ServiceStack.Text.3.9.35\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
-    <Reference Include="SevenDigital.Api.Schema">
-      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.1\lib\net40\SevenDigital.Api.Schema.dll</HintPath>
+    <Reference Include="SevenDigital.Api.Schema, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.3\lib\net40\SevenDigital.Api.Schema.dll</HintPath>
     </Reference>
     <Reference Include="SevenDigital.Api.Schema.Premium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\SevenDigital.Api.Schema.Premium.dll</HintPath>
     </Reference>
-    <Reference Include="SevenDigital.Api.Wrapper">
-      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.1\lib\net40\SevenDigital.Api.Wrapper.dll</HintPath>
+    <Reference Include="SevenDigital.Api.Wrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.3\lib\net40\SevenDigital.Api.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="SevenDigital.Api.Wrapper.Premium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
