@@ -5,15 +5,16 @@ using ServiceStack.CacheAccess;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper;
+using SevenDigital.ApiInt.Catalogue;
 
-namespace SevenDigital.ApiInt.Catalogue
+namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 {
-	public class Catalogue : ICatalogue
+	public class CachingCatalogue : ICatalogue
 	{
 		private readonly ICatalogApiFactory _factory;
 		private readonly ICacheClient _cacheClient;
 
-		public Catalogue(ICatalogApiFactory factory, ICacheClient cacheClient)
+		public CachingCatalogue(ICatalogApiFactory factory, ICacheClient cacheClient)
 		{
 			_factory = factory;
 			_cacheClient = cacheClient;

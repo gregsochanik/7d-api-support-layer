@@ -67,7 +67,6 @@
     <Compile Include="Locker\LockerCacheDateCheckerTest.cs" />
     <Compile Include="Locker\LockerCacheTests.cs" />
     <Compile Include="Locker\LockerRetrievalTests.cs" />
-    <Compile Include="Locker\TimedCacheReloadingTests.cs" />
     <Compile Include="Mapping\PurchaseItemMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

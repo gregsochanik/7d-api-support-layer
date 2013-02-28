@@ -4,8 +4,15 @@ using ServiceStack.CacheAccess;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.ApiInt.Locker;
 
-namespace SevenDigital.ApiInt.Unit.Tests.Locker
+namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests
 {
+	
+	public class TestClass
+	{
+		public int Id { get; set; }
+		public string Name { get; set; }
+	}
+
 	[TestFixture]
 	public class TimedCacheReloadingTests
 	{

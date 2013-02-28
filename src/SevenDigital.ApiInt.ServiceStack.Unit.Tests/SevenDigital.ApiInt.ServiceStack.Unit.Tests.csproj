@@ -109,6 +109,7 @@
     <Compile Include="TestData\TestPrice.cs" />
     <Compile Include="TestData\TestRelease.cs" />
     <Compile Include="TestData\TestTrack.cs" />
+    <Compile Include="TimedCacheReloadingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

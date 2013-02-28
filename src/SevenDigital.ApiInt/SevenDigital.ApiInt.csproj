@@ -33,27 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ServiceStack.Common">
-      <HintPath>..\..\packages\ServiceStack.Common.3.9.35\lib\net35\ServiceStack.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\..\packages\ServiceStack.Common.3.9.35\lib\net35\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.OrmLite">
-      <HintPath>..\..\packages\ServiceStack.OrmLite.SqlServer.3.9.35\lib\ServiceStack.OrmLite.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.OrmLite.SqlServer">
-      <HintPath>..\..\packages\ServiceStack.OrmLite.SqlServer.3.9.35\lib\ServiceStack.OrmLite.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Redis">
-      <HintPath>..\..\packages\ServiceStack.Redis.3.9.35\lib\net35\ServiceStack.Redis.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.ServiceInterface">
-      <HintPath>..\..\packages\ServiceStack.3.9.33\lib\net35\ServiceStack.ServiceInterface.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\..\packages\ServiceStack.Text.3.9.35\lib\net35\ServiceStack.Text.dll</HintPath>
-    </Reference>
     <Reference Include="SevenDigital.Api.Schema, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.3\lib\net40\SevenDigital.Api.Schema.dll</HintPath>
@@ -87,7 +66,6 @@
     <Compile Include="Authentication\LoginInvalidException.cs" />
     <Compile Include="Authentication\RequestTokenAuthentication.cs" />
     <Compile Include="Catalogue\CacheKeys.cs" />
-    <Compile Include="Catalogue\Catalogue.cs" />
     <Compile Include="Catalogue\ICatalogApiFactory.cs" />
     <Compile Include="Catalogue\ICatalogue.cs" />
     <Compile Include="Locker\ILockerBrowser.cs" />
@@ -102,8 +80,6 @@
     <Compile Include="Locker\LockerDateChecker.cs" />
     <Compile Include="Locker\LockerRetrieval.cs" />
     <Compile Include="Locker\LockerStats.cs" />
-    <Compile Include="Locker\TimedCacheReloading.cs" />
-    <Compile Include="Locker\UserTokenCache.cs" />
     <Compile Include="Mapping\IPurchaseItemMapper.cs" />
     <Compile Include="Mapping\PurchaseItemMapper.cs" />
     <Compile Include="Mapping\TrackUtility.cs" />
@@ -114,7 +90,6 @@
     <Compile Include="Model\IHasCountryCode.cs" />
     <Compile Include="Model\IHasId.cs" />
     <Compile Include="Model\ItemRequest.cs" />
-    <Compile Include="Model\LockerCheckRequest.cs" />
     <Compile Include="Model\PurchaseRequest.cs" />
     <Compile Include="Model\PurchaseStatus.cs" />
     <Compile Include="Model\PurchaseType.cs" />

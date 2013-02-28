@@ -46,7 +46,7 @@ namespace SevenDigital.ApiInt.Authentication
 			}
 			catch (XmlException)
 			{
-				HandleNonXmlResponse(authoriseRequestToken.Body);
+				HandleNonXmlResponse();
 			}
 		}
 
@@ -57,13 +57,13 @@ namespace SevenDigital.ApiInt.Authentication
 			var responseNode = xml.SelectSingleNode("/response");
 			if (responseNode.Attributes["status"].Value == "error")
 			{
-				throw new LoginInvalidException(body);
+				throw new LoginInvalidException();
 			}
 		}
 
-		private static void HandleNonXmlResponse(string body)
+		private static void HandleNonXmlResponse()
 		{
-			throw new LoginInvalidException(body);
+			throw new LoginInvalidException();
 		}
 	}
 }

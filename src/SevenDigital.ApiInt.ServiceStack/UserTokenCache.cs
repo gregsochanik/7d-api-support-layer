@@ -2,8 +2,9 @@ using System;
 using ServiceStack.CacheAccess;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.ApiInt.Catalogue;
+using SevenDigital.ApiInt.Locker;
 
-namespace SevenDigital.ApiInt.Locker
+namespace SevenDigital.ApiInt.ServiceStack
 {
 	public class UserTokenCache : IUserTokenCache
 	{

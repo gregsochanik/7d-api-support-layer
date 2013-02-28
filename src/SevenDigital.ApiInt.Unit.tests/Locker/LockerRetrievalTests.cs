@@ -35,10 +35,4 @@ namespace SevenDigital.ApiInt.Unit.Tests.Locker
 			Assert.That(lockerReleases, Is.Empty);
 		}
 	}
-
-	public class TestClass
-	{
-		public int Id { get; set; }
-		public string Name { get; set; }
-	}
 }

@@ -2,7 +2,7 @@ using SevenDigital.Api.Schema.OAuth;
 
 namespace SevenDigital.ApiInt.Catalogue
 {
-	internal static class CacheKeys
+	public static class CacheKeys
 	{
 		private const string UNLIMITED_STREAMING = "urn:stream:";
 		private const string OAUTH = "urn:oauth:";

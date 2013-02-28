@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\SevenDigitalCredentialsAuthProvider.cs" />
+    <Compile Include="Catalogue\CachingCatalogue.cs" />
     <Compile Include="ConversionHelper.cs" />
     <Compile Include="Model\AddCardRequest.cs" />
     <Compile Include="Model\ApplicationState.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Model\CardPurchaseResponse.cs" />
     <Compile Include="Model\CardRequest.cs" />
     <Compile Include="Model\DownloadTrackRequest.cs" />
+    <Compile Include="Model\LockerCheckRequest.cs" />
     <Compile Include="Model\LockerCheckResponse.cs" />
     <Compile Include="Model\StreamingUrlRequest.cs" />
     <Compile Include="Model\VoucherPurchaseRequest.cs" />
@@ -107,18 +109,18 @@
     <Compile Include="Services\TrackSearchService.cs" />
     <Compile Include="Services\UserCardService.cs" />
     <Compile Include="Services\VoucherPurchaseService.cs" />
+    <Compile Include="TimedCacheReloading.cs" />
+    <Compile Include="UserTokenCache.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\SevenDigital.ApiInt\SevenDigital.ApiInt.csproj">
       <Project>{df7b03ff-ea22-4e39-b98e-9f53a7bac3ee}</Project>
       <Name>SevenDigital.ApiInt</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Catalogue\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

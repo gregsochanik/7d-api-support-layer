@@ -5,6 +5,7 @@ using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.ApiInt.Locker;
 using SevenDigital.ApiInt.Mapping;
 using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiInt.ServiceStack.Model;
 using SevenDigital.ApiInt.ServiceStack.Services;
 
 namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
