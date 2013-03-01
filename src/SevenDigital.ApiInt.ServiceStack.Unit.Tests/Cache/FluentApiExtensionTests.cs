@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Net;
 using NUnit.Framework;
@@ -32,7 +31,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Cache
 			stubbedApi.Stub(x => x.Please()).Throw(new ApiWebException("", "", new WebException())).Repeat.Times(2);
 			stubbedApi.Stub(x => x.Please()).Return(new Track{Title="Blah"}).Repeat.Once();
 
-			var loopUntil200 = stubbedApi.LoopUntil200();
+			var loopUntil200 = stubbedApi.LoopThroughCountriesUntil200();
 
 			Assert.That(loopUntil200.Title, Is.EqualTo("Blah"));
 		}
@@ -45,7 +44,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Cache
 			var apiWebException = new ApiWebException("", "", new WebException());
 			stubbedApi.Stub(x => x.Please()).Throw(apiWebException).Repeat.Times(5);
 
-			Assert.Throws<ApiWebException>(() => stubbedApi.LoopUntil200());
+			Assert.Throws<ApiWebException>(() => stubbedApi.LoopThroughCountriesUntil200());
 		}
 
 

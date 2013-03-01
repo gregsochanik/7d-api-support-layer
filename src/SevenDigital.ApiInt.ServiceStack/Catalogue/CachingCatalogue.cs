@@ -9,21 +9,30 @@ using SevenDigital.ApiInt.Catalogue;
 
 namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 {
+	public interface IFluentApiTriggers
+	{
+		T SingleRequest<T>(IFluentApi<T> fluentApi);
+		T MultipleRequestBasedOnCountryCodeList<T>(IFluentApi<T> fluentApi);
+	}
+
 	public class CachingCatalogue : ICatalogue
 	{
 		private readonly ICatalogApiFactory _factory;
 		private readonly ICacheClient _cacheClient;
+		private readonly IFluentApiTriggers _fluentApiTriggers;
 
-		public CachingCatalogue(ICatalogApiFactory factory, ICacheClient cacheClient)
+		public CachingCatalogue(ICatalogApiFactory factory, ICacheClient cacheClient, IFluentApiTriggers fluentApiTriggers)
 		{
 			_factory = factory;
 			_cacheClient = cacheClient;
+			_fluentApiTriggers = fluentApiTriggers;
 		}
 
 		public Track GetATrack(string countryCode, int id)
 		{
 			var key = CacheKeys.Track(countryCode, id);
-			return GetSet(key, () => _factory.TrackApi().WithParameter("country", countryCode).WithParameter("imagesize", "100").ForTrackId(id).Please());
+			var forTrackId = _factory.TrackApi().WithParameter("imagesize", "100").ForTrackId(id);
+			return GetSet(key, () => _fluentApiTriggers.MultipleRequestBasedOnCountryCodeList(forTrackId));
 		}
 
 		public Track GetATrackWithPrice(string countryCode, int id)
@@ -36,13 +45,15 @@ namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 		public Release GetARelease(string countryCode, int id)
 		{
 			var key = CacheKeys.Release(countryCode, id);
-			return GetSet(key, () => _factory.ReleaseApi().WithParameter("country", countryCode).WithParameter("imagesize", "100").ForReleaseId(id).Please());
+			var forReleaseId = _factory.ReleaseApi().WithParameter("country", countryCode).WithParameter("imagesize", "100").ForReleaseId(id);
+			return GetSet(key, () => _fluentApiTriggers.MultipleRequestBasedOnCountryCodeList(forReleaseId));
 		}
 
 		public List<Track> GetAReleaseTracks(string countryCode, int id)
 		{
 			var key = CacheKeys.ReleaseTracks(countryCode, id);
-			return GetSet(key, () => _factory.ReleaseTracksApi().WithPageSize(100).WithParameter("country", countryCode).WithParameter("imagesize", "100").ForReleaseId(id).Please().Tracks);
+			var forReleaseId = _factory.ReleaseTracksApi().WithPageSize(100).WithParameter("country", countryCode).WithParameter("imagesize", "100").ForReleaseId(id);
+			return GetSet(key, () => _fluentApiTriggers.MultipleRequestBasedOnCountryCodeList(forReleaseId).Tracks);
 		}
 
 		private T GetSet<T>(string key, Func<T> retrieveEntity) where T : class

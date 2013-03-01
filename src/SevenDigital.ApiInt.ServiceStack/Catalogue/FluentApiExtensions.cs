@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using SevenDigital.Api.Wrapper;
@@ -8,16 +7,14 @@ namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 {
 	public static class FluentApiExtensions
 	{
-		private static readonly string[] _countriesToCheckInCatalogue = new[] { "GB", "US", "DE", "FR" };
-
-		public static IEnumerable<IFluentApi<T>> GetApiCallsForAllCountries<T>(this IFluentApi<T> seed)
+		public static IEnumerable<IFluentApi<T>> GetApiCallsForAllCountries<T>(this IFluentApi<T> seedFluentApi)
 		{
-			return _countriesToCheckInCatalogue.Select(country => seed.WithParameter("country", country));
+			return CatalogueHelper.CountriesToCheckInCatalogue.Select(country => seedFluentApi.WithParameter("country", country));
 		}
 
-		public static T LoopUntil200<T>(this IFluentApi<T> seed)
+		public static T LoopThroughCountriesUntil200<T>(this IFluentApi<T> seedFluentApi)
 		{
-			var apiCallsForAllCountries = seed.GetApiCallsForAllCountries();
+			var apiCallsForAllCountries = seedFluentApi.GetApiCallsForAllCountries();
 			ApiException exception = null;
 			foreach (var apiCallsForAllCountry in apiCallsForAllCountries)
 			{
@@ -31,6 +28,6 @@ namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 				}
 			}
 			throw exception;
-		}
+		}	
 	}
 }

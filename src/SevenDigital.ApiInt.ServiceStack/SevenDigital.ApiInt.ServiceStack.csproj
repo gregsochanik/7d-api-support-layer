@@ -85,7 +85,9 @@
   <ItemGroup>
     <Compile Include="Authentication\SevenDigitalCredentialsAuthProvider.cs" />
     <Compile Include="Catalogue\CachingCatalogue.cs" />
+    <Compile Include="Catalogue\CatalogueHelper.cs" />
     <Compile Include="Catalogue\FluentApiExtensions.cs" />
+    <Compile Include="Catalogue\FluentApiTriggers.cs" />
     <Compile Include="ConversionHelper.cs" />
     <Compile Include="Model\AddCardRequest.cs" />
     <Compile Include="Model\ApplicationState.cs" />
