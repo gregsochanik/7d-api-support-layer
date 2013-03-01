@@ -4,7 +4,7 @@ using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.ApiInt.Catalogue;
 using SevenDigital.ApiInt.Locker;
 
-namespace SevenDigital.ApiInt.ServiceStack
+namespace SevenDigital.ApiInt.ServiceStack.Cache
 {
 	public class UserTokenCache : IUserTokenCache
 	{

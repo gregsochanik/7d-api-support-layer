@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\SevenDigitalCredentialsAuthProviderTests.cs" />
+    <Compile Include="Cache\FluentApiExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApiCardPurchaseRuleTest.cs" />
     <Compile Include="Services\CardPurchaseServiceTests.cs" />
@@ -109,7 +110,7 @@
     <Compile Include="TestData\TestPrice.cs" />
     <Compile Include="TestData\TestRelease.cs" />
     <Compile Include="TestData\TestTrack.cs" />
-    <Compile Include="TimedCacheReloadingTests.cs" />
+    <Compile Include="Cache\TimedCacheReloadingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -118,6 +119,10 @@
     <ProjectReference Include="..\SevenDigital.ApiInt.ServiceStack\SevenDigital.ApiInt.ServiceStack.csproj">
       <Project>{638e1164-34a9-465d-acee-e3c2042dcf79}</Project>
       <Name>SevenDigital.ApiInt.ServiceStack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SevenDigital.ApiInt.TestData\SevenDigital.ApiInt.TestData.csproj">
+      <Project>{b000af1f-d190-4d1f-a528-fc44475d8243}</Project>
+      <Name>SevenDigital.ApiInt.TestData</Name>
     </ProjectReference>
     <ProjectReference Include="..\SevenDigital.ApiInt\SevenDigital.ApiInt.csproj">
       <Project>{DF7B03FF-EA22-4E39-B98E-9F53A7BAC3EE}</Project>

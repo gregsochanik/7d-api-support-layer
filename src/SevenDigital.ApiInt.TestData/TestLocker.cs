@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Rhino.Mocks;
 using SevenDigital.Api.Schema.LockerEndpoint;
-using SevenDigital.Api.Wrapper;
-using SevenDigital.Api.Wrapper.Extensions;
 
 namespace SevenDigital.ApiInt.TestData
 {
@@ -196,20 +193,6 @@ namespace SevenDigital.ApiInt.TestData
 				PageSize = 10,
 				TotalItems = lockerReleases.Count
 			};
-		}
-
-
-		public static IFluentApi<Locker> GetStubbedLockerApi(Locker stubbedLockerToReturn)
-		{
-			var apiLocker = MockRepository.GenerateStub<IFluentApi<Locker>>();
-			apiLocker.Stub(x => x.ForUser("", "")).IgnoreArguments().Return(apiLocker);
-			apiLocker.Stub(x => x.WithParameter("", "")).IgnoreArguments().Return(apiLocker);
-			apiLocker.Stub(x => x.WithPageNumber(0)).IgnoreArguments().Return(apiLocker);
-			apiLocker.Stub(x => x.WithPageSize(0)).IgnoreArguments().Return(apiLocker);
-			apiLocker.Stub(x => x.Sort(LockerSortColumn.PurchaseDate, SortOrder.Descending)).IgnoreArguments().Return(apiLocker);
-			apiLocker.Stub(x => x.Please()).Return(stubbedLockerToReturn);
-
-			return apiLocker;
 		}
 	}
 }

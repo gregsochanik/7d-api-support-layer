@@ -110,6 +110,7 @@
     <Compile Include="Model\PurchaseType.cs" />
     <Compile Include="Model\ReleaseAndTracks.cs" />
     <Compile Include="Model\ReleaseTracksRequest.cs" />
+    <Compile Include="Model\TrackRequest.cs" />
     <Compile Include="Model\TrackSearchRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchasing\CardPurchaseRules\ApiCardPurchaseRule.cs" />

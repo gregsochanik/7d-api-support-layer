@@ -3,10 +3,10 @@ using Rhino.Mocks;
 using ServiceStack.CacheAccess;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.ApiInt.Locker;
+using SevenDigital.ApiInt.ServiceStack.Cache;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests
+namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Cache
 {
-	
 	public class TestClass
 	{
 		public int Id { get; set; }

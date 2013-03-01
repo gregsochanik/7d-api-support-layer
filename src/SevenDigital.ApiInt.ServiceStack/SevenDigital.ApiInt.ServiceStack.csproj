@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Authentication\SevenDigitalCredentialsAuthProvider.cs" />
     <Compile Include="Catalogue\CachingCatalogue.cs" />
+    <Compile Include="Catalogue\FluentApiExtensions.cs" />
     <Compile Include="ConversionHelper.cs" />
     <Compile Include="Model\AddCardRequest.cs" />
     <Compile Include="Model\ApplicationState.cs" />
@@ -107,10 +108,11 @@
     <Compile Include="Services\StatusService.cs" />
     <Compile Include="Services\StreamingUriService.cs" />
     <Compile Include="Services\TrackSearchService.cs" />
+    <Compile Include="Services\TrackService.cs" />
     <Compile Include="Services\UserCardService.cs" />
     <Compile Include="Services\VoucherPurchaseService.cs" />
-    <Compile Include="TimedCacheReloading.cs" />
-    <Compile Include="UserTokenCache.cs" />
+    <Compile Include="Cache\TimedCacheReloading.cs" />
+    <Compile Include="Cache\UserTokenCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

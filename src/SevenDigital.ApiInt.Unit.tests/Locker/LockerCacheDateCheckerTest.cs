@@ -6,6 +6,7 @@ using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.ApiInt.Locker;
 using SevenDigital.ApiInt.TestData;
+using SevenDigital.ApiInt.TestData.StubApiWrapper;
 
 namespace SevenDigital.ApiInt.Unit.Tests.Locker
 {
@@ -33,7 +34,7 @@ namespace SevenDigital.ApiInt.Unit.Tests.Locker
 				Response = new LockerResponse { LockerReleases = anEmptyLocker }
 			};
 
-			var stubbedLockerApi = TestLocker.GetStubbedLockerApi(locker);
+			var stubbedLockerApi = ApiWrapper.StubbedApi(locker);
 			var lockerCacheDateChecker = new LockerDateChecker(stubbedLockerApi);
 			var latestPurchaseDateOfLiveLocker = lockerCacheDateChecker.GetLatestPurchaseDateOfLiveLocker(_oAuthAccessToken);
 			Assert.That(latestPurchaseDateOfLiveLocker, Is.EqualTo(DateTime.MinValue));
@@ -64,7 +65,7 @@ namespace SevenDigital.ApiInt.Unit.Tests.Locker
 			var lockerWithReleasesWithDifferentPurchaseDates = TestLocker.GetLockerWithReleasesWithDifferentPurchaseDates(purchaseDates);
 
 			var stubbedLockerToReturn = new Api.Schema.LockerEndpoint.Locker { Response = lockerWithReleasesWithDifferentPurchaseDates };
-			var stubbedLockerApi = TestLocker.GetStubbedLockerApi(stubbedLockerToReturn);
+			var stubbedLockerApi = ApiWrapper.StubbedApi(stubbedLockerToReturn);
 			var lockerCacheDateChecker = new LockerDateChecker(stubbedLockerApi);
 			var timedCacheReloading = MockRepository.GenerateStub<ITimedCacheReloading>();
 			timedCacheReloading.Stub(x => x.TimedSynchronousCacheGet<IEnumerable<LockerRelease>>(null, "", 0)).IgnoreArguments().Return(lockerWithReleasesWithDifferentPurchaseDates.LockerReleases);
