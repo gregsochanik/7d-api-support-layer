@@ -24,3 +24,5 @@ obj
 logs/
 logs
 *.log
+
+*.nupkg
