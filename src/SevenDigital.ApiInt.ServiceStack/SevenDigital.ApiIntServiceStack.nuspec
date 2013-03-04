@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>    
+    <description>Integration layer on top of 7digital Api Wrapper using ServiceStack</description>
+    <authors>Greg Sochanik</authors>
+    <language>en-GB</language>
+  </metadata>
+</package>
