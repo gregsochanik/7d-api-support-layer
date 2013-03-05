@@ -89,6 +89,8 @@
     <Compile Include="Catalogue\FluentApiExtensions.cs" />
     <Compile Include="Catalogue\FluentApiTriggers.cs" />
     <Compile Include="ConversionHelper.cs" />
+    <Compile Include="Mapping\AddCardMapper.cs" />
+    <Compile Include="Mapping\IMapper.cs" />
     <Compile Include="Model\AddCardRequest.cs" />
     <Compile Include="Model\ApplicationState.cs" />
     <Compile Include="Model\BuyItNowResponse.cs" />

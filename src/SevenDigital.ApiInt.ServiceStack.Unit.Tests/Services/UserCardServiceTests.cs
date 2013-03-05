@@ -9,6 +9,7 @@ using ServiceStack.ServiceInterface.Auth;
 using ServiceStack.ServiceInterface.Testing;
 using SevenDigital.Api.Schema.User.Payment;
 using SevenDigital.Api.Wrapper;
+using SevenDigital.ApiInt.ServiceStack.Mapping;
 using SevenDigital.ApiInt.ServiceStack.Model;
 using SevenDigital.ApiInt.ServiceStack.Services;
 
@@ -35,7 +36,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		[Test]
 		public void Happy_path()
 		{
-			var cardService = new UserCardService(_cardsApi, _addCardApi, _deleteCardApi);
+			var cardService = new UserCardService(_cardsApi, _addCardApi, _deleteCardApi, new AddCardMapper());
 
 			var mockRequestContext = new MockRequestContext();
 			var httpReq = mockRequestContext.Get<IHttpRequest>();
@@ -56,7 +57,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		[Test]
 		public void Throws_error_if_no_user_logged_in()
 		{
-			var cardService = new UserCardService(_cardsApi, _addCardApi, _deleteCardApi);
+			var cardService = new UserCardService(_cardsApi, _addCardApi, _deleteCardApi, new AddCardMapper());
 			var mockRequestContext = new MockRequestContext();
 			cardService.RequestContext = mockRequestContext;
 

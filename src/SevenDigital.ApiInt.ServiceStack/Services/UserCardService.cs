@@ -6,7 +6,7 @@ using SevenDigital.Api.Schema.ParameterDefinitions.Post;
 using SevenDigital.Api.Schema.User.Payment;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiInt.ServiceStack.Mapping;
 using SevenDigital.ApiInt.ServiceStack.Model;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services
@@ -16,12 +16,14 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 		private readonly IFluentApi<Cards> _cardsApi;
 		private readonly IFluentApi<AddCard> _addCardApi;
 		private readonly IFluentApi<DeleteCard> _deleteCardApi;
+		private readonly IMapper<AddCardRequest, AddCardParameters> _cardMapper;
 
-		public UserCardService(IFluentApi<Cards> cardsApi, IFluentApi<AddCard> addCardApi, IFluentApi<DeleteCard> deleteCardApi)
+		public UserCardService(IFluentApi<Cards> cardsApi, IFluentApi<AddCard> addCardApi, IFluentApi<DeleteCard> deleteCardApi, IMapper<AddCardRequest, AddCardParameters> cardMapper)
 		{
 			_cardsApi = cardsApi;
 			_addCardApi = addCardApi;
 			_deleteCardApi = deleteCardApi;
+			_cardMapper = cardMapper;
 		}
 
 		public List<Card> Get(CardRequest request)
@@ -35,20 +37,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 		{
 			var accessToken = this.TryGetOAuthAccessToken();
 
-			int issueNum;
-			int.TryParse(request.IssueNumber, out issueNum);
-			var card = new AddCardParameters
-			{
-				ExpiryDate = request.ExpiryDate,
-				HolderName = request.HolderName,
-				IssueNumber = issueNum,
-				Number = request.Number,
-				PostCode = request.PostCode,
-				StartDate = request.StartDate,
-				TwoLetterISORegionName = request.TwoLetterISORegionName,
-				Type = request.Type,
-				VerificationCode = request.VerificationCode
-			};
+			var card = _cardMapper.Map(request);
 			try
 			{
 				_addCardApi.ForUser(accessToken.Token, accessToken.Secret).WithCard(card).Please();
