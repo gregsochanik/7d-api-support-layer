@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -58,15 +59,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			Assert.That(httpError.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
 		}
-
-		[Test]
-		public void StartDate_and_IssueNumber_are_optional()
-		{
-			var cardService = new UserCardService(_cardsApi, _addCardApi, _deleteCardApi, _mapper);
-			var mockRequestContext = new MockRequestContext();
-			cardService.RequestContext = mockRequestContext;
-		}
-
+		
 		public static IFluentApi<AddCard> GetStubbedApi()
 		{
 			var fluentApi = MockRepository.GenerateStub<IFluentApi<AddCard>>();
