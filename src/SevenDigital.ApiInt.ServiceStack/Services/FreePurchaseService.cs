@@ -24,7 +24,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			_catalogue = catalogue;
 		}
 
-		public FreePurchaseResponse Get(FreePurchaseRequest request)
+		public FreePurchaseResponse Post(FreePurchaseRequest request)
 		{
 			AssertItemIsTrack(request);
 			AssertItemIsFree(request);

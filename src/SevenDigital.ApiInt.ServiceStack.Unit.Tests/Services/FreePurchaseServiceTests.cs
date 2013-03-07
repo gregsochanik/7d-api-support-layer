@@ -54,7 +54,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 				RequestContext = ContextHelper.LoggedInContext()
 			}; 
 			var freePurchaseRequest = new FreePurchaseRequest();
-			var freePurchaseResponse = freePurchaseService.Get(freePurchaseRequest);
+			var freePurchaseResponse = freePurchaseService.Post(freePurchaseRequest);
 
 			_itemBuyer.AssertWasCalled(x => x.BuyItem(Arg<ItemRequest>.Is.Equal(freePurchaseRequest), Arg<OAuthAccessToken>.Is.Anything));
 
@@ -72,7 +72,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			};
 			var freePurchaseRequest = new FreePurchaseRequest();
 
-			freePurchaseService.Get(freePurchaseRequest);
+			freePurchaseService.Post(freePurchaseRequest);
 
 			_itemBuyer.AssertWasCalled(x => x.BuyItem(
 				Arg<ItemRequest>.Is.Equal(freePurchaseRequest),
@@ -93,7 +93,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			};
 			var freePurchaseRequest = new FreePurchaseRequest{CountryCode = "GB", Id=PRICED_TRACK_ID, Type = PurchaseType.track};
 
-			var httpError = Assert.Throws<HttpError>(() => freePurchaseService.Get(freePurchaseRequest));
+			var httpError = Assert.Throws<HttpError>(() => freePurchaseService.Post(freePurchaseRequest));
 			Assert.That(httpError.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
 			Assert.That(httpError.Message, Is.EqualTo(string.Format("This track is not free! {0}", _pricedTrack.Price.Status)));
 			Assert.That(httpError.ErrorCode, Is.EqualTo("TrackNotFree"));
@@ -110,7 +110,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			};
 			var freePurchaseRequest = new FreePurchaseRequest {Type = PurchaseType.release };
 
-			var httpError = Assert.Throws<HttpError>(() => freePurchaseService.Get(freePurchaseRequest));
+			var httpError = Assert.Throws<HttpError>(() => freePurchaseService.Post(freePurchaseRequest));
 			Assert.That(httpError.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
 			Assert.That(httpError.Message, Is.EqualTo("You cannot access releases for free - only tracks are currently supported"));
 			Assert.That(httpError.ErrorCode, Is.EqualTo("ReleasesNotSupported"));
