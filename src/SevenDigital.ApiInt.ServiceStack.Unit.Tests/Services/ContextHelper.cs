@@ -2,6 +2,7 @@
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Auth;
 using ServiceStack.ServiceInterface.Testing;
+using SevenDigital.ApiInt.TestData;
 
 namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 {
@@ -15,7 +16,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			var authUserSession = mockRequestContext.ReloadSession();
 			authUserSession.Id = httpRes.CreateSessionId(httpReq);
 			authUserSession.IsAuthenticated = true;
-			authUserSession.ProviderOAuthAccess.Add(new OAuthTokens { AccessToken = "Token", AccessTokenSecret = "Secret" });
+			authUserSession.ProviderOAuthAccess.Add(new OAuthTokens { AccessToken = FakeUserData.FakeAccessToken.Token, AccessTokenSecret = FakeUserData.FakeAccessToken.Secret });
 
 			httpReq.Items[ServiceExtensions.RequestItemsSessionKey] = authUserSession;
 			return mockRequestContext;

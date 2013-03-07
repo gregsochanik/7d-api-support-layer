@@ -12,6 +12,7 @@ using SevenDigital.ApiInt.MediaDelivery;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Model;
 using SevenDigital.ApiInt.ServiceStack.Services;
+using SevenDigital.ApiInt.TestData;
 
 namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 {
@@ -21,6 +22,8 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		private const int EXPECTED_TRACK_ID = 12345;
 		private const int EXPECTED_RELEASE_ID = 54321;
 		private const int EXPECTED_FORMAT_ID = 1;
+		private static readonly string _expectedFakeToken = FakeUserData.FakeAccessToken.Token;
+		private static readonly string _expectedFakeTokenSecret = FakeUserData.FakeAccessToken.Secret;
 
 		private IOAuthCredentials _configAuthCredentials;
 		private IUrlSigner _stubbedUrlSigner;
@@ -67,7 +70,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			var expectedUrl = string.Format("{0}?releaseid={1}&trackid={2}&formatid={3}&country={4}", DownloadSettings.DOWNLOAD_TRACK_URL, EXPECTED_RELEASE_ID, EXPECTED_TRACK_ID, EXPECTED_FORMAT_ID, downloadTrackRequest.CountryCode);
 
-			_stubbedUrlSigner.AssertWasCalled(x => x.SignGetUrl(expectedUrl, "Token", "Secret", _configAuthCredentials));
+			_stubbedUrlSigner.AssertWasCalled(x => x.SignGetUrl(expectedUrl, _expectedFakeToken, _expectedFakeTokenSecret, _configAuthCredentials));
 		}
 
 		[Test]
@@ -113,7 +116,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			var expectedUrl = string.Format("{0}?releaseid={1}&formatid={2}&country={3}", DownloadSettings.DOWNLOAD_RELEASE_URL, EXPECTED_RELEASE_ID, EXPECTED_FORMAT_ID, downloadTrackRequest.CountryCode);
 
-			_stubbedUrlSigner.AssertWasCalled(x => x.SignGetUrl(expectedUrl, "Token", "Secret", _configAuthCredentials));
+			_stubbedUrlSigner.AssertWasCalled(x => x.SignGetUrl(expectedUrl, _expectedFakeToken, _expectedFakeTokenSecret, _configAuthCredentials));
 		}
 
 		[Test]

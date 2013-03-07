@@ -97,6 +97,8 @@
     <Compile Include="Model\CardPurchaseResponse.cs" />
     <Compile Include="Model\CardRequest.cs" />
     <Compile Include="Model\DownloadTrackRequest.cs" />
+    <Compile Include="Model\FreePurchaseRequest.cs" />
+    <Compile Include="Model\FreePurchaseResponse.cs" />
     <Compile Include="Model\LockerCheckRequest.cs" />
     <Compile Include="Model\LockerCheckResponse.cs" />
     <Compile Include="Model\StreamingUrlRequest.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CardPurchaseService.cs" />
     <Compile Include="Services\DownloadFileService.cs" />
+    <Compile Include="Services\FreePurchaseService.cs" />
     <Compile Include="Services\ItemPurchaseService.cs" />
     <Compile Include="Services\LockerCheckService.cs" />
     <Compile Include="Services\ReleaseTracksService.cs" />
@@ -119,7 +122,9 @@
     <Compile Include="Cache\UserTokenCache.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -6,12 +6,16 @@ using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
 using SevenDigital.ApiInt.MediaDelivery;
 using SevenDigital.ApiInt.ServiceStack.Model;
 using SevenDigital.ApiInt.ServiceStack.Services;
+using SevenDigital.ApiInt.TestData;
 
 namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 {
 	[TestFixture]
 	public class StreamingUriServiceTest
 	{
+		private static readonly string _userToken = FakeUserData.FakeAccessToken.Token;
+		private static readonly string _tokenSecret = FakeUserData.FakeAccessToken.Secret;
+
 		[Test]
 		public void If_set_up_correctly_signs_the_correct_url()
 		{
@@ -24,7 +28,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 				RequestContext = ContextHelper.LoggedInContext()
 			};
 
-			var streamingUrlRequest = new StreamingUrlRequest()
+			var streamingUrlRequest = new StreamingUrlRequest
 			{
 				Id = 12345
 			};
@@ -33,7 +37,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			var expectedUrl = string.Format("{0}?trackid={1}&formatid={2}&country={3}", StreamingSettings.LOCKER_STREAMING_URL, 12345, StreamingSettings.CurrentStreamType.FormatId, streamingUrlRequest.CountryCode);
 
-			stubbedUrlSigner.AssertWasCalled(x => x.SignGetUrl(expectedUrl, "Token", "Secret", configAuthCredentials));
+			stubbedUrlSigner.AssertWasCalled(x => x.SignGetUrl(expectedUrl, _userToken, _tokenSecret, configAuthCredentials));
 		}
 
 		[Test]
@@ -49,7 +53,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 				RequestContext = ContextHelper.LoggedInContext()
 			};
 
-			var streamingUrlRequest = new StreamingUrlRequest()
+			var streamingUrlRequest = new StreamingUrlRequest
 			{
 				Id = 12345
 			};
