@@ -56,7 +56,8 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			else
 			{
 				var aTrack = _catalogue.GetATrack(request.CountryCode, request.Id);
-				releaseAndTracks.Release = aTrack.Release;
+				var aRelease = _catalogue.GetARelease(request.CountryCode, aTrack.Release.Id);
+				releaseAndTracks.Release = aRelease;
 				var releaseTracks = _catalogue.GetAReleaseTracks(request.CountryCode, aTrack.Release.Id);
 				releaseAndTracks.Tracks = releaseTracks.Where(x => x.Id == request.Id).ToList();
 			}
