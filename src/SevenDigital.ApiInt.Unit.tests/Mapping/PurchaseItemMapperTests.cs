@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using SevenDigital.Api.Schema.LockerEndpoint;
+using SevenDigital.Api.Schema.Media;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.ApiInt.Mapping;
@@ -19,7 +20,8 @@ namespace SevenDigital.ApiInt.Unit.tests.Mapping
 			var expectedRelease = new Release
 			{
 				Id = 1,
-				Title = "Hello"
+				Title = "Hello",
+				Formats = new FormatList { Formats = new List<Format> { new Format {BitRate = "320"}} }
 			};
 			
 			var expectedTrack = new Track
@@ -44,6 +46,7 @@ namespace SevenDigital.ApiInt.Unit.tests.Mapping
 
 			Assert.That(purchasedItem.Id, Is.EqualTo(expectedRelease.Id));
 			Assert.That(purchasedItem.Title, Is.EqualTo(expectedRelease.Title));
+			Assert.That(purchasedItem.AvailableFormats, Is.EqualTo(expectedRelease.Formats.Formats));
 			Assert.That(purchasedItem.Tracks[0].Id, Is.EqualTo(lockerRelease.LockerTracks[0].Track.Id));
 			Assert.That(purchasedItem.Tracks[0].Title, Is.EqualTo(lockerRelease.LockerTracks[0].Track.Title));
 		}
@@ -60,7 +63,10 @@ namespace SevenDigital.ApiInt.Unit.tests.Mapping
 
 			var lockerRelease = new LockerRelease
 			{
-				Release = new Release(),
+				Release = new Release()
+				{
+					Formats = new FormatList { Formats = new List<Format> { new Format { BitRate = "320" } } }
+				},
 				LockerTracks = new List<LockerTrack> { new LockerTrack { Track = expectedTrack } }
 			};
 
@@ -75,6 +81,8 @@ namespace SevenDigital.ApiInt.Unit.tests.Mapping
 
 			Assert.That(purchasedItem.Id, Is.EqualTo(expectedTrack.Id));
 			Assert.That(purchasedItem.Title, Is.EqualTo(expectedTrack.Title));
+			Assert.That(purchasedItem.AvailableFormats, Is.EqualTo(lockerRelease.Release.Formats.Formats));
+
 			Assert.That(purchasedItem.Tracks[0].Id, Is.EqualTo(lockerRelease.LockerTracks[0].Track.Id));
 			Assert.That(purchasedItem.Tracks[0].Title, Is.EqualTo(lockerRelease.LockerTracks[0].Track.Title));
 		}

@@ -20,6 +20,7 @@ namespace SevenDigital.ApiInt.Mapping
 
 				purchasedItem.Id = selectedLockerRelease.Release.Id;
 				purchasedItem.Title = selectedLockerRelease.Release.Title;
+				purchasedItem.AvailableFormats = selectedLockerRelease.Release.Formats.Formats;
 				purchasedItem.Tracks = selectedLockerRelease.LockerTracks.Select(TrackUtility.MergeInto7dTrack(selectedLockerRelease)).ToList();
 			}
 			else
@@ -34,6 +35,7 @@ namespace SevenDigital.ApiInt.Mapping
 
 				purchasedItem.Id = selectedTrack.Id;
 				purchasedItem.Title = selectedTrack.Title;
+				purchasedItem.AvailableFormats = selectedTrack.Release.Formats.Formats;
 				purchasedItem.Tracks = new List<Track> { selectedTrack };
 			}
 			return purchasedItem;
