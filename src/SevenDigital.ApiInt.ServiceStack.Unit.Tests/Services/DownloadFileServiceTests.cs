@@ -63,7 +63,8 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			var downloadTrackRequest = new DownloadTrackRequest
 			{
 				Id = EXPECTED_TRACK_ID,
-				Type = PurchaseType.track
+				Type = PurchaseType.track,
+				FormatId = EXPECTED_FORMAT_ID
 			};
 
 			downloadTrackService.Get(downloadTrackRequest);
@@ -109,7 +110,8 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			var downloadTrackRequest = new DownloadTrackRequest
 			{
 				Id = EXPECTED_RELEASE_ID,
-				Type = PurchaseType.release
+				Type = PurchaseType.release,
+				FormatId = EXPECTED_FORMAT_ID
 			};
 
 			downloadTrackService.Get(downloadTrackRequest);

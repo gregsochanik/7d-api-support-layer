@@ -1,6 +1,7 @@
 using System.Net;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
+using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
 using SevenDigital.ApiInt.Catalogue;
@@ -37,14 +38,14 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			};
 		}
 
-		private string BuildDownloadUrl(ItemRequest request)
+		private string BuildDownloadUrl(DownloadTrackRequest request)
 		{
 			if (request.Type == PurchaseType.release)
 			{
 				return string.Format("{0}?releaseid={1}&formatid={2}&country={3}",
 									DownloadSettings.DOWNLOAD_RELEASE_URL,
 									request.Id,
-									 _catalogue.GetARelease(request.CountryCode, request.Id).Formats.Formats[0].Id,
+									request.FormatId,
 									request.CountryCode);
 			}
 
@@ -53,7 +54,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 								DownloadSettings.DOWNLOAD_TRACK_URL,
 								aTrack.Release.Id,
 								aTrack.Id,
-								 _catalogue.GetARelease(request.CountryCode, aTrack.Release.Id).Formats.Formats[0].Id,
+								request.FormatId,
 								request.CountryCode);
 		}
 	}
