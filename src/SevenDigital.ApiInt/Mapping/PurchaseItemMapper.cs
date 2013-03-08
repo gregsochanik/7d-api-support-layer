@@ -43,7 +43,6 @@ namespace SevenDigital.ApiInt.Mapping
 
 				purchasedItem.Id = selectedTrack.Id;
 				purchasedItem.Title = selectedTrack.Title;
-				purchasedItem.AvailableFormats = selectedTrack.Release.Formats.Formats;
 				purchasedItem.DownloadUrls = selectedLockerTrack.DownloadUrls;
 				purchasedItem.Tracks = new List<Track> { selectedTrack };
 			}
