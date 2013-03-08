@@ -21,7 +21,6 @@ namespace SevenDigital.ApiInt.Unit.tests.Mapping
 			{
 				Id = 1,
 				Title = "Hello",
-				Formats = new FormatList { Formats = new List<Format> { new Format {BitRate = "320"}} }
 			};
 			
 			var expectedTrack = new Track
@@ -32,7 +31,7 @@ namespace SevenDigital.ApiInt.Unit.tests.Mapping
 			var lockerRelease = new LockerRelease
 			{
 				Release = expectedRelease,
-				LockerTracks = new List<LockerTrack> {new LockerTrack{Track = expectedTrack}}
+				LockerTracks = new List<LockerTrack> {new LockerTrack{Track = expectedTrack, DownloadUrls = new List<DownloadUrl>{new DownloadUrl(){Format = new Format(){BitRate = "320"}}}}}
 			};
 
 			var lockerReleases = new List<LockerRelease>{lockerRelease};
@@ -46,7 +45,7 @@ namespace SevenDigital.ApiInt.Unit.tests.Mapping
 
 			Assert.That(purchasedItem.Id, Is.EqualTo(expectedRelease.Id));
 			Assert.That(purchasedItem.Title, Is.EqualTo(expectedRelease.Title));
-			Assert.That(purchasedItem.AvailableFormats, Is.EqualTo(expectedRelease.Formats.Formats));
+			Assert.That(purchasedItem.DownloadUrls, Is.EqualTo(lockerRelease.LockerTracks[0].DownloadUrls));
 			Assert.That(purchasedItem.Tracks[0].Id, Is.EqualTo(lockerRelease.LockerTracks[0].Track.Id));
 			Assert.That(purchasedItem.Tracks[0].Title, Is.EqualTo(lockerRelease.LockerTracks[0].Track.Title));
 		}
@@ -67,7 +66,7 @@ namespace SevenDigital.ApiInt.Unit.tests.Mapping
 				{
 					Formats = new FormatList { Formats = new List<Format> { new Format { BitRate = "320" } } }
 				},
-				LockerTracks = new List<LockerTrack> { new LockerTrack { Track = expectedTrack } }
+				LockerTracks = new List<LockerTrack> { new LockerTrack { Track = expectedTrack, DownloadUrls = new List<DownloadUrl>{new DownloadUrl(){Format = new Format{BitRate = "320"}}}}}
 			};
 
 			var lockerReleases = new List<LockerRelease> { lockerRelease };
@@ -81,7 +80,7 @@ namespace SevenDigital.ApiInt.Unit.tests.Mapping
 
 			Assert.That(purchasedItem.Id, Is.EqualTo(expectedTrack.Id));
 			Assert.That(purchasedItem.Title, Is.EqualTo(expectedTrack.Title));
-			Assert.That(purchasedItem.AvailableFormats, Is.EqualTo(lockerRelease.Release.Formats.Formats));
+			Assert.That(purchasedItem.DownloadUrls, Is.EqualTo(lockerRelease.LockerTracks[0].DownloadUrls));
 
 			Assert.That(purchasedItem.Tracks[0].Id, Is.EqualTo(lockerRelease.LockerTracks[0].Track.Id));
 			Assert.That(purchasedItem.Tracks[0].Title, Is.EqualTo(lockerRelease.LockerTracks[0].Track.Title));
