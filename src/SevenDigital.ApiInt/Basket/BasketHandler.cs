@@ -9,7 +9,7 @@ using SevenDigital.ApiInt.Catalogue;
 using SevenDigital.ApiInt.Exceptions;
 using SevenDigital.ApiInt.Model;
 
-namespace SevenDigital.ApiInt
+namespace SevenDigital.ApiInt.Basket
 {
 	/// <exception cref="InvalidBasketIdException"></exception>
 	/// <exception cref="ApiResponseException"></exception>
@@ -34,7 +34,7 @@ namespace SevenDigital.ApiInt
 			return new Guid(createBasket.Id);
 		}
 
-		public Basket AddItem(Guid basketId, ItemRequest request)
+		public Api.Schema.Basket.Basket AddItem(Guid basketId, ItemRequest request)
 		{
 			try
 			{

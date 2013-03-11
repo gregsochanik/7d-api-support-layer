@@ -10,6 +10,7 @@ using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.Api.Wrapper.Http;
+using SevenDigital.ApiInt.Basket;
 using SevenDigital.ApiInt.Catalogue;
 using SevenDigital.ApiInt.Exceptions;
 using SevenDigital.ApiInt.Model;

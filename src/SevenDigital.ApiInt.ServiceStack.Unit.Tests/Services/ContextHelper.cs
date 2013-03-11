@@ -28,7 +28,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		public static MockRequestContext LoggedInContextWithFakeBasketCookie(Guid fakeBasketId)
 		{
 			var mockRequestContext = LoggedInContext();
-			mockRequestContext.Cookies.Add(StateHelper.BASKET_COOKIE, new Cookie(StateHelper.BASKET_COOKIE, fakeBasketId.ToString()));
+			mockRequestContext.Cookies.Add(StateHelper.BASKET_COOKIE_NAME, new Cookie(StateHelper.BASKET_COOKIE_NAME, fakeBasketId.ToString()));
 			return mockRequestContext;
 		}
 	}

@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Net;
 using ServiceStack.ServiceInterface;
-using SevenDigital.Api.Schema.LockerEndpoint;
-using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper.Exceptions;
-using SevenDigital.ApiInt.Exceptions;
+using SevenDigital.ApiInt.Basket;
 using SevenDigital.ApiInt.Mapping;
 using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.ServiceStack.Model;
+using SevenDigital.ApiInt.Purchasing;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services
 {
@@ -25,7 +21,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 		public PurchaseResponse RunBasketPurchaseSteps(TItemRequest request, Action<Guid, TItemRequest> paymentStep = null)
 		{
-			var basketId = TryRetrieveBasketId(request, RequestContext.Cookies);
+			var basketId = BasketRequestHelper.TryRetrieveBasketId(request, RequestContext.Cookies, _basketHandler);
 
 			_basketHandler.AddItem(basketId, request);
 
@@ -38,50 +34,12 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 				var apiBasketPurchaseResponse = _basketHandler.Purchase(basketId, request.CountryCode, this.TryGetOAuthAccessToken());
 
-				return PurchaseSuccessfulResponse(request, apiBasketPurchaseResponse);
+				return PurchaseResponseHelper.PurchaseSuccessfulResponse(request, apiBasketPurchaseResponse, _mapper);
 			}
 			catch (ApiException ex)
 			{
-				return ApiErrorResponse(request, ex);
+				return PurchaseResponseHelper.ApiErrorResponse(request, ex);
 			}
-		}
-
-		private Guid TryRetrieveBasketId(ItemRequest request, IDictionary<string, Cookie> requestCookies)
-		{
-			if (!requestCookies.Keys.Contains(StateHelper.BASKET_COOKIE))
-			{
-				return _basketHandler.Create(request);
-			}
-
-			var basketIdFromCookie = requestCookies[StateHelper.BASKET_COOKIE].Value;
-
-			try
-			{
-				return new Guid(basketIdFromCookie);
-			}
-			catch (FormatException formatException)
-			{
-				throw new InvalidBasketIdException(basketIdFromCookie, formatException);
-			}
-		}
-
-		private PurchaseResponse PurchaseSuccessfulResponse(ItemRequest request, UserPurchaseBasket userPurchaseBasket)
-		{
-			return new PurchaseResponse
-			{
-				OriginalRequest = request,
-				Status = new PurchaseStatus(true, "Purchase Authorised", userPurchaseBasket.LockerReleases),
-				Item = _mapper.Map(request, userPurchaseBasket.LockerReleases)
-			};
-		}
-
-		private static PurchaseResponse ApiErrorResponse(ItemRequest request, ApiException ex)
-		{
-			return new PurchaseResponse
-			{
-				OriginalRequest = request,
-				Status = new PurchaseStatus(false, ex.Message, new List<LockerRelease>()),
-			};
 		}
 	}
 }

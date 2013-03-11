@@ -6,6 +6,7 @@ using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.User.Payment;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
+using SevenDigital.ApiInt.Basket;
 using SevenDigital.ApiInt.Mapping;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.Purchasing;

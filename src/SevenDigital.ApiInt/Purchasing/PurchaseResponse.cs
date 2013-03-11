@@ -1,6 +1,6 @@
 ﻿using SevenDigital.ApiInt.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Model
+namespace SevenDigital.ApiInt.Purchasing
 {
 	public class PurchaseResponse
 	{

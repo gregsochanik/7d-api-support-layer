@@ -4,7 +4,9 @@ using ServiceStack.Common.Web;
 using SevenDigital.Api.Schema.Premium.Basket;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Premium;
+using SevenDigital.ApiInt.Basket;
 using SevenDigital.ApiInt.Mapping;
+using SevenDigital.ApiInt.Purchasing;
 using SevenDigital.ApiInt.ServiceStack.Model;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services

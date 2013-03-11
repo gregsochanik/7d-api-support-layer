@@ -9,6 +9,7 @@ using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Premium;
+using SevenDigital.ApiInt.Basket;
 using SevenDigital.ApiInt.Exceptions;
 using SevenDigital.ApiInt.Mapping;
 using SevenDigital.ApiInt.Model;
@@ -112,7 +113,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			const string invalidBasketId = "I will not be made into a Guid!";
 			var mockRequestContext = ContextHelper.LoggedInContext();
-			mockRequestContext.Cookies.Add(StateHelper.BASKET_COOKIE, new Cookie(StateHelper.BASKET_COOKIE, invalidBasketId));
+			mockRequestContext.Cookies.Add(StateHelper.BASKET_COOKIE_NAME, new Cookie(StateHelper.BASKET_COOKIE_NAME, invalidBasketId));
 
 			var cardVoucherRequest = new VoucherPurchaseRequest { VoucherCode = expectedVoucherCode};
 			var userVoucherService = new VoucherPurchaseService(_applyVoucher, _purchaseItemMapper, _basketHandler)

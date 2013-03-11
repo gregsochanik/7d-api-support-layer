@@ -94,7 +94,6 @@
     <Compile Include="Model\AddCardRequest.cs" />
     <Compile Include="Model\ApplicationState.cs" />
     <Compile Include="Model\BuyItNowResponse.cs" />
-    <Compile Include="Model\PurchaseResponse.cs" />
     <Compile Include="Model\CardRequest.cs" />
     <Compile Include="Model\DownloadTrackRequest.cs" />
     <Compile Include="Model\FreePurchaseRequest.cs" />
@@ -106,6 +105,7 @@
     <Compile Include="Model\VoucherPurchaseResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BasketPurchaseService.cs" />
+    <Compile Include="Services\BasketRequestHelper.cs" />
     <Compile Include="Services\CardPurchaseService.cs" />
     <Compile Include="Services\DownloadFileService.cs" />
     <Compile Include="Services\FreePurchaseService.cs" />
@@ -113,7 +113,6 @@
     <Compile Include="Services\LockerCheckService.cs" />
     <Compile Include="Services\ReleaseTracksService.cs" />
     <Compile Include="Services\ServiceSessionExtensions.cs" />
-    <Compile Include="Services\StateHelper.cs" />
     <Compile Include="Services\StatusService.cs" />
     <Compile Include="Services\StreamingUriService.cs" />
     <Compile Include="Services\TrackSearchService.cs" />
