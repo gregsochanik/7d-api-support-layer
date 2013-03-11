@@ -26,10 +26,10 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 				throw new HttpError(HttpStatusCode.BadRequest, "VoucherMissing", "You need to include a voucher code");
 			}
 
-			return RunBasketPurchaseSteps(request);
+			return RunBasketPurchaseSteps(request, PerformPaymentStep);
 		}
 
-		public override void PerformPaymentStep(Guid basketId, VoucherPurchaseRequest request)
+		public void PerformPaymentStep(Guid basketId, VoucherPurchaseRequest request)
 		{
 			_applyVoucher.UseBasketId(basketId).UseVoucherCode(request.VoucherCode)
 							 .WithParameter("country", request.CountryCode)

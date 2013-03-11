@@ -12,7 +12,7 @@ using SevenDigital.ApiInt.ServiceStack.Model;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services
 {
-	public abstract class BasketPurchaseService<T> : Service where T : ItemRequest
+	public abstract class BasketPurchaseService<TItemRequest> : Service where TItemRequest : ItemRequest
 	{
 		private readonly IPurchaseItemMapper _mapper;
 		private readonly IBasketHandler _basketHandler;
@@ -23,7 +23,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			_basketHandler = basketHandler;
 		}
 
-		public PurchaseResponse RunBasketPurchaseSteps(T request)
+		public PurchaseResponse RunBasketPurchaseSteps(TItemRequest request, Action<Guid, TItemRequest> paymentStep)
 		{
 			var basketId = TryRetrieveBasketId(request, RequestContext.Cookies);
 
@@ -31,7 +31,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 			try
 			{
-				PerformPaymentStep(basketId, request);
+				paymentStep(basketId, request);
 
 				var apiBasketPurchaseResponse = _basketHandler.Purchase(basketId, request.CountryCode, this.TryGetOAuthAccessToken());
 
@@ -42,8 +42,6 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 				return ApiErrorResponse(request, ex);
 			}
 		}
-
-		public abstract void PerformPaymentStep(Guid basketId, T request);
 
 		private Guid TryRetrieveBasketId(ItemRequest request, IDictionary<string, Cookie> requestCookies)
 		{
