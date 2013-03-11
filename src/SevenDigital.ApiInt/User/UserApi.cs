@@ -1,5 +1,4 @@
 using System.Web;
-using SevenDigital.Api.Schema.Premium;
 using SevenDigital.Api.Schema.Premium.User;
 using SevenDigital.Api.Wrapper;
 

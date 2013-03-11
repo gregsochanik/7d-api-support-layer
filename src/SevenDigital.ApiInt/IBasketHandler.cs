@@ -4,7 +4,7 @@ using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.ApiInt.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiInt
 {
 	public interface IBasketHandler
 	{

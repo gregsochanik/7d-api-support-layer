@@ -8,11 +8,10 @@ using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.ApiInt.Catalogue;
 using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.ServiceStack.Services;
 using SevenDigital.ApiInt.TestData;
 using SevenDigital.ApiInt.TestData.StubApiWrapper;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiInt.Unit.Tests
 {
 	[TestFixture]
 	public class BasketHandlerTests
@@ -37,9 +36,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			_userPurchaseBasket = ApiWrapper.StubbedTypedFluentApiWthUser(new UserPurchaseBasket());
 
 			_catalogue = MockRepository.GenerateStub<ICatalogue>();
-			_catalogue.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(TestData.TestTrack.SunItRises);
-
-
+			_catalogue.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(TestTrack.EverybodysChanging);
 		}
 
 		[Test]

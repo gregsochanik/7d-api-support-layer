@@ -6,7 +6,7 @@ using SevenDigital.Api.Wrapper;
 using SevenDigital.ApiInt.Catalogue;
 using SevenDigital.ApiInt.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiInt
 {
 	public class BasketHandler : IBasketHandler
 	{
