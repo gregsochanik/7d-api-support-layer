@@ -14,6 +14,54 @@ using SevenDigital.ApiInt.ServiceStack.Model;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services
 {
+	public class CardBasketPurchaseService : BasketPurchaseService<CardBasketPurchaseRequest>
+	{
+		private readonly IFluentApi<DefaultCard> _cardApi;
+
+		private readonly ILog _logger = LogManager.GetLogger("CardPurchaseService");
+
+		public CardBasketPurchaseService(IPurchaseItemMapper mapper, IFluentApi<DefaultCard> cardApi, IBasketHandler basketHandler)
+			:base(mapper, basketHandler)
+		{
+			_cardApi = cardApi;
+		}
+
+		public PurchaseResponse Post(CardBasketPurchaseRequest request)
+		{
+			if (string.IsNullOrEmpty(request.CountryCode))
+				request.CountryCode = "GB";
+			
+			var accessToken = this.TryGetOAuthAccessToken();
+
+			if (!TrySetDefaultCard(accessToken, request.CardId))
+			{
+				return BuildFailedCardPurchasedResponse(request, string.Format("Could not set default card to {0}", request.CardId));
+			}
+			
+			return RunBasketPurchaseSteps(request);
+		}
+
+		private bool TrySetDefaultCard(OAuthAccessToken accessToken, int cardId)
+		{
+			try
+			{
+				_cardApi.ForUser(accessToken.Token, accessToken.Secret).WithCard(cardId).Please();
+				return true;
+			}
+			catch (ApiException ex)
+			{
+				_logger.Error(string.Format("Failed to set default card to {0}", cardId), ex);
+				return false;
+			}
+		}
+
+		private static PurchaseResponse BuildFailedCardPurchasedResponse(ItemRequest request, string failureMessage)
+		{
+			var failedPurchaseStatus = new PurchaseStatus(false, failureMessage, new List<LockerRelease>());
+			return new PurchaseResponse { Item = null, OriginalRequest = request, Status = failedPurchaseStatus };
+		}
+	}
+
 	public class CardPurchaseService : Service
 	{
 		private readonly IPurchaseItemMapper _mapper;

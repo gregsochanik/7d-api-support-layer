@@ -23,7 +23,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			_basketHandler = basketHandler;
 		}
 
-		public PurchaseResponse RunBasketPurchaseSteps(TItemRequest request, Action<Guid, TItemRequest> paymentStep)
+		public PurchaseResponse RunBasketPurchaseSteps(TItemRequest request, Action<Guid, TItemRequest> paymentStep = null)
 		{
 			var basketId = TryRetrieveBasketId(request, RequestContext.Cookies);
 
@@ -31,7 +31,10 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 			try
 			{
-				paymentStep(basketId, request);
+				if (paymentStep != null)
+				{
+					paymentStep(basketId, request);
+				}
 
 				var apiBasketPurchaseResponse = _basketHandler.Purchase(basketId, request.CountryCode, this.TryGetOAuthAccessToken());
 
