@@ -112,6 +112,7 @@
     <Compile Include="Services\LockerCheckService.cs" />
     <Compile Include="Services\ReleaseTracksService.cs" />
     <Compile Include="Services\ServiceSessionExtensions.cs" />
+    <Compile Include="Services\StateHelper.cs" />
     <Compile Include="Services\StatusService.cs" />
     <Compile Include="Services\StreamingUriService.cs" />
     <Compile Include="Services\TrackSearchService.cs" />

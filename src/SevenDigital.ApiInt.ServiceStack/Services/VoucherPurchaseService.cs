@@ -4,11 +4,12 @@ using System.Net;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Schema.LockerEndpoint;
-using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.Premium.Basket;
+using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.Api.Wrapper.Premium;
+using SevenDigital.ApiInt.Exceptions;
 using SevenDigital.ApiInt.Mapping;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Model;
@@ -30,35 +31,52 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 		public VoucherPurchaseResponse Post(VoucherPurchaseRequest request)
 		{
-			var basketId = _basketHandler.Create(request);
+			var basketId = TryRetrieveBasketId(request, RequestContext.Cookies);
+
 			_basketHandler.AddItem(basketId, request);
 
 			if (string.IsNullOrEmpty(request.VoucherCode))
+			{
 				throw new HttpError(HttpStatusCode.BadRequest, "VoucherMissing", "You need to include a voucher code");
+			}
 
 			try
 			{
-				ApplyVoucherToBasket(request, basketId);
+				_applyVoucher.UseBasketId(basketId).UseVoucherCode(request.VoucherCode)
+				             .WithParameter("country", request.CountryCode)
+				             .Please();
+
+				var apiBasketPurchaseResponse = _basketHandler.Purchase(basketId, request.CountryCode, this.TryGetOAuthAccessToken());
+				
+				return SuccessResponse(request, apiBasketPurchaseResponse);
 			}
 			catch (ApiException ex)
 			{
 				return ApiErrorResponse(request, ex);
 			}
-
-			return PurchaseBasket(request, basketId, this.TryGetOAuthAccessToken());
 		}
 
-		private void ApplyVoucherToBasket(VoucherPurchaseRequest request, Guid basketId)
+		private Guid TryRetrieveBasketId(ItemRequest request, IDictionary<string, Cookie> requestCookies)
 		{
-			_applyVoucher.UseBasketId(basketId).UseVoucherCode(request.VoucherCode)
-			             .WithParameter("country", request.CountryCode)
-			             .Please();
+			if (!requestCookies.Keys.Contains(StateHelper.BASKET_COOKIE))
+			{
+				return _basketHandler.Create(request);
+			}
+
+			var basketIdFromCookie = requestCookies[StateHelper.BASKET_COOKIE].Value;
+
+			try
+			{
+				return new Guid(basketIdFromCookie);
+			}
+			catch (FormatException formatException)
+			{
+				throw new InvalidBasketIdException(basketIdFromCookie, formatException);
+			}
 		}
 
-		private VoucherPurchaseResponse PurchaseBasket(VoucherPurchaseRequest request, Guid basketId, OAuthAccessToken accessToken)
+		private VoucherPurchaseResponse SuccessResponse(VoucherPurchaseRequest request, UserPurchaseBasket userPurchaseBasket)
 		{
-			var userPurchaseBasket = _basketHandler.Purchase(basketId, request.CountryCode, accessToken);
-
 			return new VoucherPurchaseResponse
 			{
 				OriginalRequest = request,

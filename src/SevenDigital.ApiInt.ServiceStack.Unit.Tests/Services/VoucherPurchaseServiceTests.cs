@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using NUnit.Framework;
 using Rhino.Mocks;
 using SevenDigital.Api.Schema.LockerEndpoint;
@@ -8,6 +9,7 @@ using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Premium;
+using SevenDigital.ApiInt.Exceptions;
 using SevenDigital.ApiInt.Mapping;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Model;
@@ -67,6 +69,61 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			userVoucherService.Post(cardVoucherRequest);
 
 			_applyVoucher.AssertWasCalled(x => x.UseVoucherCode(expectedVoucherCode));
+		}
+
+		[Test]
+		public void if_basket_cookie_exists_use_this_basket()
+		{
+			const string expectedVoucherCode = "12345678";
+			var fakeBasketId = Guid.NewGuid();
+
+			var cardVoucherRequest = new VoucherPurchaseRequest { VoucherCode = expectedVoucherCode, Type = PurchaseType.track };
+			var userVoucherService = new VoucherPurchaseService(_applyVoucher, _purchaseItemMapper, _basketHandler)
+			{
+				RequestContext = ContextHelper.LoggedInContextWithFakeBasketCookie(fakeBasketId)
+			};
+
+			userVoucherService.Post(cardVoucherRequest);
+
+			_basketHandler.AssertWasNotCalled(x => x.Create(Arg<ItemRequest>.Is.Anything));
+			_basketHandler.AssertWasCalled(x => x.AddItem(Arg<Guid>.Is.Equal(fakeBasketId), Arg<ItemRequest>.Is.Anything));
+		}
+
+		[Test]
+		public void if_no_cookie_create_new_basket()
+		{
+			const string expectedVoucherCode = "12345678";
+
+			var cardVoucherRequest = new VoucherPurchaseRequest { VoucherCode = expectedVoucherCode, Type = PurchaseType.track };
+			var userVoucherService = new VoucherPurchaseService(_applyVoucher, _purchaseItemMapper, _basketHandler)
+			{
+				RequestContext = ContextHelper.LoggedInContext()
+			};
+
+			userVoucherService.Post(cardVoucherRequest);
+
+			_basketHandler.AssertWasCalled(x => x.Create(Arg<ItemRequest>.Is.Anything));
+		}
+
+		[Test]
+		public void throws_correct_error_if_not_a_valid_guid()
+		{
+			const string expectedVoucherCode = "12345678";
+
+			const string invalidBasketId = "I will not be made into a Guid!";
+			var mockRequestContext = ContextHelper.LoggedInContext();
+			mockRequestContext.Cookies.Add(StateHelper.BASKET_COOKIE, new Cookie(StateHelper.BASKET_COOKIE, invalidBasketId));
+
+			var cardVoucherRequest = new VoucherPurchaseRequest { VoucherCode = expectedVoucherCode};
+			var userVoucherService = new VoucherPurchaseService(_applyVoucher, _purchaseItemMapper, _basketHandler)
+			{
+				RequestContext = mockRequestContext
+			};
+
+			var invalidBasketIdException = Assert.Throws<InvalidBasketIdException>(() => userVoucherService.Post(cardVoucherRequest));
+
+			Assert.That(invalidBasketIdException.Message, Is.EqualTo(string.Format("BasketId {0} is invalid", invalidBasketId)));
+			Assert.That(invalidBasketIdException.InnerException, Is.TypeOf<FormatException>());
 		}
 	}
 }

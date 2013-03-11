@@ -84,6 +84,7 @@
     <Compile Include="Catalogue\CacheKeys.cs" />
     <Compile Include="Catalogue\ICatalogApiFactory.cs" />
     <Compile Include="Catalogue\ICatalogue.cs" />
+    <Compile Include="Exceptions\InvalidBasketIdException.cs" />
     <Compile Include="IBasketHandler.cs" />
     <Compile Include="Locker\ILockerBrowser.cs" />
     <Compile Include="Locker\ILockerCacheAdapter.cs" />
