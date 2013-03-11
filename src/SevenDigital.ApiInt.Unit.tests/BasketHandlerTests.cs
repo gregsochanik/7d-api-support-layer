@@ -1,12 +1,17 @@
 using System;
+using System.Net;
 using NUnit.Framework;
 using Rhino.Mocks;
+using SevenDigital.Api.Schema;
 using SevenDigital.Api.Schema.Basket;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
+using SevenDigital.Api.Wrapper.Exceptions;
+using SevenDigital.Api.Wrapper.Http;
 using SevenDigital.ApiInt.Catalogue;
+using SevenDigital.ApiInt.Exceptions;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.TestData;
 using SevenDigital.ApiInt.TestData.StubApiWrapper;
@@ -25,7 +30,7 @@ namespace SevenDigital.ApiInt.Unit.Tests
 		[SetUp]
 		public void SetUp()
 		{
-			_createBasketApi = MockRepository.GenerateStub<IFluentApi<CreateBasket>>();
+			_createBasketApi = ApiWrapper.StubbedTypedFluentApi(new CreateBasket(){Id=_expectedBasketGuid.ToString()});
 
 			_addToBasketApi = MockRepository.GenerateStub<IFluentApi<AddItemToBasket>>();
 			_addToBasketApi = ApiWrapper.StubbedTypedFluentApi(new AddItemToBasket
@@ -132,6 +137,36 @@ namespace SevenDigital.ApiInt.Unit.Tests
 			_userPurchaseBasket.AssertWasCalled(x => x.WithParameter("country", "GB"));
 			_userPurchaseBasket.AssertWasCalled(
 				x => x.ForUser(FakeUserData.FakeAccessToken.Token, FakeUserData.FakeAccessToken.Secret));
+		}
+
+		[Test]
+		public void If_basket_api_throws_basketNotFound_exception_then_create_a_new_one()
+		{
+			var basketWithBasketidNotFound = "Basket with basketid " + _expectedBasketGuid + " not found.";
+
+			var fluentApi = MockRepository.GenerateStub<IFluentApi<AddItemToBasket>>();
+			fluentApi.Stub(x => x.WithParameter("", "")).IgnoreArguments().Return(fluentApi);
+			fluentApi.Stub(x => x.ForUser(null, null)).IgnoreArguments().Return(fluentApi);
+
+			fluentApi.Stub(x => x.Please()).Throw(new RemoteApiException(basketWithBasketidNotFound, new Response(HttpStatusCode.BadRequest, ""), ErrorCode.ResourceNotFound)).Repeat.Times(1);
+			fluentApi.Stub(x => x.Please()).Return(new AddItemToBasket { Id=_expectedBasketGuid.ToString()});
+
+			var basketHandler = new BasketHandler(_createBasketApi, fluentApi, _userPurchaseBasket, _catalogue);
+			basketHandler.AddItem(_expectedBasketGuid, new ItemRequest());
+
+			_createBasketApi.AssertWasCalled(x => x.Please(), options => options.Repeat.Once());
+			fluentApi.AssertWasCalled(x => x.Please(), options => options.Repeat.Twice());
+		}
+
+		[Test]
+		public void Any_other_exception_should_throw_invalid_BasketId()
+		{
+			var fluentApi =
+				ApiWrapper.StubbedTypedFluentApiThrows<AddItemToBasket>(new RemoteApiException("blah",new Response(HttpStatusCode.BadRequest, ""),ErrorCode.AddCardFailedError));
+
+			var basketHandler = new BasketHandler(_createBasketApi, fluentApi, _userPurchaseBasket, _catalogue);
+			Assert.Throws<InvalidBasketIdException>(() => basketHandler.AddItem(_expectedBasketGuid, new ItemRequest()));
+
 		}
 	}
 }

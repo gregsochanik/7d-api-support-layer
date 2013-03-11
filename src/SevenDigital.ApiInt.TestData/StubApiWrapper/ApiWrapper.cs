@@ -1,3 +1,4 @@
+using System;
 using Rhino.Mocks;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
@@ -53,6 +54,14 @@ namespace SevenDigital.ApiInt.TestData.StubApiWrapper
 			var fluentApi = MockRepository.GenerateStub<IFluentApi<T>>();
 			fluentApi.Stub(x => x.WithParameter(null, null)).IgnoreArguments().Return(fluentApi);
 			fluentApi.Stub(x => x.Please()).Return(toReturn);
+			return fluentApi;
+		}
+
+		public static IFluentApi<T> StubbedTypedFluentApiThrows<T>(Exception toThrow)
+		{
+			var fluentApi = MockRepository.GenerateStub<IFluentApi<T>>();
+			fluentApi.Stub(x => x.WithParameter(null, null)).IgnoreArguments().Return(fluentApi);
+			fluentApi.Stub(x => x.Please()).Throw(toThrow);
 			return fluentApi;
 		}
 

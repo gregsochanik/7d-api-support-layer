@@ -1,13 +1,18 @@
 using System;
+using SevenDigital.Api.Schema;
 using SevenDigital.Api.Schema.Basket;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
+using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.ApiInt.Catalogue;
+using SevenDigital.ApiInt.Exceptions;
 using SevenDigital.ApiInt.Model;
 
 namespace SevenDigital.ApiInt
 {
+	/// <exception cref="InvalidBasketIdException"></exception>
+	/// <exception cref="ApiResponseException"></exception>
 	public class BasketHandler : IBasketHandler
 	{
 		private readonly IFluentApi<CreateBasket> _createBasket;
@@ -31,11 +36,23 @@ namespace SevenDigital.ApiInt
 
 		public Basket AddItem(Guid basketId, ItemRequest request)
 		{
-			_addItemToBasket.UseBasketId(basketId);
-			AdjustApiCallBasedOnPurchaseType(_addItemToBasket, request);
-			return _addItemToBasket.WithParameter("country", request.CountryCode)
-			                       .WithParameter("affiliatePartner", request.PartnerId.ToString())
-			                       .Please();
+			try
+			{
+				_addItemToBasket.UseBasketId(basketId);
+				AdjustApiCallBasedOnPurchaseType(_addItemToBasket, request);
+				return _addItemToBasket.WithParameter("country", request.CountryCode)
+				                       .WithParameter("affiliatePartner", request.PartnerId.ToString())
+				                       .Please();
+			}
+			catch (ApiErrorException ex)
+			{
+				if (ex.ErrorCode == ErrorCode.ResourceNotFound && ex.Message.Contains("Basket with basketid"))
+				{
+					var guid = Create(request);
+					return AddItem(guid, request);
+				}
+			}
+			throw new InvalidBasketIdException(basketId.ToString(), null);
 		}
 
 		public UserPurchaseBasket Purchase(Guid basketId, string countryCode, OAuthAccessToken accessToken)
