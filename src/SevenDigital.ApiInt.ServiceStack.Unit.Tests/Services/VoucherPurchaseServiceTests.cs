@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -30,6 +31,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			_purchaseItemMapper = MockRepository.GenerateStub<IPurchaseItemMapper>();
 
 			_basketHandler = MockRepository.GenerateStub<IBasketHandler>();
+			_basketHandler.Stub(x => x.Purchase(Guid.Empty, null, null)).IgnoreArguments().Return(new UserPurchaseBasket(){LockerReleases = new List<LockerRelease>(), PurchaseDate = DateTime.Now});
 
 			_applyVoucher.Stub(x => x.WithParameter(null, null)).IgnoreArguments().Return(_applyVoucher);
 			_userPurchaseBasket.Stub(x => x.WithParameter(null, null)).IgnoreArguments().Return(_userPurchaseBasket);
@@ -43,7 +45,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		public void returns_cardvoucherresponse()
 		{
 			var voucherPurchaseRequest = new VoucherPurchaseRequest{VoucherCode="12345678"};
-			var userVoucherService = new VoucherPurchaseService(_applyVoucher, _userPurchaseBasket, _purchaseItemMapper, _basketHandler)
+			var userVoucherService = new VoucherPurchaseService(_applyVoucher, _purchaseItemMapper, _basketHandler)
 			{
 				RequestContext = ContextHelper.LoggedInContext()
 			};
@@ -58,7 +60,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			const string expectedVoucherCode = "12345678";
 
 			var cardVoucherRequest = new VoucherPurchaseRequest { VoucherCode = expectedVoucherCode, Type = PurchaseType.track };
-			var userVoucherService = new VoucherPurchaseService(_applyVoucher, _userPurchaseBasket, _purchaseItemMapper, _basketHandler)
+			var userVoucherService = new VoucherPurchaseService(_applyVoucher, _purchaseItemMapper, _basketHandler)
 			{
 				RequestContext = ContextHelper.LoggedInContext()
 			};

@@ -54,6 +54,15 @@ namespace SevenDigital.ApiInt.TestData.StubApiWrapper
 			fluentApi.Stub(x => x.WithParameter(null, null)).IgnoreArguments().Return(fluentApi);
 			fluentApi.Stub(x => x.Please()).Return(toReturn);
 			return fluentApi;
+		}
+
+		public static IFluentApi<T> StubbedTypedFluentApiWthUser<T>(T toReturn)
+		{
+			var fluentApi = MockRepository.GenerateStub<IFluentApi<T>>();
+			fluentApi.Stub(x => x.ForUser(null, null)).IgnoreArguments().Return(fluentApi);
+			fluentApi.Stub(x => x.WithParameter(null, null)).IgnoreArguments().Return(fluentApi);
+			fluentApi.Stub(x => x.Please()).Return(toReturn);
+			return fluentApi;
 		} 
 	}
 

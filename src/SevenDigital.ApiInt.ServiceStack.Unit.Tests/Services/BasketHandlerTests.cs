@@ -4,10 +4,12 @@ using Rhino.Mocks;
 using SevenDigital.Api.Schema.Basket;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
+using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.ApiInt.Catalogue;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Services;
+using SevenDigital.ApiInt.TestData;
 using SevenDigital.ApiInt.TestData.StubApiWrapper;
 
 namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
@@ -19,14 +21,20 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		private IFluentApi<AddItemToBasket> _addToBasketApi;
 		private ICatalogue _catalogue;
 		private Guid _expectedBasketGuid = Guid.NewGuid();
+		private IFluentApi<UserPurchaseBasket> _userPurchaseBasket;
 
 		[SetUp]
 		public void SetUp()
 		{
 			_createBasketApi = MockRepository.GenerateStub<IFluentApi<CreateBasket>>();
-			
+
 			_addToBasketApi = MockRepository.GenerateStub<IFluentApi<AddItemToBasket>>();
-			_addToBasketApi = ApiWrapper.StubbedTypedFluentApi(new AddItemToBasket { Id = _expectedBasketGuid.ToString() });
+			_addToBasketApi = ApiWrapper.StubbedTypedFluentApi(new AddItemToBasket
+			{
+				Id = _expectedBasketGuid.ToString()
+			});
+
+			_userPurchaseBasket = ApiWrapper.StubbedTypedFluentApiWthUser(new UserPurchaseBasket());
 
 			_catalogue = MockRepository.GenerateStub<ICatalogue>();
 			_catalogue.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(TestData.TestTrack.SunItRises);
@@ -42,9 +50,12 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			{
 				Id = expectedBasketId
 			});
-			
-			var basketHandler = new BasketHandler(createBasket, _addToBasketApi, _catalogue);
-			var actualBasketId = basketHandler.Create(new ItemRequest{CountryCode = "GB"});
+
+			var basketHandler = new BasketHandler(createBasket, _addToBasketApi, _userPurchaseBasket, _catalogue);
+			var actualBasketId = basketHandler.Create(new ItemRequest
+			{
+				CountryCode = "GB"
+			});
 
 			createBasket.AssertWasCalled(x => x.WithParameter("country", "GB"));
 			createBasket.AssertWasCalled(x => x.Please());
@@ -57,8 +68,12 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			const int expectedPartnerId = 1;
 			const string expectedCountryCode = "GB";
 
-			var basketHandler = new BasketHandler(_createBasketApi, _addToBasketApi, _catalogue);
-			var itemRequest = new ItemRequest{CountryCode = expectedCountryCode, PartnerId = expectedPartnerId};
+			var basketHandler = new BasketHandler(_createBasketApi, _addToBasketApi, _userPurchaseBasket, _catalogue);
+			var itemRequest = new ItemRequest
+			{
+				CountryCode = expectedCountryCode,
+				PartnerId = expectedPartnerId
+			};
 			var addItem = basketHandler.AddItem(_expectedBasketGuid, itemRequest);
 
 			_addToBasketApi.AssertWasCalled(x => x.WithParameter("country", expectedCountryCode));
@@ -72,8 +87,12 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		[Test]
 		public void adds_release_to_that_basket_if_a_releaseRequest()
 		{
-			var itemRequest = new ItemRequest {Type = PurchaseType.release, Id = 1234 };
-			var basketHandler = new BasketHandler(_createBasketApi, _addToBasketApi, _catalogue);
+			var itemRequest = new ItemRequest
+			{
+				Type = PurchaseType.release,
+				Id = 1234
+			};
+			var basketHandler = new BasketHandler(_createBasketApi, _addToBasketApi, _userPurchaseBasket, _catalogue);
 
 			basketHandler.AddItem(_expectedBasketGuid, itemRequest);
 			_addToBasketApi.AssertWasCalled(x => x.ForReleaseId(1234));
@@ -95,12 +114,27 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 				}
 			});
 
-			var itemRequest = new ItemRequest {Type = PurchaseType.track, Id = expectedTrackId };
-			var basketHandler = new BasketHandler(_createBasketApi, _addToBasketApi, catalogue);
+			var itemRequest = new ItemRequest
+			{
+				Type = PurchaseType.track,
+				Id = expectedTrackId
+			};
+			var basketHandler = new BasketHandler(_createBasketApi, _addToBasketApi, _userPurchaseBasket, catalogue);
 			basketHandler.AddItem(_expectedBasketGuid, itemRequest);
 			_addToBasketApi.AssertWasCalled(x => x.ForTrackId(expectedTrackId));
 			_addToBasketApi.AssertWasCalled(x => x.ForReleaseId(expectedReleaseId));
 		}
 
+		[Test]
+		public void Purchase_calls_api_with_correct_parameters()
+		{
+			var basketHandler = new BasketHandler(_createBasketApi, _addToBasketApi, _userPurchaseBasket, _catalogue);
+
+			basketHandler.Purchase(_expectedBasketGuid, "GB", FakeUserData.FakeAccessToken);
+
+			_userPurchaseBasket.AssertWasCalled(x => x.WithParameter("country", "GB"));
+			_userPurchaseBasket.AssertWasCalled(
+				x => x.ForUser(FakeUserData.FakeAccessToken.Token, FakeUserData.FakeAccessToken.Secret));
+		}
 	}
 }

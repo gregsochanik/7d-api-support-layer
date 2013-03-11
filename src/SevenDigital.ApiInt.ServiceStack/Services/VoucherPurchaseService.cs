@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Schema.LockerEndpoint;
+using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.Premium.Basket;
-using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.Api.Wrapper.Premium;
@@ -17,14 +18,12 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 	public class VoucherPurchaseService : Service
 	{
 		private readonly IFluentApi<ApplyVoucherToBasket> _applyVoucher;
-		private readonly IFluentApi<UserPurchaseBasket> _purchaseBasket;
 		private readonly IPurchaseItemMapper _mapper;
 		private readonly IBasketHandler _basketHandler;
 
-		public VoucherPurchaseService(IFluentApi<ApplyVoucherToBasket> applyVoucher, IFluentApi<UserPurchaseBasket> purchaseBasket, IPurchaseItemMapper mapper, IBasketHandler basketHandler)
+		public VoucherPurchaseService(IFluentApi<ApplyVoucherToBasket> applyVoucher, IPurchaseItemMapper mapper, IBasketHandler basketHandler)
 		{
 			_applyVoucher = applyVoucher;
-			_purchaseBasket = purchaseBasket;
 			_mapper = mapper;
 			_basketHandler = basketHandler;
 		}
@@ -39,38 +38,44 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 			try
 			{
-				_applyVoucher.UseBasketId(basketId).UseVoucherCode(request.VoucherCode)
-				             .WithParameter("country", request.CountryCode)
-				             .Please();
+				ApplyVoucherToBasket(request, basketId);
 			}
 			catch (ApiException ex)
 			{
-				return BuildVoucherPurchaseResponse(request, new PurchaseStatus(false, ex.Message, new List<LockerRelease>()));
+				return ApiErrorResponse(request, ex);
 			}
 
-			var accessToken = this.TryGetOAuthAccessToken();
-
-			var userPurchaseBasket = _purchaseBasket.ForUser(accessToken.Token, accessToken.Secret)
-										.WithParameter("basketId", basketId.ToString())
-										.WithParameter("country", request.CountryCode)
-										.Please();
-
-			return BuildVoucherPurchaseResponse(request, new PurchaseStatus(true, "Voucher worked", userPurchaseBasket.LockerReleases));
+			return PurchaseBasket(request, basketId, this.TryGetOAuthAccessToken());
 		}
 
-		private VoucherPurchaseResponse BuildVoucherPurchaseResponse(VoucherPurchaseRequest request, PurchaseStatus purchaseStatus)
+		private void ApplyVoucherToBasket(VoucherPurchaseRequest request, Guid basketId)
 		{
-			var voucherPurchaseResponse = new VoucherPurchaseResponse
+			_applyVoucher.UseBasketId(basketId).UseVoucherCode(request.VoucherCode)
+			             .WithParameter("country", request.CountryCode)
+			             .Please();
+		}
+
+		private VoucherPurchaseResponse PurchaseBasket(VoucherPurchaseRequest request, Guid basketId, OAuthAccessToken accessToken)
+		{
+			var userPurchaseBasket = _basketHandler.Purchase(basketId, request.CountryCode, accessToken);
+
+			return new VoucherPurchaseResponse
 			{
 				OriginalRequest = request,
-				Status = purchaseStatus,
+				Status = new PurchaseStatus(true, "Voucher worked", userPurchaseBasket.LockerReleases),
 				VoucherCode = request.VoucherCode,
+				Item = _mapper.Map(request, userPurchaseBasket.LockerReleases)
 			};
+		}
 
-			if (voucherPurchaseResponse.Status.IsSuccess)
-				voucherPurchaseResponse.Item = _mapper.Map(request, purchaseStatus.UpdatedLocker);
-
-			return voucherPurchaseResponse;
+		private static VoucherPurchaseResponse ApiErrorResponse(VoucherPurchaseRequest request, ApiException ex)
+		{
+			return new VoucherPurchaseResponse
+			{
+				OriginalRequest = request,
+				Status = new PurchaseStatus(false, ex.Message, new List<LockerRelease>()),
+				VoucherCode = request.VoucherCode
+			};
 		}
 	}
 }
