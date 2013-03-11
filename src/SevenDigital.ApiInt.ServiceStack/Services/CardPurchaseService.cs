@@ -50,13 +50,13 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			return BuildCardPurchaseResponse(request, cardPurchaseStatus);
 		}
 
-		private static CardPurchaseResponse BuildFailedCardPurchasedResponse(CardPurchaseRequest request, string failureMessage)
+		private static CardPurchaseResponse BuildFailedCardPurchasedResponse(ItemRequest request, string failureMessage)
 		{
 			var failedPurchaseStatus = new PurchaseStatus(false, failureMessage, new List<LockerRelease>());
 			return new CardPurchaseResponse { Item = null, OriginalRequest = request, Status = failedPurchaseStatus };
 		}
 
-		private CardPurchaseResponse BuildCardPurchaseResponse(CardPurchaseRequest request, PurchaseStatus purchaseStatus)
+		private CardPurchaseResponse BuildCardPurchaseResponse(ItemRequest request, PurchaseStatus purchaseStatus)
 		{
 			var cardPurchaseResponse = new CardPurchaseResponse
 			{

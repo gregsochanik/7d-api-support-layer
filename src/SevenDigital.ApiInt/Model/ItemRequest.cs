@@ -19,5 +19,8 @@ namespace SevenDigital.ApiInt.Model
 
 		[DataMember]
 		public PurchaseType Type { get; set; }
+
+		[DataMember]
+		public int PartnerId { get; set; }
 	}
 }

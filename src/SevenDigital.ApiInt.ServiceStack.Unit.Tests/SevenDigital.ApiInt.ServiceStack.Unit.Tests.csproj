@@ -94,6 +94,7 @@
     <Compile Include="Mapping\AddCardMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApiCardPurchaseRuleTest.cs" />
+    <Compile Include="Services\BasketHandlerTests.cs" />
     <Compile Include="Services\CardPurchaseServiceTests.cs" />
     <Compile Include="Services\ContextHelper.cs" />
     <Compile Include="Services\DownloadFileServiceTests.cs" />

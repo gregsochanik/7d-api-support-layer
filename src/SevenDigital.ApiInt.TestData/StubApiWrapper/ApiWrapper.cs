@@ -25,7 +25,6 @@ namespace SevenDigital.ApiInt.TestData.StubApiWrapper
 		{
 			var fluentApi = MockRepository.GenerateStub<IFluentApi<Track>>();
 			fluentApi.Stub(x => x.WithParameter("", "")).IgnoreArguments().Return(fluentApi);
-			fluentApi.Stub(x => x.WithParameter("", "")).IgnoreArguments().Return(fluentApi);
 			fluentApi.Stub(x => x.ForTrackId(0)).IgnoreArguments().Return(fluentApi);
 			return fluentApi;
 		}
@@ -33,7 +32,6 @@ namespace SevenDigital.ApiInt.TestData.StubApiWrapper
 		public static IFluentApi<Release> StubbedApi(Release toReturn)
 		{
 			var fluentApi = MockRepository.GenerateStub<IFluentApi<Release>>();
-			fluentApi.Stub(x => x.WithParameter("", "")).IgnoreArguments().Return(fluentApi);
 			fluentApi.Stub(x => x.WithParameter("", "")).IgnoreArguments().Return(fluentApi);
 			fluentApi.Stub(x => x.ForReleaseId(0)).IgnoreArguments().Return(fluentApi);
 			fluentApi.Stub(x => x.Please()).Return(toReturn);
@@ -49,6 +47,14 @@ namespace SevenDigital.ApiInt.TestData.StubApiWrapper
 			fluentApi.Stub(x => x.Please()).Return(toReturn);
 			return fluentApi;
 		}
+
+		public static IFluentApi<T> StubbedTypedFluentApi<T>(T toReturn)
+		{
+			var fluentApi = MockRepository.GenerateStub<IFluentApi<T>>();
+			fluentApi.Stub(x => x.WithParameter(null, null)).IgnoreArguments().Return(fluentApi);
+			fluentApi.Stub(x => x.Please()).Return(toReturn);
+			return fluentApi;
+		} 
 	}
 
 }

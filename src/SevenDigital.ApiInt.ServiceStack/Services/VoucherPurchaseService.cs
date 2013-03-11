@@ -1,15 +1,13 @@
-using System;
 using System.Collections.Generic;
+using System.Net;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
-using SevenDigital.Api.Schema.Basket;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.Premium.Basket;
 using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.Api.Wrapper.Premium;
-using SevenDigital.ApiInt.Catalogue;
 using SevenDigital.ApiInt.Mapping;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Model;
@@ -18,43 +16,27 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 {
 	public class VoucherPurchaseService : Service
 	{
-		private readonly IFluentApi<CreateBasket> _createBasket;
-		private readonly IFluentApi<AddItemToBasket> _addItemToBasket;
-		private readonly ICatalogue _catalogue;
 		private readonly IFluentApi<ApplyVoucherToBasket> _applyVoucher;
 		private readonly IFluentApi<UserPurchaseBasket> _purchaseBasket;
 		private readonly IPurchaseItemMapper _mapper;
+		private readonly IBasketHandler _basketHandler;
 
-		public VoucherPurchaseService(IFluentApi<CreateBasket> createBasket, 
-			IFluentApi<AddItemToBasket> addItemToBasket, 
-			IFluentApi<ApplyVoucherToBasket> applyVoucher, 
-			IFluentApi<UserPurchaseBasket> purchaseBasket, 
-			ICatalogue catalogue, 
-			IPurchaseItemMapper mapper)
+		public VoucherPurchaseService(IFluentApi<ApplyVoucherToBasket> applyVoucher, IFluentApi<UserPurchaseBasket> purchaseBasket, IPurchaseItemMapper mapper, IBasketHandler basketHandler)
 		{
-			_createBasket = createBasket;
-			_addItemToBasket = addItemToBasket;
-			_catalogue = catalogue;
 			_applyVoucher = applyVoucher;
 			_purchaseBasket = purchaseBasket;
 			_mapper = mapper;
+			_basketHandler = basketHandler;
 		}
 
 		public VoucherPurchaseResponse Post(VoucherPurchaseRequest request)
 		{
-			// create a basket
-			var createBasket = _createBasket.WithParameter("country", request.CountryCode).Please();
-			var basketId = new Guid(createBasket.Id);
-
-			// add item to backet
-			_addItemToBasket.UseBasketId(basketId);
-			AdjustApiCallBasedOnPurchaseType(_addItemToBasket, request);
-			_addItemToBasket.WithParameter("country", request.CountryCode).Please();
+			var basketId = _basketHandler.Create(request);
+			_basketHandler.AddItem(basketId, request);
 
 			if (string.IsNullOrEmpty(request.VoucherCode))
-				throw new HttpError("BOOM");
+				throw new HttpError(HttpStatusCode.BadRequest, "VoucherMissing", "You need to include a voucher code");
 
-			// apply voucher to basket
 			try
 			{
 				_applyVoucher.UseBasketId(basketId).UseVoucherCode(request.VoucherCode)
@@ -66,30 +48,14 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 				return BuildVoucherPurchaseResponse(request, new PurchaseStatus(false, ex.Message, new List<LockerRelease>()));
 			}
 
-			// purchase basket
 			var accessToken = this.TryGetOAuthAccessToken();
 
-			// handle failure
 			var userPurchaseBasket = _purchaseBasket.ForUser(accessToken.Token, accessToken.Secret)
 										.WithParameter("basketId", basketId.ToString())
 										.WithParameter("country", request.CountryCode)
 										.Please();
 
 			return BuildVoucherPurchaseResponse(request, new PurchaseStatus(true, "Voucher worked", userPurchaseBasket.LockerReleases));
-		}
-
-		private void AdjustApiCallBasedOnPurchaseType(IFluentApi<AddItemToBasket> api, ItemRequest request)
-		{
-			if (request.Type == PurchaseType.release)
-			{
-				api.ForReleaseId(request.Id);
-			}
-			else
-			{
-				var track = _catalogue.GetATrack(request.CountryCode, request.Id);
-				var releaseId = track.Release.Id;
-				api.ForReleaseId(releaseId).ForTrackId(request.Id);
-			}
 		}
 
 		private VoucherPurchaseResponse BuildVoucherPurchaseResponse(VoucherPurchaseRequest request, PurchaseStatus purchaseStatus)

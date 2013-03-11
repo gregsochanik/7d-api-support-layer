@@ -105,9 +105,11 @@
     <Compile Include="Model\VoucherPurchaseRequest.cs" />
     <Compile Include="Model\VoucherPurchaseResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BasketHandler.cs" />
     <Compile Include="Services\CardPurchaseService.cs" />
     <Compile Include="Services\DownloadFileService.cs" />
     <Compile Include="Services\FreePurchaseService.cs" />
+    <Compile Include="Services\IBasketHandler.cs" />
     <Compile Include="Services\ItemPurchaseService.cs" />
     <Compile Include="Services\LockerCheckService.cs" />
     <Compile Include="Services\ReleaseTracksService.cs" />
