@@ -2,7 +2,7 @@
 
 namespace SevenDigital.ApiInt.ServiceStack.Model
 {
-	public class CardPurchaseResponse
+	public class PurchaseResponse
 	{
 		public ItemRequest OriginalRequest { get; set; }
 		public PurchaseStatus Status { get; set; }

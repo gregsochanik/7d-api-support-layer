@@ -31,7 +31,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			_cardApi = cardApi;
 		}
 
-		public CardPurchaseResponse Post(CardPurchaseRequest request)
+		public PurchaseResponse Post(CardPurchaseRequest request)
 		{
 			if (string.IsNullOrEmpty(request.CountryCode))
 				request.CountryCode = "GB";
@@ -50,15 +50,15 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			return BuildCardPurchaseResponse(request, cardPurchaseStatus);
 		}
 
-		private static CardPurchaseResponse BuildFailedCardPurchasedResponse(ItemRequest request, string failureMessage)
+		private static PurchaseResponse BuildFailedCardPurchasedResponse(ItemRequest request, string failureMessage)
 		{
 			var failedPurchaseStatus = new PurchaseStatus(false, failureMessage, new List<LockerRelease>());
-			return new CardPurchaseResponse { Item = null, OriginalRequest = request, Status = failedPurchaseStatus };
+			return new PurchaseResponse { Item = null, OriginalRequest = request, Status = failedPurchaseStatus };
 		}
 
-		private CardPurchaseResponse BuildCardPurchaseResponse(ItemRequest request, PurchaseStatus purchaseStatus)
+		private PurchaseResponse BuildCardPurchaseResponse(ItemRequest request, PurchaseStatus purchaseStatus)
 		{
-			var cardPurchaseResponse = new CardPurchaseResponse
+			var cardPurchaseResponse = new PurchaseResponse
 			{
 				OriginalRequest = request,
 				Status = purchaseStatus,

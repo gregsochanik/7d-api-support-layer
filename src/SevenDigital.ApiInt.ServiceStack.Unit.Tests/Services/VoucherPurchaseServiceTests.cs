@@ -53,7 +53,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			};
 			var voucherResponse = userVoucherService.Post(voucherPurchaseRequest);
 			Assert.That(voucherResponse, Is.Not.Null);
-			Assert.That(voucherResponse.VoucherCode, Is.EqualTo(voucherPurchaseRequest.VoucherCode));
+			Assert.That(voucherResponse.Status.Message, Is.EqualTo("Purchase Authorised"));
 		}
 		
 		[Test]

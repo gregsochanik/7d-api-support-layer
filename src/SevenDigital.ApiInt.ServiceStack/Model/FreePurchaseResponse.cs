@@ -1,5 +1,5 @@
 namespace SevenDigital.ApiInt.ServiceStack.Model
 {
-	public class FreePurchaseResponse : CardPurchaseResponse
+	public class FreePurchaseResponse : PurchaseResponse
 	{}
 }

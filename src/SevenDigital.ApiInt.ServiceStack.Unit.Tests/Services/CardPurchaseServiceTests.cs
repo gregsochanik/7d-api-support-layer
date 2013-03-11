@@ -116,11 +116,11 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			_defaultCardApi.Stub(x => x.Please()).Throw(new RemoteApiException("blah", new Response(HttpStatusCode.NotFound, "blah"), ErrorCode.UserHasNoCardDetails));
 
-			CardPurchaseResponse cardPurchaseResponse = null;
-			Assert.DoesNotThrow(() => cardPurchaseResponse = cardService.Post(new CardPurchaseRequest{CardId = 123}));
-			Assert.That(cardPurchaseResponse, Is.Not.Null);
-			Assert.That(cardPurchaseResponse.Status.IsSuccess, Is.False);
-			Assert.That(cardPurchaseResponse.Status.Message, Is.EqualTo("Could not set default card to 123"));
+			PurchaseResponse purchaseResponse = null;
+			Assert.DoesNotThrow(() => purchaseResponse = cardService.Post(new CardPurchaseRequest{CardId = 123}));
+			Assert.That(purchaseResponse, Is.Not.Null);
+			Assert.That(purchaseResponse.Status.IsSuccess, Is.False);
+			Assert.That(purchaseResponse.Status.Message, Is.EqualTo("Could not set default card to 123"));
 		}
 	}
 }
