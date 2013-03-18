@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using SevenDigital.ApiInt.Basket;
 using SevenDigital.ApiInt.Exceptions;
 using SevenDigital.ApiInt.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiInt.Basket
 {
 	public static class BasketRequestHelper
 	{

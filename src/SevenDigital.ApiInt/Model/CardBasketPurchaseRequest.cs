@@ -1,6 +1,6 @@
 ﻿namespace SevenDigital.ApiInt.Model
 {
-	public class CardPurchaseRequest : ItemRequest
+	public class CardBasketPurchaseRequest : ItemRequest
 	{
 		public int CardId { get; set; }
 		public decimal Price { get; set; }
