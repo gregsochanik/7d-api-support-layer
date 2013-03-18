@@ -1,20 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using NUnit.Framework;
 using Rhino.Mocks;
 using ServiceStack.Common.Web;
-using SevenDigital.Api.Schema.LockerEndpoint;
-using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.Pricing;
+using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.ApiInt.Basket;
 using SevenDigital.ApiInt.Catalogue;
 using SevenDigital.ApiInt.Mapping;
 using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.Purchasing;
 using SevenDigital.ApiInt.ServiceStack.Model;
 using SevenDigital.ApiInt.ServiceStack.Services;
-using SevenDigital.ApiInt.TestData;
 
 namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 {
@@ -26,6 +22,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		private ICatalogue _catalogue;
 		private static readonly Track _freeTrack = new Track { Price = new Price { Value = "0" } };
 		private static readonly Track _pricedTrack = new Track { Id = PRICED_TRACK_ID, Price = new Price() };
+		private static readonly Release _pricedRelease = new Release { Id = PRICED_TRACK_ID, Price = new Price() };
 		private PurchasedItem _expectedPurchasedItem;
 		private IBasketHandler _basketHandler;
 
@@ -40,12 +37,10 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			_mapper.Stub(x => x.Map(null, null)).IgnoreArguments().Return(_expectedPurchasedItem);
 
 			_catalogue = MockRepository.GenerateStub<ICatalogue>();
-			_catalogue.Stub(x => x.GetATrackWithPrice(null, 0)).IgnoreArguments().Return(_freeTrack);
-			_catalogue.Stub(x => x.GetATrackWithPrice("GB",PRICED_TRACK_ID)).Return(_pricedTrack);
 		}
 
 		[Test]
-		public void Throws_error_if_item_is_not_free()
+		public void Throws_error_if_track_is_not_free()
 		{
 			var catalogue = MockRepository.GenerateStub<ICatalogue>();
 			catalogue.Stub(x => x.GetATrackWithPrice(null, 0)).IgnoreArguments().Return(_pricedTrack);
@@ -60,6 +55,24 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			Assert.That(httpError.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
 			Assert.That(httpError.Message, Is.EqualTo(string.Format("This track is not free! {0}", _pricedTrack.Price.Status)));
 			Assert.That(httpError.ErrorCode, Is.EqualTo("TrackNotFree"));
+		}
+
+		[Test]
+		public void Throws_error_if_release_is_not_free()
+		{
+			var catalogue = MockRepository.GenerateStub<ICatalogue>();
+			catalogue.Stub(x => x.GetARelease(null, 0)).IgnoreArguments().Return(_pricedRelease);
+
+			var freePurchaseService = new FreePurchaseService(_mapper, _basketHandler, catalogue)
+			{
+				RequestContext = ContextHelper.LoggedInContext()
+			};
+			var freePurchaseRequest = new FreePurchaseRequest { CountryCode = "GB", Id = PRICED_TRACK_ID, Type = PurchaseType.release };
+
+			var httpError = Assert.Throws<HttpError>(() => freePurchaseService.Post(freePurchaseRequest));
+			Assert.That(httpError.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
+			Assert.That(httpError.Message, Is.EqualTo(string.Format("This release is not free! {0}", _pricedTrack.Price.Status)));
+			Assert.That(httpError.ErrorCode, Is.EqualTo("ReleaseNotFree"));
 		}
 	}
 }

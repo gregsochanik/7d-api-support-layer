@@ -29,12 +29,26 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 		private void AssertItemIsFree(ItemRequest request)
 		{
-			var aTrackWithPrice = _catalogue.GetATrackWithPrice(request.CountryCode, request.Id);
-			if (aTrackWithPrice.Price.Status != PriceStatus.Free)
+			if (request.Type == PurchaseType.track)
 			{
-				throw new HttpError(HttpStatusCode.Forbidden,
-									"TrackNotFree",
-									string.Format("This track is not free! {0}", aTrackWithPrice.Price.Status));
+
+				var aTrackWithPrice = _catalogue.GetATrackWithPrice(request.CountryCode, request.Id);
+				if (aTrackWithPrice.Price.Status != PriceStatus.Free)
+				{
+					throw new HttpError(HttpStatusCode.Forbidden,
+					                    "TrackNotFree",
+					                    string.Format("This track is not free! {0}", aTrackWithPrice.Price.Status));
+				}
+			}
+			else
+			{
+				var release = _catalogue.GetARelease(request.CountryCode, request.Id);
+				if (release.Price.Status != PriceStatus.Free)
+				{
+					throw new HttpError(HttpStatusCode.Forbidden,
+										"ReleaseNotFree",
+										string.Format("This release is not free! {0}", release.Price.Status));
+				}
 			}
 		}
 	}
