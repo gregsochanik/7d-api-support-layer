@@ -100,6 +100,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		}
 
 		[Test]
+		[Ignore("BUYNOW-54: Releases can also be free")]
 		public void Throws_error_if_item_is_release()
 		{
 			var catalogue = MockRepository.GenerateStub<ICatalogue>();

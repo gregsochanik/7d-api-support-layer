@@ -26,7 +26,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 		public FreePurchaseResponse Post(FreePurchaseRequest request)
 		{
-			AssertItemIsTrack(request);
+			//AssertItemIsTrack(request);
 			AssertItemIsFree(request);
 
 			var accessToken = this.TryGetOAuthAccessToken();
