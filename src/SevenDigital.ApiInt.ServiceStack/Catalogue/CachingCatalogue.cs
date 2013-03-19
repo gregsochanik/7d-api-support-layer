@@ -45,14 +45,14 @@ namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 		public Release GetARelease(string countryCode, int id)
 		{
 			var key = CacheKeys.Release(countryCode, id);
-			var forReleaseId = _factory.ReleaseApi().WithParameter("country", countryCode).WithParameter("imagesize", "100").ForReleaseId(id);
+			var forReleaseId = _factory.ReleaseApi().WithParameter("imagesize", "100").ForReleaseId(id);
 			return GetSet(key, () => _fluentApiTriggers.MultipleRequestBasedOnCountryCodeList(forReleaseId));
 		}
 
 		public List<Track> GetAReleaseTracks(string countryCode, int id)
 		{
 			var key = CacheKeys.ReleaseTracks(countryCode, id);
-			var forReleaseId = _factory.ReleaseTracksApi().WithPageSize(100).WithParameter("country", countryCode).WithParameter("imagesize", "100").ForReleaseId(id);
+			var forReleaseId = _factory.ReleaseTracksApi().WithPageSize(100).WithParameter("imagesize", "100").ForReleaseId(id);
 			return GetSet(key, () => _fluentApiTriggers.MultipleRequestBasedOnCountryCodeList(forReleaseId).Tracks);
 		}
 
