@@ -18,9 +18,18 @@ namespace SevenDigital.ApiInt.Model
 		public int Id { get; set; }
 
 		[DataMember]
-		public PurchaseType Type { get; set; }
+		public virtual PurchaseType Type { get; set; }
 
 		[DataMember]
 		public int PartnerId { get; set; }
+	}
+
+	public class SpecificTrackRequest : ItemRequest
+	{
+		public override PurchaseType Type {
+			get { return PurchaseType.track;}
+		}
+
+		public int ReleaseId { get; set; }
 	}
 }
