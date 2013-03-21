@@ -56,18 +56,12 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 	[TestFixture]
 	public class ItemPurchaseServiceTests
 	{
-		private ICatalogue _catalogue;
-
 		private IProductCollater _productCollater;
 
 		[SetUp]
 		public void SetUp()
 		{
 			_productCollater = MockRepository.GenerateStub<IProductCollater>();
-
-			_catalogue = MockRepository.GenerateStub<ICatalogue>();
-			_catalogue.Stub(x => x.GetARelease(null, 0)).IgnoreArguments().Return(TestRelease.FleetFoxes);
-			_catalogue.Stub(x => x.GetAReleaseTracks(null, 0)).IgnoreArguments().Return(new List<Track>());
 		}
 
 		[Test]
@@ -76,20 +70,20 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			var releaseService = new ItemPurchaseService(_productCollater);
 			var releaseRequest = new ItemRequest{ CountryCode = "GB", Id = 12345, Type = PurchaseType.release};
 			var requestContext = MockRepository.GenerateStub<IRequestContext>();
-			
+
 			releaseService.RequestContext = requestContext;
 
 			var o = releaseService.Get(releaseRequest);
 
 			Assert.That(o, Is.TypeOf<HttpResult>());
 			Assert.That(((HttpResult)o).Response, Is.TypeOf<BuyItNowResponse<ReleaseAndTracks>>());
+
+			_productCollater.AssertWasCalled(x=>x.UsingReleaseId("GB", 12345));
 		}
 
 		[Test]
 		public void Happy_path_track()
 		{
-			_catalogue.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(TestTrack.SunItRises);
-			
 			var releaseService = new ItemPurchaseService(_productCollater);
 			var releaseRequest = new ItemRequest { CountryCode = "GB", Id = 12345, Type = PurchaseType.track };
 			var requestContext = MockRepository.GenerateStub<IRequestContext>();
@@ -100,6 +94,8 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			Assert.That(o, Is.TypeOf<HttpResult>());
 			Assert.That(((HttpResult)o).Response, Is.TypeOf<BuyItNowResponse<ReleaseAndTracks>>());
+
+			_productCollater.AssertWasCalled(x=>x.UsingTrackId("GB", 12345));
 		}
 
 		[Test]
