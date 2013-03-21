@@ -15,12 +15,19 @@ namespace SevenDigital.ApiInt.ServiceStack.Authentication
 		private readonly IOAuthAuthentication _auth;
 		private readonly IUserApi _userApi;
 		private readonly ILog _logger;
+		private static TimeSpan _sessionExpiry = new TimeSpan(0, 0, 15, 0);
 
 		public SevenDigitalCredentialsAuthProvider(IOAuthAuthentication auth, IUserApi userApi)
 		{
 			_auth = auth;
 			_userApi = userApi;
 			_logger = LogManager.GetLogger(GetType());
+		}
+
+		public SevenDigitalCredentialsAuthProvider(IOAuthAuthentication auth, IUserApi userApi, TimeSpan sessionExpiry) 
+			: this(auth, userApi)
+		{
+			_sessionExpiry = sessionExpiry;
 		}
 
 		public override bool TryAuthenticate(IServiceBase authService, string userName, string password)
@@ -58,7 +65,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Authentication
 		{
 			session.IsAuthenticated = true;
 
-			SessionExpiry = new TimeSpan(1, 0, 0, 0);
+			SessionExpiry = _sessionExpiry;
 			
 			base.OnAuthenticated(authService, session, tokens, authInfo);
 		}

@@ -6,5 +6,8 @@ namespace SevenDigital.ApiInt.Authentication
 	{
 		public LoginInvalidException() : base("Login invalid")
 		{}
+
+		public LoginInvalidException(string message) : base(message)
+		{}
 	}
 }

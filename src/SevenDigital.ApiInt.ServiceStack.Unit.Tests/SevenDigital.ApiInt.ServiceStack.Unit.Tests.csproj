@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\SevenDigitalCredentialsAuthProviderTests.cs" />
+    <Compile Include="Authentication\_if_user_does_not_exist.cs" />
     <Compile Include="Cache\CatalogueHelperTests.cs" />
     <Compile Include="Cache\FluentApiExtensionTests.cs" />
     <Compile Include="Mapping\AddCardMapperTests.cs" />
