@@ -109,10 +109,13 @@
     <Compile Include="Services\CardPurchaseService.cs" />
     <Compile Include="Services\DownloadFileService.cs" />
     <Compile Include="Services\FreePurchaseService.cs" />
+    <Compile Include="Services\IProductCollater.cs" />
     <Compile Include="Services\ItemPurchaseService.cs" />
     <Compile Include="Services\LockerCheckService.cs" />
+    <Compile Include="Services\ProductCollater.cs" />
     <Compile Include="Services\ReleaseTracksService.cs" />
     <Compile Include="Services\ServiceSessionExtensions.cs" />
+    <Compile Include="Services\SpecificTrackPurchaseService.cs" />
     <Compile Include="Services\StatusService.cs" />
     <Compile Include="Services\StreamingUriService.cs" />
     <Compile Include="Services\TrackSearchService.cs" />
