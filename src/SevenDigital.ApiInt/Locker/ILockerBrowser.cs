@@ -6,7 +6,7 @@ namespace SevenDigital.ApiInt.Locker
 {
 	public interface ILockerBrowser
 	{
-		LockerResponse GetLockerItem(OAuthAccessToken accessToken, int releaseId, int trackId = 0);
-		LockerResponse GetLockerItem(OAuthAccessToken accessToken, ItemRequest lockerCheckRequest);
+		//LockerResponse GetLockerItem(OAuthAccessToken accessToken, int releaseId, int trackId = 0);
+		LockerResponse GetLockerItem(OAuthAccessToken accessToken, ItemRequest request);
 	}
 }

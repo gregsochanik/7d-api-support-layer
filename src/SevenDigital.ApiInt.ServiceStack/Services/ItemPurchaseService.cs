@@ -27,6 +27,13 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 			try
 			{
+				if (request.ReleaseId.HasValue && request.ReleaseId > 0)
+				{
+					var releaseAndTracks = _productCollater.UsingReleaseAndTrackId(request.CountryCode, request.ReleaseId.Value, request.Id);
+
+					return new HttpResult(ResponseHelper.BuildBuyItNowResponse(this.GetSession(), releaseAndTracks));
+				}
+
 				var internalResponse = request.Type == PurchaseType.release
 					                       ? _productCollater.UsingReleaseId(request.CountryCode, request.Id)
 					                       : _productCollater.UsingTrackId(request.CountryCode, request.Id);

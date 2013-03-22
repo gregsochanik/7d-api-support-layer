@@ -17,18 +17,22 @@ namespace SevenDigital.ApiInt.Locker
 			_catalogue = catalogue;
 		}
 
-		public LockerResponse GetLockerItem(OAuthAccessToken accessToken, ItemRequest lockerCheckRequest)
+		public LockerResponse GetLockerItem(OAuthAccessToken accessToken, ItemRequest request)
 		{
-			if (lockerCheckRequest.Type == PurchaseType.release)
+			if (request.Type == PurchaseType.release)
 			{
-				return GetLockerItem(accessToken, lockerCheckRequest.Id);
+				return GetLockerItem(accessToken, request.Id);
 			}
 
-			var aTrack = _catalogue.GetATrack(lockerCheckRequest.CountryCode, lockerCheckRequest.Id);
-			return GetLockerItem(accessToken, aTrack.Release.Id, lockerCheckRequest.Id);
+			if (!request.ReleaseId.HasValue)
+			{
+				var aTrack = _catalogue.GetATrack(request.CountryCode, request.Id);
+				request.ReleaseId = aTrack.Release.Id;
+			}
+			return GetLockerItem(accessToken, request.ReleaseId.Value, request.Id);
 		}
 
-		public LockerResponse GetLockerItem(OAuthAccessToken accessToken, int releaseId, int trackId = 0)
+		private LockerResponse GetLockerItem(OAuthAccessToken accessToken, int releaseId, int trackId = 0)
 		{
 			var lockerApiCall = _lockerApi.ForUser(accessToken.Token, accessToken.Secret).ForReleaseId(releaseId).WithParameter("imagesize", "100");
 			if (trackId > 0)

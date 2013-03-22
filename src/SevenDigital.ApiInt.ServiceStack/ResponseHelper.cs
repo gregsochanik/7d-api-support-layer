@@ -1,4 +1,8 @@
+using System.Collections.Generic;
 using ServiceStack.ServiceInterface.Auth;
+using SevenDigital.Api.Schema.LockerEndpoint;
+using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiInt.Purchasing;
 using SevenDigital.ApiInt.ServiceStack.Model;
 
 namespace SevenDigital.ApiInt.ServiceStack
@@ -13,5 +17,6 @@ namespace SevenDigital.ApiInt.ServiceStack
 				Session = authSession,
 			};
 		}
+
 	}
 }

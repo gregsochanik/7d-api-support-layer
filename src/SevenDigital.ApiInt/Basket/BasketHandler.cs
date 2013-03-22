@@ -71,9 +71,16 @@ namespace SevenDigital.ApiInt.Basket
 			}
 			else
 			{
-				var track = _catalogue.GetATrack(request.CountryCode, request.Id);
-				var releaseId = track.Release.Id;
-				api.ForReleaseId(releaseId).ForTrackId(request.Id);
+				if (request.ReleaseId.HasValue)
+				{
+					api.ForReleaseId(request.ReleaseId.Value).ForTrackId(request.Id);
+				}
+				else
+				{
+					var track = _catalogue.GetATrack(request.CountryCode, request.Id);
+					var releaseId = track.Release.Id;
+					api.ForReleaseId(releaseId).ForTrackId(request.Id);
+				}
 			}
 		}
 	}
