@@ -11,7 +11,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 {
 	public interface IFluentApiTriggers
 	{
-		T SingleRequest<T>(IFluentApi<T> fluentApi);
+		T SingleRequest<T>(IFluentApi<T> fluentApi, string countryCode);
 		T MultipleRequestBasedOnCountryCodeList<T>(IFluentApi<T> fluentApi);
 	}
 
@@ -32,7 +32,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 		{
 			var key = CacheKeys.Track(countryCode, id);
 			var forTrackId = _factory.TrackApi().WithParameter("imagesize", "100").ForTrackId(id);
-			return GetSet(key, () => _fluentApiTriggers.SingleRequest(forTrackId));
+			return GetSet(key, () => _fluentApiTriggers.SingleRequest(forTrackId, countryCode));
 		}
 		
 		public Track GetATrackWithPrice(string countryCode, int id)
@@ -46,14 +46,14 @@ namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 		{
 			var key = CacheKeys.Release(countryCode, id);
 			var forReleaseId = _factory.ReleaseApi().WithParameter("imagesize", "100").ForReleaseId(id);
-			return GetSet(key, () => _fluentApiTriggers.SingleRequest(forReleaseId));
+			return GetSet(key, () => _fluentApiTriggers.SingleRequest(forReleaseId, countryCode));
 		}
 
 		public List<Track> GetAReleaseTracks(string countryCode, int id)
 		{
 			var key = CacheKeys.ReleaseTracks(countryCode, id);
 			var forReleaseId = _factory.ReleaseTracksApi().WithPageSize(100).WithParameter("imagesize", "100").ForReleaseId(id);
-			return GetSet(key, () => _fluentApiTriggers.SingleRequest(forReleaseId).Tracks);
+			return GetSet(key, () => _fluentApiTriggers.SingleRequest(forReleaseId, countryCode).Tracks);
 		}
 
 		private T GetSet<T>(string key, Func<T> retrieveEntity) where T : class

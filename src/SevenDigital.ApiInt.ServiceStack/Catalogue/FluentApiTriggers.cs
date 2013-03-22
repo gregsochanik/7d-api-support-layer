@@ -4,9 +4,9 @@ namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 {
 	public class FluentApiTriggers : IFluentApiTriggers
 	{
-		public T SingleRequest<T>(IFluentApi<T> fluentApi)
+		public T SingleRequest<T>(IFluentApi<T> fluentApi, string countryCode)
 		{
-			return fluentApi.Please();
+			return fluentApi.WithParameter("country", countryCode).Please();
 		}
 
 		public T MultipleRequestBasedOnCountryCodeList<T>(IFluentApi<T> fluentApi)
