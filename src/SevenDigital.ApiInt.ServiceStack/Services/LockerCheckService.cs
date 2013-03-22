@@ -5,7 +5,6 @@ using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.ApiInt.Locker;
 using SevenDigital.ApiInt.Mapping;
-using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Model;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services
