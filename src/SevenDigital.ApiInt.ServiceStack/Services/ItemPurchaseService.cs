@@ -3,10 +3,9 @@ using System.Net;
 using ServiceStack.Common.Web;
 using ServiceStack.Logging;
 using ServiceStack.ServiceInterface;
-using ServiceStack.ServiceInterface.Auth;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.ServiceStack.Model;
+using SevenDigital.ApiInt.ServiceStack.Catalogue;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services
 {
@@ -49,18 +48,6 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 				Request.Items["View"] = "Error";
 				throw new HttpError(request, HttpStatusCode.NotFound, "404", "Not found");
 			}
-		}
-	}
-
-	public static class ResponseHelper
-	{
-		public static BuyItNowResponse<T> BuildBuyItNowResponse<T>(IAuthSession authSession, T internalResponse)
-		{
-			return new BuyItNowResponse<T>
-			{
-				InternalResponse = internalResponse,
-				Session = authSession,
-			};
 		}
 	}
 }

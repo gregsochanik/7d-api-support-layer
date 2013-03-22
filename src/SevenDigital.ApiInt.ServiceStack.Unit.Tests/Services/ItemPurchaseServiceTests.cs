@@ -10,6 +10,7 @@ using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.ApiInt.Catalogue;
 using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiInt.ServiceStack.Catalogue;
 using SevenDigital.ApiInt.ServiceStack.Model;
 using SevenDigital.ApiInt.ServiceStack.Services;
 using SevenDigital.ApiInt.ServiceStack.Unit.Tests.TestData;

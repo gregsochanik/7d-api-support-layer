@@ -2,6 +2,7 @@ using System;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
 using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiInt.ServiceStack.Catalogue;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services
 {

@@ -2,7 +2,7 @@ using System.Linq;
 using SevenDigital.ApiInt.Catalogue;
 using SevenDigital.ApiInt.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 {
 	public class ProductCollater : IProductCollater
 	{

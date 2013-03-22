@@ -1,6 +1,6 @@
 using SevenDigital.ApiInt.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 {
 	public interface IProductCollater
 	{
