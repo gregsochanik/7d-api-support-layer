@@ -14,7 +14,7 @@
 
 		public int? ReleaseId { get; set; }
 
-		public virtual PurchaseType Type { get; set; }
+		public PurchaseType Type { get; set; }
 
 		public int PartnerId { get; set; }
 	}

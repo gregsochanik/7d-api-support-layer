@@ -3,14 +3,12 @@ using System.Net;
 using ServiceStack.Common.Web;
 using ServiceStack.Logging;
 using ServiceStack.ServiceInterface;
-using SevenDigital.Api.Schema.Pricing;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Catalogue;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services
 {
-	[DefaultView("ItemPurchaseService")]
 	public class ItemPurchaseService : Service
 	{
 		private readonly IProductCollater _productCollater;
@@ -41,8 +39,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			}
 			catch (ApiException ex)
 			{
-				_log.Error(ex);
-				Request.Items["View"] = "Error";
+				_log.Warn(ex);
 				throw new HttpError(request, HttpStatusCode.NotFound, "404", "Not found");
 			}
 		}
@@ -64,32 +61,6 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			request.Type = PurchaseType.release;
 			request.Id = releaseId;
 			return Get(request);
-		}
-	}
-
-	public static class ReleaseAndTracksExtension
-	{
-		public static bool IsABundleTrack(this ReleaseAndTracks collatedReleaseAndTracks)
-		{
-			if (collatedReleaseAndTracks == null || collatedReleaseAndTracks.Tracks == null)
-				return false;
-
-			if (collatedReleaseAndTracks.Tracks.Count < 1)
-				return false;
-
-			if (collatedReleaseAndTracks.Tracks[0].Price == null)
-				return false;
-
-			return collatedReleaseAndTracks.Type == PurchaseType.track 
-				&& collatedReleaseAndTracks.Tracks[0].Price.Status == PriceStatus.UnAvailable;
-		}
-	}
-
-	public static class ItemRequestExtension
-	{
-		public static bool HasReleaseId(this ItemRequest request)
-		{
-			return request.ReleaseId.HasValue && request.ReleaseId > 0 && request.Type == PurchaseType.track;
 		}
 	}
 }
