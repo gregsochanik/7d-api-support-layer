@@ -37,10 +37,10 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 				return new HttpResult(ResponseHelper.BuildBuyItNowResponse(this.GetSession(), collatedReleaseAndTracks));
 			}
-			catch (ApiException ex)
+			catch (InvalidResourceException ex)
 			{
 				_log.Warn(ex);
-				throw new HttpError(request, HttpStatusCode.NotFound, "404", "Not found");
+				throw new HttpError(request, HttpStatusCode.NotFound, ex.ErrorCode.ToString(), "Not found");
 			}
 		}
 

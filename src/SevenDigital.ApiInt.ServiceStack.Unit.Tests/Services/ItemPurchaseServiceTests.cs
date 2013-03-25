@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using NUnit.Framework;
 using Rhino.Mocks;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceHost;
+using SevenDigital.Api.Schema;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
+using SevenDigital.Api.Wrapper.Exceptions;
+using SevenDigital.Api.Wrapper.Http;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Catalogue;
 using SevenDigital.ApiInt.ServiceStack.Model;
@@ -69,6 +73,24 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			Assert.That(argumentNullException.ParamName, Is.EqualTo("request"));
 			Assert.That(argumentNullException.Message, Is.EqualTo("You must specify an Id\r\nParameter name: request"));
+		}
+
+		[Test]
+		public void Throws_error_if_api_throws_InvalidResourceException()
+		{
+			var productCollaterThatThrowsInvalidResourceException = MockRepository.GenerateStub<IProductCollater>();
+			productCollaterThatThrowsInvalidResourceException.Stub(x => x.UsingTrackId("GB", 1234)).IgnoreArguments().Throw(new InvalidResourceException("blah", new Response(HttpStatusCode.NotFound, "NotFound"), ErrorCode.ResourceNotFound ));
+
+			var releaseService = new ItemPurchaseService(productCollaterThatThrowsInvalidResourceException);
+			var releaseRequest = new ItemRequest{CountryCode = "GB", Id = 1234, Type = PurchaseType.track};
+
+			var exception = Assert.Throws<HttpError>(() => releaseService.Get(releaseRequest));
+
+			Assert.That(exception.Message, Is.EqualTo("Not found"));
+			Assert.That(exception.ErrorCode, Is.EqualTo(ErrorCode.ResourceNotFound.ToString()));
+			Assert.That(exception.Response, Is.TypeOf<ItemRequest>());
+			Assert.That(((ItemRequest)exception.Response).CountryCode, Is.EqualTo("GB"));
+			Assert.That(((ItemRequest)exception.Response).Id, Is.EqualTo(1234));
 		}
 
 		[Test]
