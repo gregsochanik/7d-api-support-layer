@@ -5,6 +5,7 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceHost;
+using ServiceStack.ServiceInterface.Testing;
 using SevenDigital.Api.Schema;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
@@ -22,21 +23,24 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 	public class ItemPurchaseServiceTests
 	{
 		private IProductCollater _productCollater;
+		private MockRequestContext _requestContext;
 
 		[SetUp]
 		public void SetUp()
 		{
 			_productCollater = MockRepository.GenerateStub<IProductCollater>();
+			_requestContext = ContextHelper.LoggedInContext();
 		}
 
 		[Test]
 		public void Happy_path_release()
 		{
-			var releaseService = new ItemPurchaseService(_productCollater);
-			var releaseRequest = new ItemRequest{ CountryCode = "GB", Id = 12345, Type = PurchaseType.release};
-			var requestContext = MockRepository.GenerateStub<IRequestContext>();
+			var releaseService = new ItemPurchaseService(_productCollater)
+			{
+				RequestContext = _requestContext
+			};
 
-			releaseService.RequestContext = requestContext;
+			var releaseRequest = new ItemRequest{ CountryCode = "GB", Id = 12345, Type = PurchaseType.release};
 
 			var o = releaseService.Get(releaseRequest);
 
@@ -49,11 +53,12 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		[Test]
 		public void Happy_path_track()
 		{
-			var releaseService = new ItemPurchaseService(_productCollater);
+			var releaseService = new ItemPurchaseService(_productCollater)
+			{
+				RequestContext = _requestContext
+			};
+
 			var releaseRequest = new ItemRequest { CountryCode = "GB", Id = 12345, Type = PurchaseType.track };
-			var requestContext = MockRepository.GenerateStub<IRequestContext>();
-			
-			releaseService.RequestContext = requestContext;
 
 			var o = releaseService.Get(releaseRequest);
 
@@ -115,12 +120,10 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 					TestTrack.BundleTrack
 				}
 			});
-			var releaseService = new ItemPurchaseService(productCollater);
-
-
-			var requestContext = MockRepository.GenerateStub<IRequestContext>();
-
-			releaseService.RequestContext = requestContext;
+			var releaseService = new ItemPurchaseService(productCollater)
+			{
+				RequestContext = _requestContext
+			};
 
 			var releaseRequest = new ItemRequest { Id=1, Type=PurchaseType.track };
 
