@@ -30,6 +30,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			Assert.That(usingReleaseAndTrackId.Release.Id, Is.EqualTo(TestRelease.FleetFoxes.Id));
 			Assert.That(usingReleaseAndTrackId.Type, Is.EqualTo(PurchaseType.release));
 			Assert.That(usingReleaseAndTrackId.Tracks.Count, Is.EqualTo(expectedReleaseTrackCount));
+			Assert.That(usingReleaseAndTrackId.TrackCount, Is.EqualTo(expectedReleaseTrackCount));
 		}
 
 		[Test]
@@ -37,39 +38,45 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		{
 			const int expectedReleaseTrackCount = 5;
 			var fakeListOfTracks = Enumerable.Repeat(new Track(), expectedReleaseTrackCount).ToList();
-			fakeListOfTracks.Add(TestTrack.SunItRises);
+			var specificTrack = TestTrack.SunItRises;
+			fakeListOfTracks.Add(specificTrack);
 
 			var catalogue = MockRepository.GenerateStub<ICatalogue>();
 			catalogue.Stub(x => x.GetARelease(null, 0)).IgnoreArguments().Return(TestRelease.FleetFoxes);
 			catalogue.Stub(x => x.GetAReleaseTracks(null, 0)).IgnoreArguments().Return(fakeListOfTracks);
-			catalogue.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(TestTrack.SunItRises);
+			catalogue.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(specificTrack);
 
 			var productCollater = new ProductCollater(catalogue);
-			var usingReleaseAndTrackId = productCollater.UsingTrackId("GB", TestTrack.SunItRises.Id);
+			var usingReleaseAndTrackId = productCollater.UsingTrackId("GB", specificTrack.Id);
 
 			Assert.That(usingReleaseAndTrackId.Release.Id, Is.EqualTo(TestRelease.FleetFoxes.Id));
 			Assert.That(usingReleaseAndTrackId.Type, Is.EqualTo(PurchaseType.track));
 			Assert.That(usingReleaseAndTrackId.Tracks.Count, Is.EqualTo(1));
+			Assert.That(usingReleaseAndTrackId.TrackCount, Is.EqualTo(expectedReleaseTrackCount + 1));
+
 		}
 
 		[Test]
-		public void Collating_a_release_specific_track_returns_release_and_that_specific_track()
+		public void Collating_a_release_specific_track_returns_release_and_only_that_specific_track()
 		{
 			const int expectedReleaseTrackCount = 5;
 			var fakeListOfTracks = Enumerable.Repeat(new Track(), expectedReleaseTrackCount).ToList();
-			fakeListOfTracks.Add(TestTrack.SunItRises);
+			var specificTrack = TestTrack.SunItRises;
+			fakeListOfTracks.Add(specificTrack);
 
 			var catalogue = MockRepository.GenerateStub<ICatalogue>();
 			catalogue.Stub(x => x.GetARelease(null, 0)).IgnoreArguments().Return(TestRelease.FleetFoxes);
 			catalogue.Stub(x => x.GetAReleaseTracks(null, 0)).IgnoreArguments().Return(fakeListOfTracks);
-			catalogue.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(TestTrack.SunItRises);
+			catalogue.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(specificTrack);
 
 			var productCollater = new ProductCollater(catalogue);
-			var usingReleaseAndTrackId = productCollater.UsingReleaseAndTrackId("GB", 12, TestTrack.SunItRises.Id);
+			var usingReleaseAndTrackId = productCollater.UsingReleaseAndTrackId("GB", 12, specificTrack.Id);
 
 			Assert.That(usingReleaseAndTrackId.Release.Id, Is.EqualTo(TestRelease.FleetFoxes.Id));
 			Assert.That(usingReleaseAndTrackId.Type, Is.EqualTo(PurchaseType.track));
 			Assert.That(usingReleaseAndTrackId.Tracks.Count, Is.EqualTo(1));
+			Assert.That(usingReleaseAndTrackId.TrackCount, Is.EqualTo(expectedReleaseTrackCount + 1));
+
 		}
 
 		public static IFluentApi<Release> GetStubbedReleaseApi(Release releaseToReturn)

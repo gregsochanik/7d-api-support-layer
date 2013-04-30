@@ -15,11 +15,13 @@ namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 
 		public ReleaseAndTracks UsingReleaseId(string countryCode, int releaseId)
 		{
+			var releaseTracks = _catalogue.GetAReleaseTracks(countryCode, releaseId);
 			return new ReleaseAndTracks
 			{
 				Type = PurchaseType.release,
 				Release = _catalogue.GetARelease(countryCode, releaseId),
-				Tracks = _catalogue.GetAReleaseTracks(countryCode, releaseId)
+				Tracks = releaseTracks,
+				TrackCount = releaseTracks.Count
 			};
 		}
 
@@ -33,7 +35,8 @@ namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 			{
 				Type = PurchaseType.track,
 				Release = aRelease,
-				Tracks = releaseTracks.Where(x => x.Id == trackId).ToList()
+				Tracks = releaseTracks.Where(x => x.Id == trackId).ToList(),
+				TrackCount = releaseTracks.Count
 			};
 		}
 
@@ -46,7 +49,8 @@ namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 			{
 				Type = PurchaseType.track,
 				Release = aRelease,
-				Tracks = releaseTracks.Where(x => x.Id == trackId).ToList()
+				Tracks = releaseTracks.Where(x => x.Id == trackId).ToList(),
+				TrackCount = releaseTracks.Count
 			};
 		}
 	}

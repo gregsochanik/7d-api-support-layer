@@ -6,6 +6,7 @@ using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.ApiInt.Catalogue;
+using SevenDigital.ApiInt.Model;
 
 namespace SevenDigital.ApiInt.ServiceStack.Catalogue
 {
