@@ -60,6 +60,7 @@ namespace SevenDigital.ApiInt.Basket
 			return _purchaseBasket.ForUser(accessToken.Token, accessToken.Secret)
 			               .WithParameter("basketId", basketId.ToString())
 			               .WithParameter("country", countryCode)
+						   .WithParameter("imagesize", "100")
 			               .Please();
 		}
 
