@@ -120,6 +120,8 @@
     <Compile Include="Services\ItemPurchaseService.cs" />
     <Compile Include="Services\LockerCheckService.cs" />
     <Compile Include="Catalogue\ProductCollater.cs" />
+    <Compile Include="Services\ReleaseRecommendRequest.cs" />
+    <Compile Include="Services\ReleaseRecommendService.cs" />
     <Compile Include="Services\ReleaseTracksService.cs" />
     <Compile Include="ResponseHelper.cs" />
     <Compile Include="ServiceSessionExtensions.cs" />
