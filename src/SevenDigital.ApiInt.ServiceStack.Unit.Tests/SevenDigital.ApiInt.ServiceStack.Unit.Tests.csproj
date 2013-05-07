@@ -112,6 +112,7 @@
     <Compile Include="Services\PriceWatchTests.cs" />
     <Compile Include="Services\ProductCollaterTests.cs" />
     <Compile Include="Services\ReleaseTracksExtensionTests.cs" />
+    <Compile Include="Services\ShopRestrictionServiceTests.cs" />
     <Compile Include="Services\ShopUrlServiceTests.cs" />
     <Compile Include="Services\StatusServiceTests.cs" />
     <Compile Include="Services\StreamingUriServiceTest.cs" />

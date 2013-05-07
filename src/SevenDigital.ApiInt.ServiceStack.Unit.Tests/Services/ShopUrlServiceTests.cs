@@ -34,7 +34,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		[TestCase("GB", "www.7digital.com")]
 		[TestCase("DE", "de.7digital.com")]
 		[TestCase("AU", "www.zdigital.com.au")]
-		public void _then_I_should_get_the_correct_data_back(string countryCode, string expectedUrl)
+		public void _then_I_should_get_the_correct_data_back_for_cases_that_exist_in_the_countries_api(string countryCode, string expectedUrl)
 		{
 			var shopUrlService = new ShopUrlService(_mockApi);
 
@@ -47,7 +47,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 		[Test]
 		[TestCaseSource("ListOfGenericEuroCountries")]
-		public void _then_I_should_get_the_correct_generic_url_for_other_european_countries(string countryCode)
+		public void _then_I_should_get_the_correct_generic_url_for_other_european_countries_that_dont_appear_in_countries_api(string countryCode)
 		{
 			var shopUrlService = new ShopUrlService(_mockApi);
 			const string expectedUrl = "eu.7digital.com";
@@ -62,7 +62,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		[Test]
 		[TestCase("ea")]
 		[TestCase("dd")]
-		public void _otherwise_it_should_return_correct_url_for_all_others(string countryCode)
+		public void _otherwise_it_should_return_correct_worldwide_url_for_all_others(string countryCode)
 		{
 			var shopUrlService = new ShopUrlService(_mockApi);
 			const string expectedUrl = "xw.7digital.com";

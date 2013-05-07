@@ -125,6 +125,8 @@
     <Compile Include="Services\ReleaseTracksService.cs" />
     <Compile Include="ResponseHelper.cs" />
     <Compile Include="ServiceSessionExtensions.cs" />
+    <Compile Include="Services\ShopRestriction.cs" />
+    <Compile Include="Services\ShopRestrictionService.cs" />
     <Compile Include="Services\ShopUrl.cs" />
     <Compile Include="Services\ShopUrlConstants.cs" />
     <Compile Include="Services\ShopUrlService.cs" />
