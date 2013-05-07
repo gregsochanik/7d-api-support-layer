@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using NUnit.Framework;
 using Rhino.Mocks;
 using SevenDigital.Api.Schema.Territories;
@@ -40,7 +41,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			var response = shopUrlService.Get(request);
 
-			Assert.That(response.DomainName, Is.EqualTo(expectedUrl));
+			Assert.That(response.Headers["Location"], Is.EqualTo(expectedUrl));
 		}
 
 		[Test]
@@ -54,7 +55,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			var response = shopUrlService.Get(request);
 
-			Assert.That(response.DomainName, Is.EqualTo(expectedUrl));
+			Assert.That(response.Headers["Location"], Is.EqualTo(expectedUrl));
 		}
 
 		[Test]
@@ -69,7 +70,19 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			var response = shopUrlService.Get(request);
 
-			Assert.That(response.DomainName, Is.EqualTo(expectedUrl));
+			Assert.That(response.Headers["Location"], Is.EqualTo(expectedUrl));
+		}
+
+		[Test]
+		public void _ting()
+		{
+			var shopUrlService = new ShopUrlService(_mockApi);
+
+			var request = new ShopUrl { CountryCode = "GB" };
+
+			var response = shopUrlService.Get(request);
+
+			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Redirect));
 		}
 
 		private static IEnumerable<string> ListOfGenericEuroCountries()

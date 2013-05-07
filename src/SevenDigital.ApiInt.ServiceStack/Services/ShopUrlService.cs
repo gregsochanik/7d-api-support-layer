@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Net;
+using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Schema.Territories;
 using SevenDigital.Api.Wrapper;
@@ -14,7 +16,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			_countryApi = countryApi;
 		}
 
-		public ShopUrl Get(ShopUrl shopUrl)
+		public HttpResult Get(ShopUrl shopUrl)
 		{
 			var countries = _countryApi.Please();
 
@@ -32,8 +34,12 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			{
 				shopUrl.DomainName = "xw.7digital.com";
 			}
-			
-			return shopUrl;
+
+			return new HttpResult
+			{
+				Location = shopUrl.DomainName,
+				StatusCode = HttpStatusCode.Redirect
+			};
 		}
 	}
 }
