@@ -91,7 +91,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		{
 			var shopUrlService = new ShopUrlService(_mockApi);
 			const string expectedUrl = "www.7digital.com";
-			var request = new ShopUrl { CountryCode = "GB", UrlPath = "/boom/bang" };
+			var request = new ShopUrl { CountryCode = "GB", UrlPath = "boom/bang" };
 
 			var response = shopUrlService.Get(request);
 

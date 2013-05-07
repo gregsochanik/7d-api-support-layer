@@ -35,9 +35,11 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 				shopUrl.DomainName = "xw.7digital.com";
 			}
 
+			var urlPath = string.IsNullOrEmpty(shopUrl.UrlPath) ? string.Empty : "/" + shopUrl.UrlPath;
+
 			return new HttpResult
 			{
-				Location = shopUrl.DomainName + shopUrl.UrlPath,
+				Location = shopUrl.DomainName + urlPath,
 				StatusCode = HttpStatusCode.Redirect
 			};
 		}
