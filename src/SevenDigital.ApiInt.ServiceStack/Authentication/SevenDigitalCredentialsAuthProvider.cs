@@ -55,9 +55,8 @@ namespace SevenDigital.ApiInt.ServiceStack.Authentication
 			}
 			catch (LoginInvalidException ex)
 			{
-				_logger.Info("Login failed");
-
-				throw HttpError.Unauthorized(ex.Message);
+				_logger.Info("Login failed", ex);
+				return false;
 			}
 		}
 
@@ -68,6 +67,11 @@ namespace SevenDigital.ApiInt.ServiceStack.Authentication
 			SessionExpiry = _sessionExpiry;
 			
 			base.OnAuthenticated(authService, session, tokens, authInfo);
+		}
+
+		public override void OnFailedAuthentication(IAuthSession session, global::ServiceStack.ServiceHost.IHttpRequest httpReq, global::ServiceStack.ServiceHost.IHttpResponse httpRes)
+		{
+			base.OnFailedAuthentication(session, httpReq, httpRes);
 		}
 	}
 }

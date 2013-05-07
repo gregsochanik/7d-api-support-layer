@@ -43,15 +43,14 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Authentication
 		}
 
 		[Test]
-		public void Throws_httpError_if_fails()
+		public void Returns_false_if_fails()
 		{
 			_oAuthAuthentication.Stub(x => x.ForUser("test", "test")).Throw(new LoginInvalidException());
 			var sevenDigitalCredentialsAuthProvider = new SevenDigitalCredentialsAuthProvider(_oAuthAuthentication, _userApi);
 			var serviceBase = MockRepository.GenerateStub<IServiceBase>();
 
-			var httpError = Assert.Throws<HttpError>(() => sevenDigitalCredentialsAuthProvider.TryAuthenticate(serviceBase, "test", "test"));
-			Assert.That(httpError.ErrorCode, Is.EqualTo("Login invalid"));
-			Assert.That(httpError.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
+			var tryAuthenticate = sevenDigitalCredentialsAuthProvider.TryAuthenticate(serviceBase, "test", "test");
+			Assert.That(tryAuthenticate, Is.False);
 		}
 	}
 }
