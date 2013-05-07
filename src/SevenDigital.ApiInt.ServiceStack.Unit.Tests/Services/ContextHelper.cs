@@ -4,7 +4,6 @@ using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Auth;
 using ServiceStack.ServiceInterface.Testing;
-using SevenDigital.ApiInt.ServiceStack.Services;
 using SevenDigital.ApiInt.TestData;
 
 namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services

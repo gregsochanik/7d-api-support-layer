@@ -1,7 +1,5 @@
-﻿using System.Net;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Testing;
 using SevenDigital.Api.Schema.OAuth;
