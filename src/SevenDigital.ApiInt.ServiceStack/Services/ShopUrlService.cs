@@ -37,7 +37,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 			return new HttpResult
 			{
-				Location = shopUrl.DomainName,
+				Location = shopUrl.DomainName + shopUrl.UrlPath,
 				StatusCode = HttpStatusCode.Redirect
 			};
 		}

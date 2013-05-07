@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -74,7 +75,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		}
 
 		[Test]
-		public void _ting()
+		public void _it_should_perform_a_redirect()
 		{
 			var shopUrlService = new ShopUrlService(_mockApi);
 
@@ -83,6 +84,18 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			var response = shopUrlService.Get(request);
 
 			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Redirect));
+		}
+
+		[Test]
+		public void _it_should_add_the_urlPath_arg_to_the_end_of_the_redirect()
+		{
+			var shopUrlService = new ShopUrlService(_mockApi);
+			const string expectedUrl = "www.7digital.com";
+			var request = new ShopUrl { CountryCode = "GB", UrlPath = "/boom/bang" };
+
+			var response = shopUrlService.Get(request);
+
+			Assert.That(response.Headers["Location"], Is.EqualTo(expectedUrl + "/boom/bang"));
 		}
 
 		private static IEnumerable<string> ListOfGenericEuroCountries()
