@@ -45,5 +45,18 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			Assert.That(shopRestriction.IsRestricted, Is.False);
 		}
+
+
+		[Test]
+		public void _restricted_if_no_ip_supplied()
+		{
+			var shopRestrictionService = new ShopRestrictionService(_ipLookupApi);
+			var shopRestriction = shopRestrictionService.Get(new ShopRestriction
+			{
+				CountryCode = "GB"
+			});
+
+			Assert.That(shopRestriction.IsRestricted, Is.False);
+		}
 	}
 }
