@@ -23,7 +23,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 		public HttpResult Get(ItemRequest request)
 		{
-			if (_geoLookup.IsRestricted(request.CountryCode, Request.RemoteIp))
+			if (Request.RemoteIp != "127.0.0.1" && _geoLookup.IsRestricted(request.CountryCode, Request.RemoteIp))
 			{
 				throw new HttpError(HttpStatusCode.Forbidden, "TerritoryRestriction", _geoLookup.RestrictionMessage(request.CountryCode, Request.RemoteIp));
 			}
