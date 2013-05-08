@@ -1,22 +1,19 @@
 ﻿using ServiceStack.ServiceInterface;
-using SevenDigital.Api.Schema.Territories;
-using SevenDigital.Api.Wrapper;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services
 {
 	public class ShopRestrictionService : Service
 	{
-		private readonly IFluentApi<GeoIpLookup> _ipLookupApi;
+		private readonly IGeoLookup _geoLookup;
 
-		public ShopRestrictionService(IFluentApi<GeoIpLookup> ipLookupApi)
+		public ShopRestrictionService(IGeoLookup geoLookup)
 		{
-			_ipLookupApi = ipLookupApi;
+			_geoLookup = geoLookup;
 		}
 
 		public ShopRestriction Get(ShopRestriction request)
 		{
-			var geoIpLookup = _ipLookupApi.WithIpAddress(request.IpAddress).Please();
-			request.IsRestricted = request.CountryCode != geoIpLookup.CountryCode;
+			request.IsRestricted = _geoLookup.IsRestricted(request.CountryCode, request.IpAddress);
 			return request;
 		}
 	}

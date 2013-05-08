@@ -117,6 +117,8 @@
     <Compile Include="Services\DownloadFileService.cs" />
     <Compile Include="Services\FreePurchaseService.cs" />
     <Compile Include="Catalogue\IProductCollater.cs" />
+    <Compile Include="Services\RestrictedByIpAddressGeoLookup.cs" />
+    <Compile Include="Services\IGeoLookup.cs" />
     <Compile Include="Services\ItemPurchaseService.cs" />
     <Compile Include="Services\LockerCheckService.cs" />
     <Compile Include="Catalogue\ProductCollater.cs" />

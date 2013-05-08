@@ -25,14 +25,17 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			if (enumerable != null)
 			{
 				shopUrl.DomainName = enumerable.Url;
+				shopUrl.Description = enumerable.Description;
 			}
 			else if (ShopUrlConstants.GenericEuroCountryCodes().Contains(shopUrl.CountryCode))
 			{
 				shopUrl.DomainName = ShopUrlConstants.GENERIC_EURO_URL;
+				shopUrl.Description = "European";
 			}
 			else
 			{
 				shopUrl.DomainName = "xw.7digital.com";
+				shopUrl.Description = "Worldwide";
 			}
 
 			var urlPath = string.IsNullOrEmpty(shopUrl.UrlPath) ? string.Empty : "/" + shopUrl.UrlPath;
@@ -40,7 +43,8 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			return new HttpResult
 			{
 				Location = shopUrl.DomainName + urlPath,
-				StatusCode = HttpStatusCode.Redirect
+				StatusCode = HttpStatusCode.Redirect,
+				Response = shopUrl.Description
 			};
 		}
 	}

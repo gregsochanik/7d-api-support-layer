@@ -12,15 +12,22 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 	public class ItemPurchaseService : Service
 	{
 		private readonly IProductCollater _productCollater;
+		private readonly IGeoLookup _geoLookup;
 		private readonly ILog _log = LogManager.GetLogger("ItemPurchaseService");
 
-		public ItemPurchaseService(IProductCollater productCollater)
+		public ItemPurchaseService(IProductCollater productCollater, IGeoLookup geoLookup)
 		{
 			_productCollater = productCollater;
+			_geoLookup = geoLookup;
 		}
 
 		public HttpResult Get(ItemRequest request)
 		{
+			if (_geoLookup.IsRestricted(request.CountryCode, Request.RemoteIp))
+			{
+				throw new HttpError(HttpStatusCode.Forbidden, "TerritoryRestriction", _geoLookup.RestrictionMessage(request.CountryCode, Request.RemoteIp));
+			}
+
 			if (request.Id < 1)
 				throw new ArgumentNullException("request", "You must specify an Id");
 
