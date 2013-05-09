@@ -13,17 +13,19 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 	{
 		private readonly IProductCollater _productCollater;
 		private readonly IGeoLookup _geoLookup;
+		private readonly IGeoSettings _geoSettings;
 		private readonly ILog _log = LogManager.GetLogger("ItemPurchaseService");
 
-		public ItemPurchaseService(IProductCollater productCollater, IGeoLookup geoLookup)
+		public ItemPurchaseService(IProductCollater productCollater, IGeoLookup geoLookup, IGeoSettings geoSettings)
 		{
 			_productCollater = productCollater;
 			_geoLookup = geoLookup;
+			_geoSettings = geoSettings;
 		}
 
 		public HttpResult Get(ItemRequest request)
 		{
-			if (Request.RemoteIp != "127.0.0.1" && _geoLookup.IsRestricted(request.CountryCode, Request.RemoteIp))
+			if (_geoSettings.IsTiedToIpAddress() && _geoLookup.IsRestricted(request.CountryCode, Request.RemoteIp))
 			{
 				throw new HttpError(HttpStatusCode.Forbidden, "TerritoryRestriction", _geoLookup.RestrictionMessage(request.CountryCode, Request.RemoteIp));
 			}

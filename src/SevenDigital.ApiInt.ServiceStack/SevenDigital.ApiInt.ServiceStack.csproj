@@ -117,6 +117,7 @@
     <Compile Include="Services\DownloadFileService.cs" />
     <Compile Include="Services\FreePurchaseService.cs" />
     <Compile Include="Catalogue\IProductCollater.cs" />
+    <Compile Include="Services\IGeoSettings.cs" />
     <Compile Include="Services\RestrictedByIpAddressGeoLookup.cs" />
     <Compile Include="Services\IGeoLookup.cs" />
     <Compile Include="Services\ItemPurchaseService.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Services\ShopUrlService.cs" />
     <Compile Include="Services\StatusService.cs" />
     <Compile Include="Services\StreamingUriService.cs" />
+    <Compile Include="Services\StrictGeoSettings.cs" />
     <Compile Include="Services\TrackSearchService.cs" />
     <Compile Include="Services\TrackService.cs" />
     <Compile Include="Services\UserCardService.cs" />
