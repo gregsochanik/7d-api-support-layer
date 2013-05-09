@@ -1,14 +1,15 @@
-﻿using SevenDigital.Api.Schema.Territories;
+﻿using System.Web;
+using SevenDigital.Api.Schema.Territories;
 using SevenDigital.Api.Wrapper;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services
 {
-	public class RestrictedByIpAddressGeoLookup : IGeoLookup
+	public class GeoLookup : IGeoLookup
 	{
 		private readonly IFluentApi<GeoIpLookup> _ipLookupApi;
 		private readonly ShopUrlService _shopUrlService;
 
-		public RestrictedByIpAddressGeoLookup(IFluentApi<GeoIpLookup> ipLookupApi, ShopUrlService shopUrlService)
+		public GeoLookup(IFluentApi<GeoIpLookup> ipLookupApi, ShopUrlService shopUrlService)
 		{
 			_ipLookupApi = ipLookupApi;
 			_shopUrlService = shopUrlService;
@@ -37,7 +38,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 			var localShopUrl = localShopDetails.Headers["Location"];
 
-			return "Sorry, but in accordance with our contractual obligations with the labels, you can only purchase from " + requestedShopUrl + " if you live in " + requestedShopName + ". Please visit your local store at " + localShopUrl + " to find an alternative version. If you’ve tried to access " + requestedShopUrl + " from inside " + requestedShopName + ", please get in touch with our Customer Support Team who will resolve the problem for you. Thanks for your understanding!";
+			return HttpUtility.HtmlEncode("<p>Sorry, but in accordance with our contractual obligations with the labels, you can only purchase from " + requestedShopUrl + " if you live in " + requestedShopName + ".</p><p>Please visit your local store at " + localShopUrl + " to find an alternative version. If you’ve tried to access " + requestedShopUrl + " from inside " + requestedShopName + ", please get in touch with our Customer Support Team who will resolve the problem for you.</p><p>Thanks for your understanding!</p>");
 		}
 	}
 }

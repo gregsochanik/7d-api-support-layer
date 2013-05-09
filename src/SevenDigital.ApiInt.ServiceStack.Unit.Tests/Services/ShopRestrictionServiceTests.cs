@@ -10,7 +10,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 	public class ShopRestrictionServiceTests
 	{
 		private IFluentApi<GeoIpLookup> _ipLookupApi;
-		private RestrictedByIpAddressGeoLookup _restrictedByIpAddressGeoLookup;
+		private GeoLookup _restrictedByIpAddressGeoLookup;
 
 		[SetUp]
 		public void SetUp()
@@ -19,7 +19,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			_ipLookupApi.Stub(x => x.WithIpAddress("")).IgnoreArguments().Return(_ipLookupApi);
 			_ipLookupApi.Stub(x => x.Please()).Return(new GeoIpLookup{CountryCode = "GB", IpAddress = "86.131.235.233"});
 
-			_restrictedByIpAddressGeoLookup = new RestrictedByIpAddressGeoLookup(_ipLookupApi, new ShopUrlService(MockRepository.GenerateStub<IFluentApi<Countries>>()));
+			_restrictedByIpAddressGeoLookup = new GeoLookup(_ipLookupApi, new ShopUrlService(MockRepository.GenerateStub<IFluentApi<Countries>>()));
 		}
 
 		[Test]
