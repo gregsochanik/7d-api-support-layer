@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using ServiceStack.Common.Web;
 using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Auth;
@@ -13,7 +14,8 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		public static MockRequestContext LoggedInContext()
 		{
 			var mockRequestContext = new MockRequestContext();
-			var httpReq = mockRequestContext.Get<IHttpRequest>();
+			var httpReq = (MockHttpRequest)mockRequestContext.Get<IHttpRequest>();
+			httpReq.RemoteIp = "86.131.235.233, 127.0.0.1";
 			var httpRes = mockRequestContext.Get<IHttpResponse>();
 			var authUserSession = mockRequestContext.ReloadSession();
 			authUserSession.Id = httpRes.CreateSessionId(httpReq);

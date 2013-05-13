@@ -4,6 +4,7 @@ using System.Net;
 using NUnit.Framework;
 using Rhino.Mocks;
 using ServiceStack.Common.Web;
+using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface.Testing;
 using SevenDigital.Api.Schema;
 using SevenDigital.Api.Schema.TrackEndpoint;
@@ -21,7 +22,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 	public class ItemPurchaseServiceTests
 	{
 		private IProductCollater _productCollater;
-		private MockRequestContext _requestContext;
+		private IRequestContext _requestContext;
 		private IGeoLookup _geoLookup;
 		private IGeoSettings _geoSettings;
 
@@ -73,7 +74,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		[Test]
 		public void Throws_error_if_no_releaseId_specified()
 		{
-			var releaseService = new ItemPurchaseService(_productCollater, _geoLookup, _geoSettings) { RequestContext = new MockRequestContext() }; ;
+			var releaseService = new ItemPurchaseService(_productCollater, _geoLookup, _geoSettings) { RequestContext = _requestContext }; ;
 			var releaseRequest = new ItemRequest();
 
 			var argumentNullException = Assert.Throws<ArgumentNullException>(() => releaseService.Get(releaseRequest));
@@ -92,7 +93,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			var geoSettings = MockRepository.GenerateStub<IGeoSettings>();
 			geoSettings.Stub(x => x.IsTiedToIpAddress()).Return(true);
 
-			var releaseService = new ItemPurchaseService(_productCollater, geoLookup, geoSettings) { RequestContext = new MockRequestContext() }; ;
+			var releaseService = new ItemPurchaseService(_productCollater, geoLookup, geoSettings) { RequestContext = _requestContext }; ;
 			var releaseRequest = new ItemRequest { CountryCode = "GB", Id = 12345, Type = PurchaseType.track };
 
 			var httpError = Assert.Throws<HttpError>(() => releaseService.Get(releaseRequest));
@@ -111,12 +112,12 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			var geoSettings = MockRepository.GenerateStub<IGeoSettings>();
 			geoSettings.Stub(x => x.IsTiedToIpAddress()).Return(true);
 
-			var releaseService = new ItemPurchaseService(_productCollater, geoLookup, geoSettings) { RequestContext = new MockRequestContext()}; ;
+			var releaseService = new ItemPurchaseService(_productCollater, geoLookup, geoSettings) { RequestContext = _requestContext}; ;
 			var releaseRequest = new ItemRequest { CountryCode = "GB", Id = 12345, Type = PurchaseType.track };
 
 			var httpError = Assert.Throws<HttpError>(() => releaseService.Get(releaseRequest));
 
-			Assert.That(httpError.Message, Is.EqualTo("RestrictionMessage!"));
+			Assert.That(httpError.Message, Is.EqualTo("IpAddress not valid"));
 			Assert.That(httpError.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
 		}
 
@@ -126,7 +127,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			var productCollaterThatThrowsInvalidResourceException = MockRepository.GenerateStub<IProductCollater>();
 			productCollaterThatThrowsInvalidResourceException.Stub(x => x.UsingTrackId("GB", 1234)).IgnoreArguments().Throw(new InvalidResourceException("blah", new Response(HttpStatusCode.NotFound, "NotFound"), ErrorCode.ResourceNotFound ));
 
-			var releaseService = new ItemPurchaseService(productCollaterThatThrowsInvalidResourceException, _geoLookup, _geoSettings) { RequestContext = new MockRequestContext() };
+			var releaseService = new ItemPurchaseService(productCollaterThatThrowsInvalidResourceException, _geoLookup, _geoSettings) { RequestContext = _requestContext, };
 			var releaseRequest = new ItemRequest{CountryCode = "GB", Id = 1234, Type = PurchaseType.track};
 
 			var exception = Assert.Throws<HttpError>(() => releaseService.Get(releaseRequest));
