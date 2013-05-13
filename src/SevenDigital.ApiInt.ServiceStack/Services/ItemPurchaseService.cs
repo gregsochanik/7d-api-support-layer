@@ -33,16 +33,14 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 				if (_geoSettings.IsTiedToIpAddress() &&
 					_geoLookup.IsRestricted(request.CountryCode, ipAddress))
 				{
-					throw new HttpError(HttpStatusCode.Forbidden,
-					                    "TerritoryRestriction",
-					                    _geoLookup.RestrictionMessage(request.CountryCode, ipAddress));
+					_log.WarnFormat("TerritoryRestriction: {0} {1}", ipAddress, request.CountryCode);
+					throw new HttpError(HttpStatusCode.Forbidden, "TerritoryRestriction", _geoLookup.RestrictionMessage(request.CountryCode, ipAddress));
 				}
 			}
 			catch (InputParameterException iex)
 			{
-				throw new HttpError(HttpStatusCode.Forbidden,
-										"TerritoryRestrictionInvalidIpAddress",
-										iex.Message);
+				_log.ErrorFormat("TerritoryRestrictionInvalidIpAddress: {0} {1}", ipAddress, request.CountryCode);
+				throw new HttpError(HttpStatusCode.Forbidden, "TerritoryRestrictionInvalidIpAddress", iex.Message);
 			}
 
 			if (request.Id < 1)
