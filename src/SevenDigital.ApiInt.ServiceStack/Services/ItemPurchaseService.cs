@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using ServiceStack.Common.Web;
 using ServiceStack.Logging;
@@ -25,9 +26,22 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 		public HttpResult Get(ItemRequest request)
 		{
-			if (_geoSettings.IsTiedToIpAddress() && _geoLookup.IsRestricted(request.CountryCode, Request.RemoteIp))
+			var ipAddress = Request.RemoteIp.Split(new[] { ',' }, 1).First();
+			try
 			{
-				throw new HttpError(HttpStatusCode.Forbidden, "TerritoryRestriction", _geoLookup.RestrictionMessage(request.CountryCode, Request.RemoteIp));
+				if (_geoSettings.IsTiedToIpAddress() &&
+					_geoLookup.IsRestricted(request.CountryCode, ipAddress))
+				{
+					throw new HttpError(HttpStatusCode.Forbidden,
+					                    "TerritoryRestriction",
+					                    _geoLookup.RestrictionMessage(request.CountryCode, ipAddress));
+				}
+			}
+			catch (InputParameterException)
+			{
+				throw new HttpError(HttpStatusCode.Forbidden,
+										"TerritoryRestrictionInvalidIpAddress",
+										Request.RemoteIp + " is invalid: try " + Request.Headers[HttpHeaders.XForwardedFor]);
 			}
 
 			if (request.Id < 1)

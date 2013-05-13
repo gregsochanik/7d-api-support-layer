@@ -102,6 +102,25 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		}
 
 		[Test]
+		public void Throws_error_if_territory_apit_throws_input_parameter_applies()
+		{
+			var geoLookup = MockRepository.GenerateStub<IGeoLookup>();
+
+			geoLookup.Stub(x => x.IsRestricted("", "")).IgnoreArguments().Throw(new InputParameterException("IpAddress not valid", new Response(HttpStatusCode.BadRequest, ""), ErrorCode.InvalidParameterValue));
+
+			var geoSettings = MockRepository.GenerateStub<IGeoSettings>();
+			geoSettings.Stub(x => x.IsTiedToIpAddress()).Return(true);
+
+			var releaseService = new ItemPurchaseService(_productCollater, geoLookup, geoSettings) { RequestContext = new MockRequestContext()}; ;
+			var releaseRequest = new ItemRequest { CountryCode = "GB", Id = 12345, Type = PurchaseType.track };
+
+			var httpError = Assert.Throws<HttpError>(() => releaseService.Get(releaseRequest));
+
+			Assert.That(httpError.Message, Is.EqualTo("RestrictionMessage!"));
+			Assert.That(httpError.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
+		}
+
+		[Test]
 		public void Throws_error_if_api_throws_InvalidResourceException()
 		{
 			var productCollaterThatThrowsInvalidResourceException = MockRepository.GenerateStub<IProductCollater>();
