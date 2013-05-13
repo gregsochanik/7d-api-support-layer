@@ -128,6 +128,8 @@
     <Compile Include="Services\ReleaseTracksService.cs" />
     <Compile Include="ResponseHelper.cs" />
     <Compile Include="ServiceSessionExtensions.cs" />
+    <Compile Include="Services\Restrictions\IpAddressRestrictor.cs" />
+    <Compile Include="Services\Restrictions\IRestrictor.cs" />
     <Compile Include="Services\ShopRestriction.cs" />
     <Compile Include="Services\ShopRestrictionService.cs" />
     <Compile Include="Services\ShopUrl.cs" />

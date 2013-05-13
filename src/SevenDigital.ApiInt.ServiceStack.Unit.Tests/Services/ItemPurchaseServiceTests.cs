@@ -5,7 +5,6 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceHost;
-using ServiceStack.ServiceInterface.Testing;
 using SevenDigital.Api.Schema;
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper.Exceptions;
@@ -14,6 +13,7 @@ using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Catalogue;
 using SevenDigital.ApiInt.ServiceStack.Model;
 using SevenDigital.ApiInt.ServiceStack.Services;
+using SevenDigital.ApiInt.ServiceStack.Services.Restrictions;
 using SevenDigital.ApiInt.TestData;
 
 namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
@@ -23,22 +23,21 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 	{
 		private IProductCollater _productCollater;
 		private IRequestContext _requestContext;
-		private IGeoLookup _geoLookup;
-		private IGeoSettings _geoSettings;
+		private IRestrictor _restrictor;
 
 		[SetUp]
 		public void SetUp()
 		{
 			_productCollater = MockRepository.GenerateStub<IProductCollater>();
-			_geoLookup = MockRepository.GenerateStub<IGeoLookup>();
-			_geoSettings = MockRepository.GenerateStub<IGeoSettings>();
+			_restrictor = MockRepository.GenerateStub<IRestrictor>();
+
 			_requestContext = ContextHelper.LoggedInContext();
 		}
 
 		[Test]
 		public void Happy_path_release()
 		{
-			var releaseService = new ItemPurchaseService(_productCollater, _geoLookup, _geoSettings)
+			var releaseService = new ItemPurchaseService(_productCollater, _restrictor)
 			{
 				RequestContext = _requestContext
 			};
@@ -56,7 +55,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		[Test]
 		public void Happy_path_track()
 		{
-			var releaseService = new ItemPurchaseService(_productCollater, _geoLookup, _geoSettings)
+			var releaseService = new ItemPurchaseService(_productCollater, _restrictor)
 			{
 				RequestContext = _requestContext
 			};
@@ -74,7 +73,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		[Test]
 		public void Throws_error_if_no_releaseId_specified()
 		{
-			var releaseService = new ItemPurchaseService(_productCollater, _geoLookup, _geoSettings) { RequestContext = _requestContext }; ;
+			var releaseService = new ItemPurchaseService(_productCollater, _restrictor) { RequestContext = _requestContext }; ;
 			var releaseRequest = new ItemRequest();
 
 			var argumentNullException = Assert.Throws<ArgumentNullException>(() => releaseService.Get(releaseRequest));
@@ -93,7 +92,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			var geoSettings = MockRepository.GenerateStub<IGeoSettings>();
 			geoSettings.Stub(x => x.IsTiedToIpAddress()).Return(true);
 
-			var releaseService = new ItemPurchaseService(_productCollater, geoLookup, geoSettings) { RequestContext = _requestContext }; ;
+			var releaseService = new ItemPurchaseService(_productCollater, new IpAddressRestrictor(geoLookup, geoSettings)) { RequestContext = _requestContext }; ;
 			var releaseRequest = new ItemRequest { CountryCode = "GB", Id = 12345, Type = PurchaseType.track };
 
 			var httpError = Assert.Throws<HttpError>(() => releaseService.Get(releaseRequest));
@@ -112,7 +111,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			var geoSettings = MockRepository.GenerateStub<IGeoSettings>();
 			geoSettings.Stub(x => x.IsTiedToIpAddress()).Return(true);
 
-			var releaseService = new ItemPurchaseService(_productCollater, geoLookup, geoSettings) { RequestContext = _requestContext}; ;
+			var releaseService = new ItemPurchaseService(_productCollater, new IpAddressRestrictor(geoLookup, geoSettings)) { RequestContext = _requestContext }; ;
 			var releaseRequest = new ItemRequest { CountryCode = "GB", Id = 12345, Type = PurchaseType.track };
 
 			var httpError = Assert.Throws<HttpError>(() => releaseService.Get(releaseRequest));
@@ -127,7 +126,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			var productCollaterThatThrowsInvalidResourceException = MockRepository.GenerateStub<IProductCollater>();
 			productCollaterThatThrowsInvalidResourceException.Stub(x => x.UsingTrackId("GB", 1234)).IgnoreArguments().Throw(new InvalidResourceException("blah", new Response(HttpStatusCode.NotFound, "NotFound"), ErrorCode.ResourceNotFound ));
 
-			var releaseService = new ItemPurchaseService(productCollaterThatThrowsInvalidResourceException, _geoLookup, _geoSettings) { RequestContext = _requestContext, };
+			var releaseService = new ItemPurchaseService(productCollaterThatThrowsInvalidResourceException, _restrictor) { RequestContext = _requestContext, };
 			var releaseRequest = new ItemRequest{CountryCode = "GB", Id = 1234, Type = PurchaseType.track};
 
 			var exception = Assert.Throws<HttpError>(() => releaseService.Get(releaseRequest));
@@ -161,7 +160,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 					TestTrack.BundleTrack
 				}
 			});
-			var releaseService = new ItemPurchaseService(productCollater, _geoLookup, _geoSettings)
+			var releaseService = new ItemPurchaseService(productCollater, _restrictor)
 			{
 				RequestContext = _requestContext
 			};

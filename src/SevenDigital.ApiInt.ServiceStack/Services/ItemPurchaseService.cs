@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using ServiceStack.Common.Web;
@@ -7,41 +8,28 @@ using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Catalogue;
+using SevenDigital.ApiInt.ServiceStack.Services.Restrictions;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services
 {
 	public class ItemPurchaseService : Service
 	{
 		private readonly IProductCollater _productCollater;
-		private readonly IGeoLookup _geoLookup;
-		private readonly IGeoSettings _geoSettings;
+		private readonly IRestrictor _restrictor;
 		private readonly ILog _log = LogManager.GetLogger("ItemPurchaseService");
 
-		public ItemPurchaseService(IProductCollater productCollater, IGeoLookup geoLookup, IGeoSettings geoSettings)
+		public ItemPurchaseService(IProductCollater productCollater, IRestrictor restrictor)
 		{
 			_productCollater = productCollater;
-			_geoLookup = geoLookup;
-			_geoSettings = geoSettings;
+			_restrictor = restrictor;
 		}
 
 		public HttpResult Get(ItemRequest request)
 		{
 			_log.InfoFormat("RemoteIp: {0}", Request.RemoteIp);
 			var ipAddress = Request.RemoteIp.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).First();
-			try
-			{
-				if (_geoSettings.IsTiedToIpAddress() &&
-					_geoLookup.IsRestricted(request.CountryCode, ipAddress))
-				{
-					_log.WarnFormat("TerritoryRestriction: {0} {1}", ipAddress, request.CountryCode);
-					throw new HttpError(HttpStatusCode.Forbidden, "TerritoryRestriction", _geoLookup.RestrictionMessage(request.CountryCode, ipAddress));
-				}
-			}
-			catch (InputParameterException iex)
-			{
-				_log.ErrorFormat("TerritoryRestrictionInvalidIpAddress: {0} {1}", ipAddress, request.CountryCode);
-				throw new HttpError(HttpStatusCode.Forbidden, "TerritoryRestrictionInvalidIpAddress", iex.Message);
-			}
+			var countrycode = request.CountryCode;
+			_restrictor.AssertRestriction(new KeyValuePair<string, string>(countrycode, ipAddress));
 
 			if (request.Id < 1)
 				throw new ArgumentNullException("request", "You must specify an Id");
@@ -49,7 +37,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			try
 			{
 				var collatedReleaseAndTracks = request.HasReleaseId() 
-					? BasedOnSpecificRelease(request.CountryCode, request.ReleaseId.Value, request.Id) 
+					? BasedOnSpecificRelease(countrycode, request.ReleaseId.Value, request.Id) 
 					: BasedOnPurchaseType(request);
 
 				if (collatedReleaseAndTracks.IsABundleTrack())
