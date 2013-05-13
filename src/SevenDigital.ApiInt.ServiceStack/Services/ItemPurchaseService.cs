@@ -27,7 +27,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 		public HttpResult Get(ItemRequest request)
 		{
 			_log.InfoFormat("RemoteIp: {0}", Request.RemoteIp);
-			var ipAddress = Request.RemoteIp.Split(new[] { ',' }, 1).First();
+			var ipAddress = Request.RemoteIp.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).First();
 			try
 			{
 				if (_geoSettings.IsTiedToIpAddress() &&

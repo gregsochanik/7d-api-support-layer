@@ -32,7 +32,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 			var restrictionMessage = restrictedByIpAddressGeoLookup.RestrictionMessage("GB", "");
 
-			Assert.That(restrictionMessage, Is.EqualTo("&lt;p&gt;Sorry, but in accordance with our contractual obligations with the labels, you can only purchase from www.7digital.com if you live in Great Britain.&lt;/p&gt;&lt;p&gt;Please visit your local store at us.7digital.com to find an alternative version. If you’ve tried to access www.7digital.com from inside Great Britain, please get in touch with our Customer Support Team who will resolve the problem for you.&lt;/p&gt;&lt;p&gt;Thanks for your understanding!&lt;/p&gt;"));
+			Assert.That(restrictionMessage, Is.EqualTo("Sorry, but in accordance with our contractual obligations with the labels, you can only purchase from www.7digital.com if you live in Great Britain.\r\nPlease visit your local store at us.7digital.com to find an alternative version. If you’ve tried to access www.7digital.com from inside Great Britain, please get in touch with our Customer Support Team who will resolve the problem for you.\r\nThanks for your understanding!"));
 
 		}
 	}

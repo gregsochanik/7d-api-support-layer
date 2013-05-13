@@ -1,5 +1,4 @@
-﻿using System.Web;
-using SevenDigital.Api.Schema.Territories;
+﻿using SevenDigital.Api.Schema.Territories;
 using SevenDigital.Api.Wrapper;
 
 namespace SevenDigital.ApiInt.ServiceStack.Services
@@ -38,7 +37,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 			var localShopUrl = localShopDetails.Headers["Location"];
 
-			return HttpUtility.HtmlEncode("<p>Sorry, but in accordance with our contractual obligations with the labels, you can only purchase from " + requestedShopUrl + " if you live in " + requestedShopName + ".</p><p>Please visit your local store at " + localShopUrl + " to find an alternative version. If you’ve tried to access " + requestedShopUrl + " from inside " + requestedShopName + ", please get in touch with our Customer Support Team who will resolve the problem for you.</p><p>Thanks for your understanding!</p>");
+			return "Sorry, but in accordance with our contractual obligations with the labels, you can only purchase from " + requestedShopUrl + " if you live in " + requestedShopName + ".\r\nPlease visit your local store at " + localShopUrl + " to find an alternative version. If you’ve tried to access " + requestedShopUrl + " from inside " + requestedShopName + ", please get in touch with our Customer Support Team who will resolve the problem for you.\r\nThanks for your understanding!";
 		}
 	}
 }
