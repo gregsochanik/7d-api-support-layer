@@ -121,6 +121,7 @@
     <Compile Include="Services\UserCardServiceTests.cs" />
     <Compile Include="Services\UserDeliverItemBuyerTests.cs" />
     <Compile Include="Services\VoucherPurchaseServiceTests.cs" />
+    <Compile Include="Services\_if_voucher_is_not_correct_type.cs" />
     <Compile Include="TestData\TestArtist.cs" />
     <Compile Include="TestData\TestFormat.cs" />
     <Compile Include="TestData\TestFormatList.cs" />

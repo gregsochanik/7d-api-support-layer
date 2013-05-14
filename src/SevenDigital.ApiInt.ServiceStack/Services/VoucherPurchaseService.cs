@@ -33,9 +33,16 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 		public void PerformPaymentStep(Guid basketId, VoucherPurchaseRequest request)
 		{
-			_applyVoucher.UseBasketId(basketId).UseVoucherCode(request.VoucherCode)
-							 .WithParameter("country", request.CountryCode)
-							 .Please();
+			var applyVoucherToBasket = _applyVoucher
+											.UseBasketId(basketId)
+											.UseVoucherCode(request.VoucherCode)
+											.WithParameter("country", request.CountryCode)
+											.Please();
+			
+			if (applyVoucherToBasket.AmountDue != null && double.Parse(applyVoucherToBasket.AmountDue.Amount) > 0)
+			{
+				throw new HttpError(HttpStatusCode.BadRequest, "VoucherInvalid", string.Format("This voucher is not valid for {0}s", request.Type.ToString().ToLower()));
+			}
 		}
 	}
 }

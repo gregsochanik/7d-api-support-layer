@@ -30,15 +30,18 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		public void SetUp()
 		{
 			_applyVoucher = MockRepository.GenerateStub<IFluentApi<ApplyVoucherToBasket>>();
+			_applyVoucher.Stub(x => x.WithParameter(null, null)).IgnoreArguments().Return(_applyVoucher);
+			_applyVoucher.Stub(x => x.Please()).Return(new ApplyVoucherToBasket());
+
 			_userPurchaseBasket = MockRepository.GenerateStub<IFluentApi<UserPurchaseBasket>>();
+			_userPurchaseBasket.Stub(x => x.WithParameter(null, null)).IgnoreArguments().Return(_userPurchaseBasket);
+			_userPurchaseBasket.Stub(x => x.ForUser(null, null)).IgnoreArguments().Return(_userPurchaseBasket);
+
 			_purchaseItemMapper = MockRepository.GenerateStub<IPurchaseItemMapper>();
 
 			_basketHandler = MockRepository.GenerateStub<IBasketHandler>();
-			_basketHandler.Stub(x => x.Purchase(Guid.Empty, null, null)).IgnoreArguments().Return(new UserPurchaseBasket(){LockerReleases = new List<LockerRelease>(), PurchaseDate = DateTime.Now});
-
-			_applyVoucher.Stub(x => x.WithParameter(null, null)).IgnoreArguments().Return(_applyVoucher);
-			_userPurchaseBasket.Stub(x => x.WithParameter(null, null)).IgnoreArguments().Return(_userPurchaseBasket);
-			_userPurchaseBasket.Stub(x => x.ForUser(null, null)).IgnoreArguments().Return(_userPurchaseBasket);
+			_basketHandler.Stub(x => x.Purchase(Guid.Empty, null, null)).IgnoreArguments().Return(new UserPurchaseBasket { LockerReleases = new List<LockerRelease>(), PurchaseDate = DateTime.Now });
+			
 			var lockerReleases = new List<LockerRelease>{new LockerRelease { Release = new Release(), LockerTracks = new List<LockerTrack>()}};
 			_userPurchaseBasket.Stub(x => x.Please()).Return(new UserPurchaseBasket { LockerReleases = lockerReleases});
 
