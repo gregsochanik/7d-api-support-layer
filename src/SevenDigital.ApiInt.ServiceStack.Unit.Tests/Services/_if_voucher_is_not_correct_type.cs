@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Runtime.Serialization;
 using NUnit.Framework;
 using Rhino.Mocks;
 using ServiceStack.Common.Web;
+using SevenDigital.Api.Schema;
 using SevenDigital.Api.Schema.Basket;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.Premium.Basket;
 using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
+using SevenDigital.Api.Wrapper.Exceptions;
+using SevenDigital.Api.Wrapper.Http;
 using SevenDigital.ApiInt.Basket;
 using SevenDigital.ApiInt.Mapping;
 using SevenDigital.ApiInt.Model;
@@ -82,10 +86,38 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 
 
 		[Test]
-		[Description("BUYNOW-78"), Ignore]
+		[Description("BUYNOW-78")]
 		public void then_if_apply_voucher_returns_3012_it_throws_expected_error()
 		{
-			Assert.Fail();
+			var applyVoucher = MockRepository.GenerateStub<IFluentApi<ApplyVoucherToBasket>>();
+			applyVoucher.Stub(x => x.WithParameter(null, null)).IgnoreArguments().Return(applyVoucher);
+			applyVoucher.Stub(x => x.Please()).Throw(new DummyApiException("", new Response(HttpStatusCode.BadRequest, "blah"), ErrorCode.AddCardDeclinedError));
+
+			var basketId = Guid.NewGuid().ToString();
+
+			var mockRequestContext = ContextHelper.LoggedInContext();
+			mockRequestContext.Cookies.Add(StateHelper.BASKET_COOKIE_NAME, new Cookie(StateHelper.BASKET_COOKIE_NAME, basketId));
+
+			var voucherRequest = new VoucherPurchaseRequest { VoucherCode = "12345678", Type = PurchaseType.release };
+			var userVoucherService = new VoucherPurchaseService(applyVoucher, _purchaseItemMapper, _basketHandler)
+			{
+				RequestContext = mockRequestContext
+			};
+
+			var httpError = Assert.Throws<HttpError>(() => userVoucherService.Post(voucherRequest));
+
+			Assert.That(httpError.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+			Assert.That(httpError.ErrorCode, Is.EqualTo("VoucherInvalid"));
+			Assert.That(httpError.Message, Is.EqualTo("This voucher is not valid for releases"));
+		}
+
+		public class DummyApiException : ApiErrorException
+		{
+			public DummyApiException(string message, Response response, ErrorCode errorCode) : base(message, response, errorCode)
+			{}
+
+			public DummyApiException(SerializationInfo info, StreamingContext context) : base(info, context)
+			{}
 		}
 	}
 }
