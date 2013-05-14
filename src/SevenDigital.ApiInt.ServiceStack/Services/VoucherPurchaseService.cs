@@ -6,6 +6,7 @@ using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Premium;
 using SevenDigital.ApiInt.Basket;
 using SevenDigital.ApiInt.Mapping;
+using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.Purchasing;
 using SevenDigital.ApiInt.ServiceStack.Model;
 
@@ -33,15 +34,20 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 
 		public void PerformPaymentStep(Guid basketId, VoucherPurchaseRequest request)
 		{
-			var applyVoucherToBasket = _applyVoucher
-											.UseBasketId(basketId)
-											.UseVoucherCode(request.VoucherCode)
-											.WithParameter("country", request.CountryCode)
-											.Please();
+			AssertVoucherApplied(() => _applyVoucher
+				                           .UseBasketId(basketId)
+				                           .UseVoucherCode(request.VoucherCode)
+				                           .WithParameter("country", request.CountryCode)
+				                           .Please(), request.Type);
+		}
+
+		private void AssertVoucherApplied(Func<ApplyVoucherToBasket> action, PurchaseType type)
+		{
+			var applyVoucherToBasket = action();
 			
-			if (applyVoucherToBasket.AmountDue != null && double.Parse(applyVoucherToBasket.AmountDue.Amount) > 0)
+			if (applyVoucherToBasket.AmountDue != null && double.Parse(applyVoucherToBasket.AmountDue.Amount) > 0 && applyVoucherToBasket.BasketItems.Items.Count < 2)
 			{
-				throw new HttpError(HttpStatusCode.BadRequest, "VoucherInvalid", string.Format("This voucher is not valid for {0}s", request.Type.ToString().ToLower()));
+				throw new HttpError(HttpStatusCode.BadRequest, "VoucherInvalid", string.Format("This voucher is not valid for {0}s", type.ToString().ToLower()));
 			}
 		}
 	}
