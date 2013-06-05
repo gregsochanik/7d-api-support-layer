@@ -1,7 +1,6 @@
 using System.Net;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
-using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
 using SevenDigital.ApiInt.Catalogue;
