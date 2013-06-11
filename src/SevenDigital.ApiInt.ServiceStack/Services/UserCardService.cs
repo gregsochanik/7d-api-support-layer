@@ -29,8 +29,14 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 		public List<Card> Get(CardRequest request)
 		{
 			var accessToken = this.TryGetOAuthAccessToken();
-			var please = _cardsApi.ForUser(accessToken.Token, accessToken.Secret).Please();
-			return please.UserCards;
+			var apiResponse = _cardsApi.ForUser(accessToken.Token, accessToken.Secret).Please();
+
+			if (apiResponse.UserCards.Count == 1)
+			{
+				apiResponse.UserCards[0].IsDefault = true;
+			}
+
+			return apiResponse.UserCards;
 		}
 
 		public List<Card> Post(AddCardRequest request)
