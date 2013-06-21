@@ -133,11 +133,11 @@ namespace SevenDigital.ApiInt.Unit.Tests
 		{
 			var basketHandler = new BasketHandler(_createBasketApi, _addToBasketApi, _userPurchaseBasket, _catalogue);
 
-			basketHandler.Purchase(_expectedBasketGuid, "GB", FakeUserData.FakeAccessToken);
+			basketHandler.Purchase(_expectedBasketGuid, new PurchaseData{CountryCode="GB", SalesTagName = "blah", SalesTagValue = "1234"}, FakeUserData.FakeAccessToken);
 
 			_userPurchaseBasket.AssertWasCalled(x => x.WithParameter("country", "GB"));
-			_userPurchaseBasket.AssertWasCalled(
-				x => x.ForUser(FakeUserData.FakeAccessToken.Token, FakeUserData.FakeAccessToken.Secret));
+			_userPurchaseBasket.AssertWasCalled(x => x.ForUser(FakeUserData.FakeAccessToken.Token, FakeUserData.FakeAccessToken.Secret));
+			_userPurchaseBasket.AssertWasCalled(x => x.WithParameter("tag_blah", "1234"));
 		}
 
 		[Test]

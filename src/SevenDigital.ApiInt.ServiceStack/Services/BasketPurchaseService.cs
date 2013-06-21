@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using ServiceStack.Logging;
 using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Wrapper.Exceptions;
@@ -34,7 +35,14 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 					paymentStep(basketId, request);
 				}
 
-				var apiBasketPurchaseResponse = _basketHandler.Purchase(basketId, request.CountryCode, this.TryGetOAuthAccessToken());
+				var purchaseData = new PurchaseData
+				{
+					CountryCode = request.CountryCode,
+					SalesTagName = ConfigurationManager.AppSettings["BasketPurchase.TagName"],
+					SalesTagValue = ConfigurationManager.AppSettings["BasketPurchase.TagValue"]
+				};
+
+				var apiBasketPurchaseResponse = _basketHandler.Purchase(basketId, purchaseData, this.TryGetOAuthAccessToken());
 				_logger.InfoFormat("Item {0} purchased successfully - type {1} {2}", request.Id, request.Type, request.GetType().Name);
 				return PurchaseResponseHelper.PurchaseSuccessfulResponse(request, apiBasketPurchaseResponse, _mapper);
 			}

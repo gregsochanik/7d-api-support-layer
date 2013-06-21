@@ -9,6 +9,6 @@ namespace SevenDigital.ApiInt.Basket
 	{
 		Guid Create(ItemRequest request);
 		Api.Schema.Basket.Basket AddItem(Guid basketId, ItemRequest request);
-		UserPurchaseBasket Purchase(Guid basketId, string countryCode, OAuthAccessToken accessToken);
+		UserPurchaseBasket Purchase(Guid basketId, PurchaseData countryCode, OAuthAccessToken accessToken);
 	}
 }

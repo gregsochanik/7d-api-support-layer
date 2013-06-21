@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using SevenDigital.Api.Schema;
 using SevenDigital.Api.Schema.Basket;
 using SevenDigital.Api.Schema.OAuth;
@@ -11,6 +12,13 @@ using SevenDigital.ApiInt.Model;
 
 namespace SevenDigital.ApiInt.Basket
 {
+	public class PurchaseData
+	{
+		public string CountryCode { get; set; }
+		public string SalesTagName { get; set; }
+		public string SalesTagValue { get; set; }
+	}
+
 	/// <exception cref="InvalidBasketIdException"></exception>
 	/// <exception cref="ApiResponseException"></exception>
 	public class BasketHandler : IBasketHandler
@@ -55,14 +63,15 @@ namespace SevenDigital.ApiInt.Basket
 			throw new InvalidBasketIdException(basketId.ToString(), null);
 		}
 
-		public UserPurchaseBasket Purchase(Guid basketId, string countryCode, OAuthAccessToken accessToken)
+		public UserPurchaseBasket Purchase(Guid basketId, PurchaseData purchaseData, OAuthAccessToken accessToken)
 		{
-			return _purchaseBasket.ForUser(accessToken.Token, accessToken.Secret)
-			               .WithParameter("basketId", basketId.ToString())
-			               .WithParameter("country", countryCode)
-						   .WithParameter("imagesize", "100")
-						   .WithParameter("tag_app", "4102")
-			               .Please();
+			var withParameter = _purchaseBasket.ForUser(accessToken.Token, accessToken.Secret).WithParameter("basketId", basketId.ToString()).WithParameter("country", purchaseData.CountryCode).WithParameter("imagesize", "100");
+			if (!string.IsNullOrEmpty(purchaseData.SalesTagName) && !string.IsNullOrEmpty(purchaseData.SalesTagValue))
+			{
+				withParameter = withParameter.WithParameter("tag_" + purchaseData.SalesTagName, purchaseData.SalesTagValue);
+			}
+
+			return withParameter.Please();
 		}
 
 		private void AdjustApiCallBasedOnPurchaseType(IFluentApi<AddItemToBasket> api, ItemRequest request)
