@@ -104,6 +104,9 @@
     <Compile Include="Services\ApiCardPurchaseRuleTest.cs" />
     <Compile Include="Services\ContextHelper.cs" />
     <Compile Include="Services\DownloadFileServiceTests.cs" />
+    <Compile Include="Services\FreePurchaseServiceTests.cs" />
+    <Compile Include="Services\Given_voucher_has_not_been_applied.cs" />
+    <Compile Include="Services\ItemPurchaseServiceTests.cs" />
     <Compile Include="Services\ItemRequestExtensionTests.cs" />
     <Compile Include="Services\LockerCheckServiceTests.cs" />
     <Compile Include="Services\PriceWatchTests.cs" />
@@ -117,6 +120,7 @@
     <Compile Include="Services\UserCardServiceAddTests.cs" />
     <Compile Include="Services\UserCardServiceTests.cs" />
     <Compile Include="Services\UserDeliverItemBuyerTests.cs" />
+    <Compile Include="Services\VoucherPurchaseServiceTests.cs" />
     <Compile Include="TestData\TestArtist.cs" />
     <Compile Include="TestData\TestFormat.cs" />
     <Compile Include="TestData\TestFormatList.cs" />
