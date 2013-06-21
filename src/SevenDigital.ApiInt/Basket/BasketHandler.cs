@@ -61,6 +61,7 @@ namespace SevenDigital.ApiInt.Basket
 			               .WithParameter("basketId", basketId.ToString())
 			               .WithParameter("country", countryCode)
 						   .WithParameter("imagesize", "100")
+						   .WithParameter("tag_app", "4102")
 			               .Please();
 		}
 
