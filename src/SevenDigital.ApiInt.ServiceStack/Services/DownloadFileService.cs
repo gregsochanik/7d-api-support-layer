@@ -4,6 +4,7 @@ using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
 using SevenDigital.ApiInt.Catalogue;
+using SevenDigital.ApiInt.Locker;
 using SevenDigital.ApiInt.MediaDelivery;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Model;
@@ -15,12 +16,14 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 		private readonly IUrlSigner _urlSigner;
 		private readonly IOAuthCredentials _configAuthCredentials;
 		private readonly ICatalogue _catalogue;
+		private readonly ILockerBrowser _lockerBrowser;
 
-		public DownloadFileService(IUrlSigner urlSigner, IOAuthCredentials configAuthCredentials, ICatalogue catalogue)
+		public DownloadFileService(IUrlSigner urlSigner, IOAuthCredentials configAuthCredentials, ICatalogue catalogue, ILockerBrowser lockerBrowser)
 		{
 			_urlSigner = urlSigner;
 			_configAuthCredentials = configAuthCredentials;
 			_catalogue = catalogue;
+			_lockerBrowser = lockerBrowser;
 		}
 
 		public HttpResult Get(DownloadTrackRequest request)
@@ -28,7 +31,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 			var oAuthAccessToken = this.TryGetOAuthAccessToken();
 
 			var url = BuildDownloadUrl(request);
-
+			
 			return new HttpResult
 			{
 				Headers = { { "Cache-control", "no-cache" } },
