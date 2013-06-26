@@ -8,7 +8,6 @@ using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
 using SevenDigital.ApiInt.Catalogue;
-using SevenDigital.ApiInt.Locker;
 using SevenDigital.ApiInt.MediaDelivery;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Model;
@@ -29,7 +28,6 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		private IOAuthCredentials _configAuthCredentials;
 		private IUrlSigner _stubbedUrlSigner;
 		private ICatalogue _stubbedCatalogue;
-		private ILockerBrowser _stubbedLockerBrowser;
 
 		[SetUp]
 		public void SetUp()
@@ -52,14 +50,12 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 				Formats = new FormatList { Formats = new List<Format> { new Format { Id = EXPECTED_FORMAT_ID } } }
 			});
 
-			_stubbedLockerBrowser = MockRepository.GenerateStub<ILockerBrowser>();
-
 		}
 
 		[Test]
 		public void If_set_up_correctly_signs_the_correct_url()
 		{
-			var downloadTrackService = new DownloadFileService(_stubbedUrlSigner, _configAuthCredentials, _stubbedCatalogue, _stubbedLockerBrowser)
+			var downloadTrackService = new DownloadFileService(_stubbedUrlSigner, _configAuthCredentials, _stubbedCatalogue)
 			{
 				RequestContext = ContextHelper.LoggedInContext()
 			};
@@ -85,7 +81,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			_configAuthCredentials.Stub(x => x.ConsumerSecret).Return("ConsumerSecret");
 			var urlSigner = new UrlSigner();
 
-			var downloadTrackService = new DownloadFileService(urlSigner, _configAuthCredentials, _stubbedCatalogue, _stubbedLockerBrowser)
+			var downloadTrackService = new DownloadFileService(urlSigner, _configAuthCredentials, _stubbedCatalogue)
 			{
 				RequestContext = ContextHelper.LoggedInContext()
 			};
@@ -106,7 +102,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 		[Test]
 		public void If_set_up_correctly_signs_the_correct_url_release()
 		{
-			var downloadTrackService = new DownloadFileService(_stubbedUrlSigner, _configAuthCredentials, _stubbedCatalogue, _stubbedLockerBrowser)
+			var downloadTrackService = new DownloadFileService(_stubbedUrlSigner, _configAuthCredentials, _stubbedCatalogue)
 			{
 				RequestContext = ContextHelper.LoggedInContext()
 			};
@@ -132,7 +128,7 @@ namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
 			_configAuthCredentials.Stub(x => x.ConsumerSecret).Return("ConsumerSecret");
 			var urlSigner = new UrlSigner();
 
-			var downloadTrackService = new DownloadFileService(urlSigner, _configAuthCredentials, _stubbedCatalogue, _stubbedLockerBrowser)
+			var downloadTrackService = new DownloadFileService(urlSigner, _configAuthCredentials, _stubbedCatalogue)
 			{
 				RequestContext = ContextHelper.LoggedInContext()
 			};

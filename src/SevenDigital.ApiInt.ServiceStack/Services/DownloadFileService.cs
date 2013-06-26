@@ -4,7 +4,6 @@ using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
 using SevenDigital.ApiInt.Catalogue;
-using SevenDigital.ApiInt.Locker;
 using SevenDigital.ApiInt.MediaDelivery;
 using SevenDigital.ApiInt.Model;
 using SevenDigital.ApiInt.ServiceStack.Model;
@@ -16,14 +15,12 @@ namespace SevenDigital.ApiInt.ServiceStack.Services
 		private readonly IUrlSigner _urlSigner;
 		private readonly IOAuthCredentials _configAuthCredentials;
 		private readonly ICatalogue _catalogue;
-		private readonly ILockerBrowser _lockerBrowser;
 
-		public DownloadFileService(IUrlSigner urlSigner, IOAuthCredentials configAuthCredentials, ICatalogue catalogue, ILockerBrowser lockerBrowser)
+		public DownloadFileService(IUrlSigner urlSigner, IOAuthCredentials configAuthCredentials, ICatalogue catalogue)
 		{
 			_urlSigner = urlSigner;
 			_configAuthCredentials = configAuthCredentials;
 			_catalogue = catalogue;
-			_lockerBrowser = lockerBrowser;
 		}
 
 		public HttpResult Get(DownloadTrackRequest request)
