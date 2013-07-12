@@ -92,6 +92,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\SevenDigitalCredentialsAuthProvider.cs" />
+    <Compile Include="Cache\CacheLock.cs" />
+    <Compile Include="Cache\CacheSemaphore.cs" />
+    <Compile Include="Cache\ICacheLock.cs" />
+    <Compile Include="Cache\LockerReloader.cs" />
     <Compile Include="Catalogue\CachingCatalogue.cs" />
     <Compile Include="Catalogue\CatalogueHelper.cs" />
     <Compile Include="Catalogue\FluentApiExtensions.cs" />
