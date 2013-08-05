@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5EA9B28B-0B80-4580-BE7A-0A65FE0170F3}</ProjectGuid>
+    <ProjectGuid>{638E1164-34A9-465D-ACEE-E3C2042DCF79}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SevenDigital.ApiInt.ServiceStack.Unit.Tests</RootNamespace>
-    <AssemblyName>SevenDigital.ApiInt.ServiceStack.Unit.Tests</AssemblyName>
+    <RootNamespace>SevenDigital.ApiSupportLayer.ServiceStack</RootNamespace>
+    <AssemblyName>SevenDigital.ApiSupportLayer.ServiceStack</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -32,12 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack, Version=3.9.45.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\ServiceStack.3.9.45\lib\net35\ServiceStack.dll</HintPath>
@@ -87,7 +81,9 @@
       <HintPath>..\..\lib\SevenDigital.Api.Wrapper.Premium.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -95,55 +91,83 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\SevenDigitalCredentialsAuthProviderTests.cs" />
-    <Compile Include="Authentication\_if_user_does_not_exist.cs" />
-    <Compile Include="Cache\CatalogueHelperTests.cs" />
-    <Compile Include="Cache\FluentApiExtensionTests.cs" />
-    <Compile Include="Mapping\AddCardMapperTests.cs" />
+    <Compile Include="Authentication\SevenDigitalCredentialsAuthProvider.cs" />
+    <Compile Include="Cache\CacheLock.cs" />
+    <Compile Include="Cache\CacheSemaphore.cs" />
+    <Compile Include="Cache\ICacheLock.cs" />
+    <Compile Include="Cache\LockerReloader.cs" />
+    <Compile Include="Catalogue\CachingCatalogue.cs" />
+    <Compile Include="Catalogue\CatalogueHelper.cs" />
+    <Compile Include="Catalogue\FluentApiExtensions.cs" />
+    <Compile Include="Catalogue\FluentApiTriggers.cs" />
+    <Compile Include="ConversionHelper.cs" />
+    <Compile Include="Mapping\AddCardMapper.cs" />
+    <Compile Include="Mapping\IMapper.cs" />
+    <Compile Include="Model\AddCardRequest.cs" />
+    <Compile Include="Model\ApplicationState.cs" />
+    <Compile Include="Model\BuyItNowResponse.cs" />
+    <Compile Include="Model\CardRequest.cs" />
+    <Compile Include="Model\DownloadTrackRequest.cs" />
+    <Compile Include="Model\FreePurchaseRequest.cs" />
+    <Compile Include="Model\FreePurchaseResponse.cs" />
+    <Compile Include="Model\LockerCheckRequest.cs" />
+    <Compile Include="Model\LockerCheckResponse.cs" />
+    <Compile Include="Model\StreamingUrlRequest.cs" />
+    <Compile Include="Model\VoucherPurchaseRequest.cs" />
+    <Compile Include="Model\VoucherPurchaseResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ApiCardPurchaseRuleTest.cs" />
-    <Compile Include="Services\ContextHelper.cs" />
-    <Compile Include="Services\DownloadFileServiceTests.cs" />
-    <Compile Include="Services\FreePurchaseServiceTests.cs" />
-    <Compile Include="Services\Given_voucher_has_not_been_applied.cs" />
-    <Compile Include="Services\ItemPurchaseServiceTests.cs" />
-    <Compile Include="Services\ItemRequestExtensionTests.cs" />
-    <Compile Include="Services\LockerCheckServiceTests.cs" />
-    <Compile Include="Services\PriceWatchTests.cs" />
-    <Compile Include="Services\ProductCollaterTests.cs" />
-    <Compile Include="Services\ReleaseTracksExtensionTests.cs" />
-    <Compile Include="Services\RestrictedByIpAddressGeoLookupTests.cs" />
-    <Compile Include="Services\ShopRestrictionServiceTests.cs" />
-    <Compile Include="Services\ShopUrlServiceTests.cs" />
-    <Compile Include="Services\StatusServiceTests.cs" />
-    <Compile Include="Services\StreamingUriServiceTest.cs" />
-    <Compile Include="Services\UserCardServiceAddTests.cs" />
-    <Compile Include="Services\UserCardServiceTests.cs" />
-    <Compile Include="Services\UserDeliverItemBuyerTests.cs" />
-    <Compile Include="Services\VoucherPurchaseServiceTests.cs" />
-    <Compile Include="TestData\TestArtist.cs" />
-    <Compile Include="TestData\TestFormat.cs" />
-    <Compile Include="TestData\TestFormatList.cs" />
-    <Compile Include="TestData\TestPrice.cs" />
-    <Compile Include="TestData\TestRelease.cs" />
-    <Compile Include="TestData\TestTrack.cs" />
-    <Compile Include="Cache\TimedCacheReloadingTests.cs" />
+    <Compile Include="Services\BasketPurchaseService.cs" />
+    <Compile Include="Services\CardBasketPurchaseService.cs" />
+    <Compile Include="Services\DownloadFileService.cs" />
+    <Compile Include="Catalogue\IProductCollater.cs" />
+    <Compile Include="Services\DownloadService.cs" />
+    <Compile Include="Services\FreePurchaseService.cs" />
+    <Compile Include="Services\IGeoSettings.cs" />
+    <Compile Include="Services\ItemPurchaseService.cs" />
+    <Compile Include="Services\ReleaseSlug\ReleaseSlugRequest.cs" />
+    <Compile Include="Services\ReleaseSlug\ReleaseSlugResponse.cs" />
+    <Compile Include="Services\ReleaseSlug\ReleaseSlugService.cs" />
+    <Compile Include="Services\RestrictedByIpAddressGeoLookup.cs" />
+    <Compile Include="Services\IGeoLookup.cs" />
+    <Compile Include="Services\LockerCheckService.cs" />
+    <Compile Include="Catalogue\ProductCollater.cs" />
+    <Compile Include="Services\ReleaseRecommendRequest.cs" />
+    <Compile Include="Services\ReleaseRecommendService.cs" />
+    <Compile Include="Services\ReleaseTracksService.cs" />
+    <Compile Include="ResponseHelper.cs" />
+    <Compile Include="ServiceSessionExtensions.cs" />
+    <Compile Include="Services\Restrictions\IpAddressRestrictor.cs" />
+    <Compile Include="Services\Restrictions\IRestrictor.cs" />
+    <Compile Include="Services\ShopRestriction.cs" />
+    <Compile Include="Services\ShopRestrictionService.cs" />
+    <Compile Include="Services\ShopUrl.cs" />
+    <Compile Include="Services\ShopUrlConstants.cs" />
+    <Compile Include="Services\ShopUrlService.cs" />
+    <Compile Include="Services\StatusService.cs" />
+    <Compile Include="Services\StreamingUriService.cs" />
+    <Compile Include="Services\StrictGeoSettings.cs" />
+    <Compile Include="Services\TrackSearchService.cs" />
+    <Compile Include="Services\TrackService.cs" />
+    <Compile Include="Services\UrlSlugParsing\ISlugToNameParser.cs" />
+    <Compile Include="Services\UrlSlugParsing\SlugNotFoundException.cs" />
+    <Compile Include="Services\UrlSlugParsing\SlugParseException.cs" />
+    <Compile Include="Services\UrlSlugParsing\SlugToIdConvertor.cs" />
+    <Compile Include="Services\UrlSlugParsing\SlugToNameParser.cs" />
+    <Compile Include="Services\UserCardService.cs" />
+    <Compile Include="Cache\TimedCacheReloading.cs" />
+    <Compile Include="Cache\UserTokenCache.cs" />
+    <Compile Include="Services\VoucherPurchaseService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\SevenDigital.ApiInt.ServiceStack\SevenDigital.ApiInt.ServiceStack.csproj">
-      <Project>{638e1164-34a9-465d-acee-e3c2042dcf79}</Project>
-      <Name>SevenDigital.ApiInt.ServiceStack</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SevenDigital.ApiInt.TestData\SevenDigital.ApiInt.TestData.csproj">
-      <Project>{b000af1f-d190-4d1f-a528-fc44475d8243}</Project>
-      <Name>SevenDigital.ApiInt.TestData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SevenDigital.ApiInt\SevenDigital.ApiInt.csproj">
-      <Project>{DF7B03FF-EA22-4E39-B98E-9F53A7BAC3EE}</Project>
-      <Name>SevenDigital.ApiInt</Name>
+    <ProjectReference Include="..\SevenDigital.ApiSupportLayer\SevenDigital.ApiSupportLayer.csproj">
+      <Project>{df7b03ff-ea22-4e39-b98e-9f53a7bac3ee}</Project>
+      <Name>SevenDigital.ApiSupportLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

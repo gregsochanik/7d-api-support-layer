@@ -7,8 +7,8 @@
     <ProjectGuid>{DF7B03FF-EA22-4E39-B98E-9F53A7BAC3EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SevenDigital.ApiInt</RootNamespace>
-    <AssemblyName>SevenDigital.ApiInt</AssemblyName>
+    <RootNamespace>SevenDigital.ApiSupportLayer</RootNamespace>
+    <AssemblyName>SevenDigital.ApiSupportLayer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>

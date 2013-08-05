@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B000AF1F-D190-4D1F-A528-FC44475D8243}</ProjectGuid>
+    <ProjectGuid>{AEEE31C1-C09E-4EB4-A282-1A1F10096B5F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SevenDigital.ApiInt.TestData</RootNamespace>
-    <AssemblyName>SevenDigital.ApiInt.TestData</AssemblyName>
+    <RootNamespace>SevenDigital.ApiSupportLayer.Unit.Tests</RootNamespace>
+    <AssemblyName>SevenDigital.ApiSupportLayer.Unit.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -32,8 +32,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common, Version=3.9.45.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ServiceStack.Common.3.9.45\lib\net35\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=3.9.45.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ServiceStack.Common.3.9.45\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=3.9.45.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ServiceStack.Text.3.9.45\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="SevenDigital.Api.Schema, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -51,22 +66,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FakeUserData.cs" />
+    <Compile Include="BasketHandlerTests.cs" />
+    <Compile Include="Locker\LockerCacheDateCheckerTest.cs" />
+    <Compile Include="Locker\LockerCacheTests.cs" />
+    <Compile Include="Locker\LockerRetrievalTests.cs" />
+    <Compile Include="Mapping\PurchaseItemMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StubApiWrapper\ApiWrapper.cs" />
-    <Compile Include="TestArtist.cs" />
-    <Compile Include="TestFormat.cs" />
-    <Compile Include="TestFormatList.cs" />
-    <Compile Include="TestLocker.cs" />
-    <Compile Include="TestLockerRelease.cs" />
-    <Compile Include="TestLockerTrack.cs" />
-    <Compile Include="TestPrice.cs" />
-    <Compile Include="TestRelease.cs" />
-    <Compile Include="TestTrack.cs" />
-    <Compile Include="TestUserDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SevenDigital.ApiSupportLayer.TestData\SevenDigital.ApiSupportLayer.TestData.csproj">
+      <Project>{B000AF1F-D190-4D1F-A528-FC44475D8243}</Project>
+      <Name>SevenDigital.ApiSupportLayer.TestData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SevenDigital.ApiSupportLayer\SevenDigital.ApiSupportLayer.csproj">
+      <Project>{df7b03ff-ea22-4e39-b98e-9f53a7bac3ee}</Project>
+      <Name>SevenDigital.ApiSupportLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
