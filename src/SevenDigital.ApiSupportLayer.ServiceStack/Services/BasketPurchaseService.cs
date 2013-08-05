@@ -3,12 +3,12 @@ using System.Configuration;
 using ServiceStack.Logging;
 using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Wrapper.Exceptions;
-using SevenDigital.ApiInt.Basket;
-using SevenDigital.ApiInt.Mapping;
-using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.Purchasing;
+using SevenDigital.ApiSupportLayer.Basket;
+using SevenDigital.ApiSupportLayer.Mapping;
+using SevenDigital.ApiSupportLayer.Model;
+using SevenDigital.ApiSupportLayer.Purchasing;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
 {
 	public abstract class BasketPurchaseService<TItemRequest> : Service where TItemRequest : ItemRequest
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using ServiceStack.ServiceInterface;
 
-namespace SevenDigital.ApiInt.ServiceStack.Model
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Model
 {
 	[Authenticate]
 	public class AddCardRequest : CardRequest

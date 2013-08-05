@@ -3,11 +3,11 @@ using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Wrapper.Exceptions;
-using SevenDigital.ApiInt.Locker;
-using SevenDigital.ApiInt.Mapping;
-using SevenDigital.ApiInt.ServiceStack.Model;
+using SevenDigital.ApiSupportLayer.Locker;
+using SevenDigital.ApiSupportLayer.Mapping;
+using SevenDigital.ApiSupportLayer.ServiceStack.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
 {
 	public class LockerCheckService : Service
 	{

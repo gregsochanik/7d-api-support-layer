@@ -1,14 +1,14 @@
 ﻿using System.Net;
 using ServiceStack.Common.Web;
 using SevenDigital.Api.Schema.Pricing;
-using SevenDigital.ApiInt.Basket;
-using SevenDigital.ApiInt.Catalogue;
-using SevenDigital.ApiInt.Mapping;
-using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.Purchasing;
-using SevenDigital.ApiInt.ServiceStack.Model;
+using SevenDigital.ApiSupportLayer.Basket;
+using SevenDigital.ApiSupportLayer.Catalogue;
+using SevenDigital.ApiSupportLayer.Mapping;
+using SevenDigital.ApiSupportLayer.Model;
+using SevenDigital.ApiSupportLayer.Purchasing;
+using SevenDigital.ApiSupportLayer.ServiceStack.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
 {
 	public class FreePurchaseService : BasketPurchaseService<FreePurchaseRequest>
 	{

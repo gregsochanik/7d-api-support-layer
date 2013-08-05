@@ -2,7 +2,7 @@
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
 
-namespace SevenDigital.ApiInt.Model
+namespace SevenDigital.ApiSupportLayer.Model
 {
 	public class PurchasedItem
 	{

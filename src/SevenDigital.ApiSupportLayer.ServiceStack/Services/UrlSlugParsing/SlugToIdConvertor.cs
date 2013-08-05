@@ -4,7 +4,7 @@ using SevenDigital.Api.Schema.ArtistEndpoint;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Wrapper;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services.UrlSlugParsing
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.UrlSlugParsing
 {
 	public class SlugToIdConvertor
 	{

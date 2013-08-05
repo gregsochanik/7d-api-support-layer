@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using SevenDigital.Api.Schema.Media;
 
-namespace SevenDigital.ApiInt.TestData
+namespace SevenDigital.ApiSupportLayer.TestData
 {
 	public static class TestFormatList
 	{

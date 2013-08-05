@@ -2,9 +2,9 @@
 using Rhino.Mocks;
 using SevenDigital.Api.Schema.Territories;
 using SevenDigital.Api.Wrapper;
-using SevenDigital.ApiInt.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {
 	[TestFixture]
 	public class ShopRestrictionServiceTests

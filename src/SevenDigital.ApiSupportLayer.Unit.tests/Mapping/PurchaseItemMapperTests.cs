@@ -4,10 +4,10 @@ using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.Media;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
-using SevenDigital.ApiInt.Mapping;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Mapping;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.Unit.tests.Mapping
+namespace SevenDigital.ApiSupportLayer.Unit.Tests.Mapping
 {
 	[TestFixture]
 	public class PurchaseItemMapperTests

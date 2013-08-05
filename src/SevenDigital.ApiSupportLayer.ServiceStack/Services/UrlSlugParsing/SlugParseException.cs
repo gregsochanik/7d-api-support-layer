@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services.UrlSlugParsing
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.UrlSlugParsing
 {
 	public class SlugParseException : Exception
 	{}

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services.Restrictions
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Restrictions
 {
 	public interface IRestrictor
 	{

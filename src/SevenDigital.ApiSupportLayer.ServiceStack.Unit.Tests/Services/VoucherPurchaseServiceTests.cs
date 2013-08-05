@@ -9,14 +9,14 @@ using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Premium;
-using SevenDigital.ApiInt.Basket;
-using SevenDigital.ApiInt.Exceptions;
-using SevenDigital.ApiInt.Mapping;
-using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.ServiceStack.Model;
-using SevenDigital.ApiInt.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.Basket;
+using SevenDigital.ApiSupportLayer.Exceptions;
+using SevenDigital.ApiSupportLayer.Mapping;
+using SevenDigital.ApiSupportLayer.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {
 	[TestFixture]
 	public class VoucherPurchaseServiceTests

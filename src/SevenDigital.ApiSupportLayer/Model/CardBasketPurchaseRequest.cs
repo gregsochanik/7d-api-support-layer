@@ -1,4 +1,4 @@
-﻿namespace SevenDigital.ApiInt.Model
+﻿namespace SevenDigital.ApiSupportLayer.Model
 {
 	public class CardBasketPurchaseRequest : ItemRequest
 	{

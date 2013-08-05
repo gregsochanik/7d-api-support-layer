@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
-using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {
 	[TestFixture]
 	public class ItemRequestExtensionTests

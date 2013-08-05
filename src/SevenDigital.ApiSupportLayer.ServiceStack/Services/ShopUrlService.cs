@@ -5,7 +5,7 @@ using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Schema.Territories;
 using SevenDigital.Api.Wrapper;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
 {
 	public class ShopUrlService : Service
 	{

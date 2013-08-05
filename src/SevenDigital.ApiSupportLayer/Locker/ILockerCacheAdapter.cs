@@ -5,7 +5,7 @@ using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.TrackEndpoint;
 
-namespace SevenDigital.ApiInt.Locker
+namespace SevenDigital.ApiSupportLayer.Locker
 {
 	public interface ILockerCacheAdapter
 	{

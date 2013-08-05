@@ -2,7 +2,7 @@
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper;
 
-namespace SevenDigital.ApiInt.Catalogue
+namespace SevenDigital.ApiSupportLayer.Catalogue
 {
 	public interface ICatalogApiFactory
 	{

@@ -4,7 +4,7 @@ using ServiceStack.Common.Web;
 using ServiceStack.Logging;
 using SevenDigital.Api.Wrapper.Exceptions;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services.Restrictions
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Restrictions
 {
 	public class IpAddressRestrictor : IRestrictor
 	{

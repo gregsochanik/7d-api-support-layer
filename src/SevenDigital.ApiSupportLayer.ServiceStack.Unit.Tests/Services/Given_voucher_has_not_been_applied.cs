@@ -13,13 +13,13 @@ using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.Api.Wrapper.Http;
-using SevenDigital.ApiInt.Basket;
-using SevenDigital.ApiInt.Mapping;
-using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.ServiceStack.Model;
-using SevenDigital.ApiInt.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.Basket;
+using SevenDigital.ApiSupportLayer.Mapping;
+using SevenDigital.ApiSupportLayer.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {
 	[TestFixture]
 	[Description("BUYNOW-76")]

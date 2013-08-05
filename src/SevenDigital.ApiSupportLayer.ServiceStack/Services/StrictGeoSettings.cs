@@ -1,4 +1,4 @@
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
 {
 	public class StrictGeoSettings : IGeoSettings
 	{

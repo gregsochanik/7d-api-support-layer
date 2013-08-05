@@ -1,7 +1,7 @@
 using System;
 using SevenDigital.Api.Schema.OAuth;
 
-namespace SevenDigital.ApiInt.Locker
+namespace SevenDigital.ApiSupportLayer.Locker
 {
 	public interface ILockerDateChecker
 	{

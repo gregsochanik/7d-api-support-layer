@@ -4,7 +4,7 @@ using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Extensions;
 
-namespace SevenDigital.ApiInt.Locker
+namespace SevenDigital.ApiSupportLayer.Locker
 {
 	public class LockerRetrieval : ILockerRetrieval
 	{

@@ -1,4 +1,4 @@
-namespace SevenDigital.ApiInt.Locker
+namespace SevenDigital.ApiSupportLayer.Locker
 {
 	public class LockerStats
 	{

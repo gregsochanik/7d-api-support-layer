@@ -1,7 +1,7 @@
 using ServiceStack.ServiceInterface.Auth;
 using SevenDigital.Api.Schema.OAuth;
 
-namespace SevenDigital.ApiInt.ServiceStack
+namespace SevenDigital.ApiSupportLayer.ServiceStack
 {
 	public static class ConversionHelper
 	{

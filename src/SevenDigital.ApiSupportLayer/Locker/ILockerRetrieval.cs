@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.OAuth;
 
-namespace SevenDigital.ApiInt.Locker
+namespace SevenDigital.ApiSupportLayer.Locker
 {
 	public interface ILockerRetrieval
 	{

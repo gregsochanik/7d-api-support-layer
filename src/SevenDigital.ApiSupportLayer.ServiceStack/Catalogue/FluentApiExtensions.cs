@@ -3,7 +3,7 @@ using System.Linq;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
 
-namespace SevenDigital.ApiInt.ServiceStack.Catalogue
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Catalogue
 {
 	public static class FluentApiExtensions
 	{

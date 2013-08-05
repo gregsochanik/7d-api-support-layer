@@ -1,6 +1,6 @@
 using System;
 
-namespace SevenDigital.ApiInt.ServiceStack.Cache
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Cache
 {
 	public interface ICacheLock
 	{

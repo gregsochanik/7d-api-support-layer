@@ -6,12 +6,12 @@ using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
-using SevenDigital.ApiInt.Catalogue;
-using SevenDigital.ApiInt.Locker;
-using SevenDigital.ApiInt.MediaDelivery;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Catalogue;
+using SevenDigital.ApiSupportLayer.Locker;
+using SevenDigital.ApiSupportLayer.MediaDelivery;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
 {
 	public class DownloadErrorRequest : ItemRequest
 	{}

@@ -2,10 +2,9 @@
 using NUnit.Framework;
 using SevenDigital.Api.Schema.Pricing;
 using SevenDigital.Api.Schema.TrackEndpoint;
-using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {
 	[TestFixture]
 	public class ReleaseTracksExtensionTests

@@ -2,9 +2,9 @@ using System.Diagnostics;
 using System.Timers;
 using ServiceStack.CacheAccess;
 using SevenDigital.Api.Schema.OAuth;
-using SevenDigital.ApiInt.Locker;
+using SevenDigital.ApiSupportLayer.Locker;
 
-namespace SevenDigital.ApiInt.ServiceStack.Cache
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Cache
 {
 	public class TimedCacheReloading : ITimedCacheReloading
 	{

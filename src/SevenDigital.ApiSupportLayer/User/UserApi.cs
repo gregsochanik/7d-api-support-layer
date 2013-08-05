@@ -2,7 +2,7 @@ using System.Web;
 using SevenDigital.Api.Schema.Premium.User;
 using SevenDigital.Api.Wrapper;
 
-namespace SevenDigital.ApiInt.User
+namespace SevenDigital.ApiSupportLayer.User
 {
 	public class UserApi : IUserApi
 	{

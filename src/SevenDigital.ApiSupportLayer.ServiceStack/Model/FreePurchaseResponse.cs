@@ -1,6 +1,6 @@
-using SevenDigital.ApiInt.Purchasing;
+using SevenDigital.ApiSupportLayer.Purchasing;
 
-namespace SevenDigital.ApiInt.ServiceStack.Model
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Model
 {
 	public class FreePurchaseResponse : PurchaseResponse
 	{}

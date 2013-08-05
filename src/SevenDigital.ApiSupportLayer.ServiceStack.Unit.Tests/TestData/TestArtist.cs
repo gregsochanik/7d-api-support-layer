@@ -1,6 +1,6 @@
 ﻿using SevenDigital.Api.Schema.ArtistEndpoint;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.TestData
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.TestData
 {
 	public static class TestArtist
 	{

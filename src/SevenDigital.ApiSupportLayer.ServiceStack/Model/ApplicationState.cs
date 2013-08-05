@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace SevenDigital.ApiInt.ServiceStack.Model
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Model
 {
 	[DataContract]
 	public class ApplicationState

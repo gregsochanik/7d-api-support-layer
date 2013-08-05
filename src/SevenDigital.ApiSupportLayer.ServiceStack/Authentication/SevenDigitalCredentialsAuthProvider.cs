@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
-using ServiceStack.Common.Web;
 using ServiceStack.Logging;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Auth;
-using SevenDigital.ApiInt.Authentication;
-using SevenDigital.ApiInt.User;
+using SevenDigital.ApiSupportLayer.Authentication;
+using SevenDigital.ApiSupportLayer.User;
 
-namespace SevenDigital.ApiInt.ServiceStack.Authentication
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Authentication
 {
 	public class SevenDigitalCredentialsAuthProvider : CredentialsAuthProvider
 	{

@@ -1,6 +1,6 @@
 ﻿using SevenDigital.Api.Schema.Pricing;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.TestData
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.TestData
 {
 	public static class TestPrice
 	{

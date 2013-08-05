@@ -2,9 +2,9 @@
 using Rhino.Mocks;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Wrapper;
-using SevenDigital.ApiInt.Locker;
+using SevenDigital.ApiSupportLayer.Locker;
 
-namespace SevenDigital.ApiInt.Unit.Tests.Locker
+namespace SevenDigital.ApiSupportLayer.Unit.Tests.Locker
 {
 	[TestFixture]
 	public class LockerRetrievalTests

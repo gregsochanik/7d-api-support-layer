@@ -3,10 +3,10 @@ using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.User;
 using SevenDigital.Api.Wrapper;
-using SevenDigital.ApiInt.Catalogue;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Catalogue;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.Purchasing
+namespace SevenDigital.ApiSupportLayer.Purchasing
 {
 	public class UserDeliverItemBuyer : IItemBuyer
 	{

@@ -1,9 +1,9 @@
 using System;
 using SevenDigital.Api.Schema.Pricing;
-using SevenDigital.ApiInt.Catalogue;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Catalogue;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.Purchasing
+namespace SevenDigital.ApiSupportLayer.Purchasing
 {
 	public class PriceWatch : IPriceWatch
 	{

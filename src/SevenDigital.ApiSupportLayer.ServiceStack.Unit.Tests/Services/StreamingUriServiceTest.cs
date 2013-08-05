@@ -3,12 +3,12 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
-using SevenDigital.ApiInt.MediaDelivery;
-using SevenDigital.ApiInt.ServiceStack.Model;
-using SevenDigital.ApiInt.ServiceStack.Services;
-using SevenDigital.ApiInt.TestData;
+using SevenDigital.ApiSupportLayer.MediaDelivery;
+using SevenDigital.ApiSupportLayer.ServiceStack.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.TestData;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {
 	[TestFixture]
 	public class StreamingUriServiceTest

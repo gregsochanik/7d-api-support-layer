@@ -3,11 +3,11 @@ using System.Net;
 using NUnit.Framework;
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper.Exceptions;
-using SevenDigital.ApiInt.ServiceStack.Catalogue;
-using SevenDigital.ApiInt.TestData.StubApiWrapper;
 using Rhino.Mocks;
+using SevenDigital.ApiSupportLayer.ServiceStack.Catalogue;
+using SevenDigital.ApiSupportLayer.TestData.StubApiWrapper;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Cache
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Cache
 {
 	[TestFixture]
 	public class FluentApiExtensionTests

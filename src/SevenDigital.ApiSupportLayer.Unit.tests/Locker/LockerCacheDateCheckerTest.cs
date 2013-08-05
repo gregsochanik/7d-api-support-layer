@@ -4,11 +4,11 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.OAuth;
-using SevenDigital.ApiInt.Locker;
-using SevenDigital.ApiInt.TestData;
-using SevenDigital.ApiInt.TestData.StubApiWrapper;
+using SevenDigital.ApiSupportLayer.Locker;
+using SevenDigital.ApiSupportLayer.TestData;
+using SevenDigital.ApiSupportLayer.TestData.StubApiWrapper;
 
-namespace SevenDigital.ApiInt.Unit.Tests.Locker
+namespace SevenDigital.ApiSupportLayer.Unit.Tests.Locker
 {
 	[TestFixture]
 	public class LockerCacheDateCheckerTest

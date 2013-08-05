@@ -1,6 +1,6 @@
 using SevenDigital.Api.Schema.OAuth;
 
-namespace SevenDigital.ApiInt.Authentication
+namespace SevenDigital.ApiSupportLayer.Authentication
 {
 	public interface IOAuthAuthentication
 	{

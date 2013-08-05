@@ -1,6 +1,6 @@
 using SevenDigital.Api.Wrapper;
 
-namespace SevenDigital.ApiInt.ServiceStack.Catalogue
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Catalogue
 {
 	public class FluentApiTriggers : IFluentApiTriggers
 	{

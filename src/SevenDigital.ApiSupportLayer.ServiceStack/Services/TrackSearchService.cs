@@ -2,9 +2,9 @@ using System.Linq;
 using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
 {
 	public class TrackSearchService : Service
 	{

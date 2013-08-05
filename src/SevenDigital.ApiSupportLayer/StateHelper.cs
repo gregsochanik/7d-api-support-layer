@@ -1,4 +1,4 @@
-namespace SevenDigital.ApiInt
+namespace SevenDigital.ApiSupportLayer
 {
 	public static class StateHelper
 	{

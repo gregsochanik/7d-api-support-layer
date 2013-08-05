@@ -1,9 +1,9 @@
 using System;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.User.Purchase;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.Basket
+namespace SevenDigital.ApiSupportLayer.Basket
 {
 	public interface IBasketHandler
 	{

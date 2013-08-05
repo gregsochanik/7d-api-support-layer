@@ -1,6 +1,6 @@
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.Purchasing
+namespace SevenDigital.ApiSupportLayer.Purchasing
 {
 	public interface IPriceWatch
 	{

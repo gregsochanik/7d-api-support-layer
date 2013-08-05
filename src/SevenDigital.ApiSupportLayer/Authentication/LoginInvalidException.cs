@@ -1,6 +1,6 @@
 using System;
 
-namespace SevenDigital.ApiInt.Authentication
+namespace SevenDigital.ApiSupportLayer.Authentication
 {
 	public class LoginInvalidException : Exception
 	{

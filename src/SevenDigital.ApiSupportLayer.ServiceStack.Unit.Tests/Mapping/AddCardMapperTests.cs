@@ -1,9 +1,9 @@
 using System;
 using NUnit.Framework;
-using SevenDigital.ApiInt.ServiceStack.Mapping;
-using SevenDigital.ApiInt.ServiceStack.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Mapping;
+using SevenDigital.ApiSupportLayer.ServiceStack.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Mapping
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Mapping
 {
 	[TestFixture]
 	public class AddCardMapperTests

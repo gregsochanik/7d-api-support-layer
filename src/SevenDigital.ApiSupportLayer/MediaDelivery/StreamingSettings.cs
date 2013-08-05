@@ -1,4 +1,4 @@
-namespace SevenDigital.ApiInt.MediaDelivery
+namespace SevenDigital.ApiSupportLayer.MediaDelivery
 {
 	public class StreamingSettings
 	{

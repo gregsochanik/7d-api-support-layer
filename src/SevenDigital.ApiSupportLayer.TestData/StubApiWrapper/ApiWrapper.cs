@@ -6,7 +6,7 @@ using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Extensions;
 
-namespace SevenDigital.ApiInt.TestData.StubApiWrapper
+namespace SevenDigital.ApiSupportLayer.TestData.StubApiWrapper
 {
 	public static class ApiWrapper
 	{

@@ -2,7 +2,7 @@ using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Wrapper;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
 {
 	public class ReleaseRecommendService : Service
 	{

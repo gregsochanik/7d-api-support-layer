@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper.Exceptions;
-using SevenDigital.ApiInt.Mapping;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Mapping;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.Purchasing
+namespace SevenDigital.ApiSupportLayer.Purchasing
 {
 	public static class PurchaseResponseHelper
 	{

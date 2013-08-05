@@ -1,6 +1,6 @@
 using SevenDigital.Api.Schema.Pricing;
 
-namespace SevenDigital.ApiInt.Model
+namespace SevenDigital.ApiSupportLayer.Model
 {
 	public static class ReleaseAndTracksExtension
 	{

@@ -1,7 +1,6 @@
-using SevenDigital.Api.Schema.Premium;
 using SevenDigital.Api.Schema.Premium.User;
 
-namespace SevenDigital.ApiInt.User
+namespace SevenDigital.ApiSupportLayer.User
 {
 	public interface IUserApi
 	{

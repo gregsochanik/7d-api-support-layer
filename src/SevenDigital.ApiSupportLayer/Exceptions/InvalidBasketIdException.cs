@@ -1,6 +1,6 @@
 using System;
 
-namespace SevenDigital.ApiInt.Exceptions
+namespace SevenDigital.ApiSupportLayer.Exceptions
 {
 	public class InvalidBasketIdException : Exception
 	{

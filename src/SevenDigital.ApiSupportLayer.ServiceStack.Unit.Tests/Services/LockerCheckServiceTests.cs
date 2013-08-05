@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using Rhino.Mocks;
 using SevenDigital.Api.Schema.LockerEndpoint;
-using SevenDigital.ApiInt.Locker;
-using SevenDigital.ApiInt.Mapping;
-using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.ServiceStack.Model;
-using SevenDigital.ApiInt.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.Locker;
+using SevenDigital.ApiSupportLayer.Mapping;
+using SevenDigital.ApiSupportLayer.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {
 	[TestFixture]
 	public class LockerCheckServiceTests

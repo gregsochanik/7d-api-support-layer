@@ -5,10 +5,10 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.OAuth;
-using SevenDigital.ApiInt.Locker;
-using SevenDigital.ApiInt.TestData;
+using SevenDigital.ApiSupportLayer.Locker;
+using SevenDigital.ApiSupportLayer.TestData;
 
-namespace SevenDigital.ApiInt.Unit.Tests.Locker
+namespace SevenDigital.ApiSupportLayer.Unit.Tests.Locker
 {
 	[TestFixture]
 	public class LockerCacheTests

@@ -1,6 +1,6 @@
 ﻿using SevenDigital.Api.Schema.ReleaseEndpoint;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services.ReleaseSlug
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.ReleaseSlug
 {
 	public class ReleaseSlugResponse
 	{

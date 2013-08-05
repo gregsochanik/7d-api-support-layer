@@ -8,11 +8,11 @@ using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Schema.User;
 using SevenDigital.Api.Wrapper;
-using SevenDigital.ApiInt.Catalogue;
-using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.Purchasing;
+using SevenDigital.ApiSupportLayer.Catalogue;
+using SevenDigital.ApiSupportLayer.Model;
+using SevenDigital.ApiSupportLayer.Purchasing;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {
 	[TestFixture]
 	public class UserDeliverItemBuyerTests

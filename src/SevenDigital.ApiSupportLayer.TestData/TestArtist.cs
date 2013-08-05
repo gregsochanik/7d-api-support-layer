@@ -2,7 +2,7 @@ using Rhino.Mocks;
 using SevenDigital.Api.Schema.ArtistEndpoint;
 using SevenDigital.Api.Wrapper;
 
-namespace SevenDigital.ApiInt.TestData
+namespace SevenDigital.ApiSupportLayer.TestData
 {
 	public static class TestArtist
 	{

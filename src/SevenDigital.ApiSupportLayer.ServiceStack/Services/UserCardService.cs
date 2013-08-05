@@ -6,10 +6,10 @@ using SevenDigital.Api.Schema.ParameterDefinitions.Post;
 using SevenDigital.Api.Schema.User.Payment;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
-using SevenDigital.ApiInt.ServiceStack.Mapping;
-using SevenDigital.ApiInt.ServiceStack.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Mapping;
+using SevenDigital.ApiSupportLayer.ServiceStack.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
 {
 	public class UserCardService : Service
 	{

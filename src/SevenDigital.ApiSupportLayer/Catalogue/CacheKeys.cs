@@ -1,6 +1,6 @@
 using SevenDigital.Api.Schema.OAuth;
 
-namespace SevenDigital.ApiInt.Catalogue
+namespace SevenDigital.ApiSupportLayer.Catalogue
 {
 	public static class CacheKeys
 	{

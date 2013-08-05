@@ -1,4 +1,4 @@
-namespace SevenDigital.ApiInt.ServiceStack.Mapping
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Mapping
 {
 	public interface IMapper<TInput, TOutput>
 	{

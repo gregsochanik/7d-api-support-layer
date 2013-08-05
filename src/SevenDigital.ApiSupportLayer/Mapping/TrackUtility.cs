@@ -2,7 +2,7 @@ using System;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
 
-namespace SevenDigital.ApiInt.Mapping
+namespace SevenDigital.ApiSupportLayer.Mapping
 {
 	public class TrackUtility
 	{

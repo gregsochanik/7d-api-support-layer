@@ -4,10 +4,10 @@ using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
-using SevenDigital.ApiInt.Catalogue;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Catalogue;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.Purchasing.CardPurchaseRules
+namespace SevenDigital.ApiSupportLayer.Purchasing.CardPurchaseRules
 {
 	public class ApiCardPurchaseRule : ICardPurchaseRule
 	{

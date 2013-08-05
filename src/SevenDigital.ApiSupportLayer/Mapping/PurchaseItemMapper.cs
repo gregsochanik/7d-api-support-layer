@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.Mapping
+namespace SevenDigital.ApiSupportLayer.Mapping
 {
 	public class PurchaseItemMapper : IPurchaseItemMapper
 	{

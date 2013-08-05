@@ -1,10 +1,10 @@
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Wrapper;
-using SevenDigital.ApiInt.Catalogue;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Catalogue;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.Locker
+namespace SevenDigital.ApiSupportLayer.Locker
 {
 	public class LockerBrowser : ILockerBrowser
 	{

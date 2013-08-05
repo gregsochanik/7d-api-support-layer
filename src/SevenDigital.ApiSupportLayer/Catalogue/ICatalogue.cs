@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
 
-namespace SevenDigital.ApiInt.Catalogue
+namespace SevenDigital.ApiSupportLayer.Catalogue
 {
 	public interface ICatalogue
 	{

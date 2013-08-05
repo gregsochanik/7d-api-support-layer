@@ -2,10 +2,10 @@
 using Rhino.Mocks;
 using ServiceStack.CacheAccess;
 using SevenDigital.Api.Schema.OAuth;
-using SevenDigital.ApiInt.Locker;
-using SevenDigital.ApiInt.ServiceStack.Cache;
+using SevenDigital.ApiSupportLayer.Locker;
+using SevenDigital.ApiSupportLayer.ServiceStack.Cache;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Cache
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Cache
 {
 	public class TestClass
 	{

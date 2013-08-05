@@ -9,14 +9,14 @@ using SevenDigital.Api.Schema;
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.Api.Wrapper.Http;
-using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.ServiceStack.Catalogue;
-using SevenDigital.ApiInt.ServiceStack.Model;
-using SevenDigital.ApiInt.ServiceStack.Services;
-using SevenDigital.ApiInt.ServiceStack.Services.Restrictions;
-using SevenDigital.ApiInt.TestData;
+using SevenDigital.ApiSupportLayer.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Catalogue;
+using SevenDigital.ApiSupportLayer.ServiceStack.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services.Restrictions;
+using SevenDigital.ApiSupportLayer.TestData;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {
 	[TestFixture]
 	public class ItemPurchaseServiceTests

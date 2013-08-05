@@ -5,10 +5,10 @@ using SevenDigital.Api.Schema.ArtistEndpoint;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.TrackEndpoint;
-using SevenDigital.ApiInt.Catalogue;
-using SevenDigital.ApiInt.Mapping;
+using SevenDigital.ApiSupportLayer.Catalogue;
+using SevenDigital.ApiSupportLayer.Mapping;
 
-namespace SevenDigital.ApiInt.Locker
+namespace SevenDigital.ApiSupportLayer.Locker
 {
 	public class LockerCacheAdapter : ILockerCacheAdapter
 	{

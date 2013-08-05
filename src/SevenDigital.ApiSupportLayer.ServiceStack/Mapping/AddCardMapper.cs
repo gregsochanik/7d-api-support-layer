@@ -1,8 +1,8 @@
 using System;
 using SevenDigital.Api.Schema.ParameterDefinitions.Post;
-using SevenDigital.ApiInt.ServiceStack.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Mapping
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Mapping
 {
 	public class AddCardMapper : IMapper<AddCardRequest, AddCardParameters>
 	{

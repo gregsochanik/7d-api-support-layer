@@ -10,14 +10,14 @@ using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.Api.Wrapper.Http;
-using SevenDigital.ApiInt.Basket;
-using SevenDigital.ApiInt.Catalogue;
-using SevenDigital.ApiInt.Exceptions;
-using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.TestData;
-using SevenDigital.ApiInt.TestData.StubApiWrapper;
+using SevenDigital.ApiSupportLayer.Basket;
+using SevenDigital.ApiSupportLayer.Catalogue;
+using SevenDigital.ApiSupportLayer.Exceptions;
+using SevenDigital.ApiSupportLayer.Model;
+using SevenDigital.ApiSupportLayer.TestData;
+using SevenDigital.ApiSupportLayer.TestData.StubApiWrapper;
 
-namespace SevenDigital.ApiInt.Unit.Tests
+namespace SevenDigital.ApiSupportLayer.Unit.Tests
 {
 	[TestFixture]
 	public class BasketHandlerTests

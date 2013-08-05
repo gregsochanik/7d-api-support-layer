@@ -1,4 +1,4 @@
-﻿namespace SevenDigital.ApiInt.ServiceStack.Services.ReleaseSlug
+﻿namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.ReleaseSlug
 {
 	public class ReleaseSlugRequest
 	{

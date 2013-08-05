@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using SevenDigital.Api.Schema.LockerEndpoint;
 
-namespace SevenDigital.ApiInt.TestData
+namespace SevenDigital.ApiSupportLayer.TestData
 {
 	public static class TestLocker
 	{

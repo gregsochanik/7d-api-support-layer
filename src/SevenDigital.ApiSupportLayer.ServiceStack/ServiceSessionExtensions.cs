@@ -3,7 +3,7 @@ using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Schema.OAuth;
 
-namespace SevenDigital.ApiInt.ServiceStack
+namespace SevenDigital.ApiSupportLayer.ServiceStack
 {
 	public static class ServiceSessionExtensions
 	{

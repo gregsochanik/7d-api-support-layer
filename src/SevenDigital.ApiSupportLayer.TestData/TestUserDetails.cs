@@ -1,4 +1,4 @@
-﻿namespace SevenDigital.ApiInt.TestData
+﻿namespace SevenDigital.ApiSupportLayer.TestData
 {
 	public static class TestUserDetails
 	{

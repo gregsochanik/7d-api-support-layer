@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.OAuth;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.Purchasing.CardPurchaseRules
+namespace SevenDigital.ApiSupportLayer.Purchasing.CardPurchaseRules
 {
 	public class StubCardPurchaseRule : ICardPurchaseRule
 	{

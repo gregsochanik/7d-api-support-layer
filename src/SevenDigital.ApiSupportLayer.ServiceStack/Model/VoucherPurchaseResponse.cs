@@ -1,6 +1,6 @@
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Model
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Model
 {
 	public class VoucherPurchaseResponse
 	{

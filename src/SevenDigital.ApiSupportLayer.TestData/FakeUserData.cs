@@ -1,6 +1,6 @@
 using SevenDigital.Api.Schema.OAuth;
 
-namespace SevenDigital.ApiInt.TestData
+namespace SevenDigital.ApiSupportLayer.TestData
 {
 	public static class FakeUserData
 	{

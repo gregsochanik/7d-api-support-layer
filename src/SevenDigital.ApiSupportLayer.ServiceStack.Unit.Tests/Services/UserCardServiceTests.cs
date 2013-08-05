@@ -9,11 +9,11 @@ using ServiceStack.ServiceInterface.Auth;
 using ServiceStack.ServiceInterface.Testing;
 using SevenDigital.Api.Schema.User.Payment;
 using SevenDigital.Api.Wrapper;
-using SevenDigital.ApiInt.ServiceStack.Mapping;
-using SevenDigital.ApiInt.ServiceStack.Model;
-using SevenDigital.ApiInt.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.ServiceStack.Mapping;
+using SevenDigital.ApiSupportLayer.ServiceStack.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {
 	[TestFixture]
 	public class UserCardServiceTests

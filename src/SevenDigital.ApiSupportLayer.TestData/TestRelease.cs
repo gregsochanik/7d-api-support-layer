@@ -2,7 +2,7 @@ using System;
 using SevenDigital.Api.Schema;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
 
-namespace SevenDigital.ApiInt.TestData
+namespace SevenDigital.ApiSupportLayer.TestData
 {
 	public static class TestRelease
 	{

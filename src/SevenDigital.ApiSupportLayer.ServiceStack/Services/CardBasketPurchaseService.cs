@@ -5,12 +5,12 @@ using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.User.Payment;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
-using SevenDigital.ApiInt.Basket;
-using SevenDigital.ApiInt.Mapping;
-using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.Purchasing;
+using SevenDigital.ApiSupportLayer.Basket;
+using SevenDigital.ApiSupportLayer.Mapping;
+using SevenDigital.ApiSupportLayer.Model;
+using SevenDigital.ApiSupportLayer.Purchasing;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
 {
 	public class CardBasketPurchaseService : BasketPurchaseService<CardBasketPurchaseRequest>
 	{

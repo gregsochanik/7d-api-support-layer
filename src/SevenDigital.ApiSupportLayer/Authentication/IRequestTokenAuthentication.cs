@@ -1,7 +1,7 @@
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Wrapper.Http;
 
-namespace SevenDigital.ApiInt.Authentication
+namespace SevenDigital.ApiSupportLayer.Authentication
 {
 	public interface IRequestTokenAuthentication
 	{

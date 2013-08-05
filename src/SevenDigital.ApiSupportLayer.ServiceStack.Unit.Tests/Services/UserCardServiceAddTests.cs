@@ -1,4 +1,3 @@
-using System;
 using System.Net;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -10,11 +9,11 @@ using SevenDigital.Api.Schema.User.Payment;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.Api.Wrapper.Http;
-using SevenDigital.ApiInt.ServiceStack.Mapping;
-using SevenDigital.ApiInt.ServiceStack.Model;
-using SevenDigital.ApiInt.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.ServiceStack.Mapping;
+using SevenDigital.ApiSupportLayer.ServiceStack.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {
 	[TestFixture]
 	public class UserCardServiceAddTests

@@ -4,9 +4,9 @@ using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Auth;
 using ServiceStack.ServiceInterface.Testing;
-using SevenDigital.ApiInt.TestData;
+using SevenDigital.ApiSupportLayer.TestData;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {
 	public static class ContextHelper
 	{

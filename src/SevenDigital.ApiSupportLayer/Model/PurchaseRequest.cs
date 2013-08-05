@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace SevenDigital.ApiInt.Model
+namespace SevenDigital.ApiSupportLayer.Model
 {
 	[DataContract]
 	public class PurchaseRequest 

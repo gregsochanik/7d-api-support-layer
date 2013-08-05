@@ -1,7 +1,7 @@
 using ServiceStack.ServiceInterface;
-using SevenDigital.ApiInt.Model;
+using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiInt.ServiceStack.Model
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Model
 {
 	[Authenticate]
 	public class LockerCheckRequest : ItemRequest

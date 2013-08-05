@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using SevenDigital.Api.Schema.LockerEndpoint;
 
-namespace SevenDigital.ApiInt.Model
+namespace SevenDigital.ApiSupportLayer.Model
 {
 	public class PurchaseStatus
 	{

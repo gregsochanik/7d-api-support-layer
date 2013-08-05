@@ -1,7 +1,7 @@
 using SevenDigital.Api.Schema.Pricing;
 using SevenDigital.Api.Schema.TrackEndpoint;
 
-namespace SevenDigital.ApiInt.TestData
+namespace SevenDigital.ApiSupportLayer.TestData
 {
 	public static class TestTrack
 	{

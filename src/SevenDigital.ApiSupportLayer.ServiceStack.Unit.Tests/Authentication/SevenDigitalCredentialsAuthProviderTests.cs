@@ -3,11 +3,11 @@ using Rhino.Mocks;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Testing;
 using SevenDigital.Api.Schema.OAuth;
-using SevenDigital.ApiInt.Authentication;
-using SevenDigital.ApiInt.ServiceStack.Authentication;
-using SevenDigital.ApiInt.User;
+using SevenDigital.ApiSupportLayer.Authentication;
+using SevenDigital.ApiSupportLayer.ServiceStack.Authentication;
+using SevenDigital.ApiSupportLayer.User;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Authentication
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Authentication
 {
 	[TestFixture]
 	public class _if_user_exists

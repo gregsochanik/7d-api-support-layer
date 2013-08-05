@@ -4,7 +4,7 @@ using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
 using SevenDigital.Api.Wrapper.Http;
 
-namespace SevenDigital.ApiInt.Authentication
+namespace SevenDigital.ApiSupportLayer.Authentication
 {
 	public class RequestTokenAuthentication : IRequestTokenAuthentication
 	{

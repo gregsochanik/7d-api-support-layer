@@ -1,7 +1,7 @@
 using NUnit.Framework;
-using SevenDigital.ApiInt.ServiceStack.Catalogue;
+using SevenDigital.ApiSupportLayer.ServiceStack.Catalogue;
 
-namespace SevenDigital.ApiInt.ServiceStack.Unit.Tests.Cache
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Cache
 {
 	[TestFixture]
 	public class CatalogueHelperTests

@@ -1,7 +1,7 @@
 ﻿using ServiceStack.ServiceInterface;
-using SevenDigital.ApiInt.ServiceStack.Services.UrlSlugParsing;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services.UrlSlugParsing;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services.ReleaseSlug
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.ReleaseSlug
 {
 	public class ReleaseSlugService : Service
 	{

@@ -6,11 +6,11 @@ using ServiceStack.Common.Web;
 using ServiceStack.Logging;
 using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Wrapper.Exceptions;
-using SevenDigital.ApiInt.Model;
-using SevenDigital.ApiInt.ServiceStack.Catalogue;
-using SevenDigital.ApiInt.ServiceStack.Services.Restrictions;
+using SevenDigital.ApiSupportLayer.Model;
+using SevenDigital.ApiSupportLayer.ServiceStack.Catalogue;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services.Restrictions;
 
-namespace SevenDigital.ApiInt.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
 {
 	public class ItemPurchaseService : Service
 	{
