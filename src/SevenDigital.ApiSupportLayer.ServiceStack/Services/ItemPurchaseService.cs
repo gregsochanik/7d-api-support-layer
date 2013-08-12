@@ -26,7 +26,6 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
 
 		public HttpResult Get(ItemRequest request)
 		{
-			_log.InfoFormat("RemoteIp: {0}", Request.RemoteIp);
 			var ipAddress = Request.RemoteIp.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).First();
 			var countrycode = request.CountryCode;
 			_restrictor.AssertRestriction(new KeyValuePair<string, string>(countrycode, ipAddress));
