@@ -105,7 +105,6 @@
     <Compile Include="Mapping\IMapper.cs" />
     <Compile Include="Model\AddCardRequest.cs" />
     <Compile Include="Model\ApplicationState.cs" />
-    <Compile Include="Model\BuyItNowResponse.cs" />
     <Compile Include="Model\CardRequest.cs" />
     <Compile Include="Model\DownloadTrackRequest.cs" />
     <Compile Include="Model\FreePurchaseRequest.cs" />
@@ -123,7 +122,6 @@
     <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Services\FreePurchaseService.cs" />
     <Compile Include="Services\IGeoSettings.cs" />
-    <Compile Include="Services\ItemPurchaseService.cs" />
     <Compile Include="Services\ReleaseSlug\ReleaseSlugRequest.cs" />
     <Compile Include="Services\ReleaseSlug\ReleaseSlugResponse.cs" />
     <Compile Include="Services\ReleaseSlug\ReleaseSlugService.cs" />
@@ -134,7 +132,6 @@
     <Compile Include="Services\ReleaseRecommendRequest.cs" />
     <Compile Include="Services\ReleaseRecommendService.cs" />
     <Compile Include="Services\ReleaseTracksService.cs" />
-    <Compile Include="ResponseHelper.cs" />
     <Compile Include="ServiceSessionExtensions.cs" />
     <Compile Include="Services\Restrictions\IpAddressRestrictor.cs" />
     <Compile Include="Services\Restrictions\IRestrictor.cs" />
