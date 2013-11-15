@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using SevenDigital.Api.Schema.Territories;
 using SevenDigital.Api.Wrapper;
+using SevenDigital.ApiSupportLayer.ServiceStack.GeoLocation;
 using SevenDigital.ApiSupportLayer.ServiceStack.Services;
 
 namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services

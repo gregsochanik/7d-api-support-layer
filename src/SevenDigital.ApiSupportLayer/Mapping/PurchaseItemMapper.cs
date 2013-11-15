@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SevenDigital.Api.Schema.LockerEndpoint;
-using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.ApiSupportLayer.Model;
 
 namespace SevenDigital.ApiSupportLayer.Mapping
@@ -11,47 +9,58 @@ namespace SevenDigital.ApiSupportLayer.Mapping
 	{
 		public PurchasedItem Map(ItemRequest request, IEnumerable<LockerRelease> lockerReleases)
 		{
+			return request.Type == PurchaseType.release 
+				? ReleasePurchasedItem(request, lockerReleases) 
+				: TrackPurchasedItem(request, lockerReleases);
+		}
+
+		private static PurchasedItem TrackPurchasedItem(IHasId request, IEnumerable<LockerRelease> lockerReleases)
+		{
 			var purchasedItem = new PurchasedItem();
-			if (request.Type == PurchaseType.release)
+			var lockerReleasesList = lockerReleases.ToList();
+			var lockerTracks = lockerReleasesList.Select
+			(
+				lockerRelease => lockerRelease.LockerTracks
+			);
+
+			var lockerTracksAs7DTracks = lockerReleasesList.Select
+			(
+				lockerRelease => lockerRelease.LockerTracks.Select(TrackUtility.MergeInto7dTrack(lockerRelease))
+			);
+
+			var selectedTracks = lockerTracksAs7DTracks.SelectMany(x => x).Where(x => x.Id == request.Id).ToList();
+			var selectedLockerTrack = lockerTracks.SelectMany(x => x).SingleOrDefault(x => x.Track.Id == request.Id);
+
+			if (selectedTracks.Count > 0 && selectedLockerTrack != null)
 			{
-				var selectedLockerRelease = lockerReleases.SingleOrDefault(x => x.Release.Id == request.Id);
-				if(selectedLockerRelease == null)
-				{
-					return new PurchasedItem();
-				}
-
-				purchasedItem.Id = selectedLockerRelease.Release.Id;
-				purchasedItem.Title = selectedLockerRelease.Release.Title;
-				purchasedItem.DownloadUrls = selectedLockerRelease.LockerTracks[0].DownloadUrls;
-				purchasedItem.Tracks = selectedLockerRelease.LockerTracks.Select(TrackUtility.MergeInto7dTrack(selectedLockerRelease)).ToList();
-			}
-			else
-			{
-				var lockerReleasesList = lockerReleases.ToList();
-
-				var lockerTracks = lockerReleasesList.Select
-				(
-					lockerRelease => lockerRelease.LockerTracks
-				);
-
-				var lockerTracksAs7DTracks = lockerReleasesList.Select
-				(
-					lockerRelease => lockerRelease.LockerTracks.Select(TrackUtility.MergeInto7dTrack(lockerRelease))
-				);
-
-				var selectedTrack = lockerTracksAs7DTracks.SelectMany(x => x).SingleOrDefault(x => x.Id == request.Id);
-				var selectedLockerTrack = lockerTracks.SelectMany(x => x).SingleOrDefault(x => x.Track.Id == request.Id);
-
-				if (selectedTrack == null || selectedLockerTrack == null)
-				{
-					return new PurchasedItem();
-				}
-
 				purchasedItem.Id = selectedLockerTrack.Track.Id;
 				purchasedItem.Title = selectedLockerTrack.Track.Title;
 				purchasedItem.DownloadUrls = selectedLockerTrack.DownloadUrls;
-				purchasedItem.Tracks = new List<Track> { selectedTrack };
+				purchasedItem.Tracks = selectedTracks;
 			}
+			return purchasedItem;
+		}
+
+		private static PurchasedItem ReleasePurchasedItem(IHasId request, IEnumerable<LockerRelease> lockerReleases)
+		{
+			var purchasedItem = new PurchasedItem();
+
+			var selectedLockerRelease = lockerReleases.SingleOrDefault(x => x.Release.Id == request.Id);
+			
+			if (selectedLockerRelease != null)
+			{
+				var selectedTracks = selectedLockerRelease.LockerTracks.Select(TrackUtility.MergeInto7dTrack(selectedLockerRelease));
+
+				var purchasedItem1 = new PurchasedItem
+				{
+					Id = selectedLockerRelease.Release.Id,
+					Title = selectedLockerRelease.Release.Title,
+					DownloadUrls = selectedLockerRelease.LockerTracks[0].DownloadUrls,
+					Tracks = selectedTracks.ToList()
+				};
+				purchasedItem = purchasedItem1;
+			}
+
 			return purchasedItem;
 		}
 	}

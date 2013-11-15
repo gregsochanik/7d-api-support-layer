@@ -3,8 +3,9 @@ using System.Net;
 using ServiceStack.Common.Web;
 using ServiceStack.Logging;
 using SevenDigital.Api.Wrapper.Exceptions;
+using SevenDigital.ApiSupportLayer.ServiceStack.GeoLocation;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Restrictions
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Restrictions
 {
 	public class IpAddressRestrictor : IRestrictor
 	{

@@ -1,7 +1,8 @@
 ﻿using SevenDigital.Api.Schema.Territories;
 using SevenDigital.Api.Wrapper;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.GeoLocation
 {
 	public class GeoLookup : IGeoLookup
 	{
