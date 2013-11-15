@@ -108,7 +108,6 @@
     <Compile Include="Services\FreePurchaseServiceTests.cs" />
     <Compile Include="Services\Given_voucher_has_not_been_applied.cs" />
     <Compile Include="Services\ItemRequestExtensionTests.cs" />
-    <Compile Include="Services\LockerCheckServiceTests.cs" />
     <Compile Include="Services\PriceWatchTests.cs" />
     <Compile Include="Services\ProductCollaterTests.cs" />
     <Compile Include="Services\ReleaseTracksExtensionTests.cs" />

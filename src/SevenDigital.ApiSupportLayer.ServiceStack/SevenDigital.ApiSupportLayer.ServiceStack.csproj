@@ -109,8 +109,6 @@
     <Compile Include="Model\DownloadTrackRequest.cs" />
     <Compile Include="Model\FreePurchaseRequest.cs" />
     <Compile Include="Model\FreePurchaseResponse.cs" />
-    <Compile Include="Model\LockerCheckRequest.cs" />
-    <Compile Include="Model\LockerCheckResponse.cs" />
     <Compile Include="Model\StreamingUrlRequest.cs" />
     <Compile Include="Model\VoucherPurchaseRequest.cs" />
     <Compile Include="Model\VoucherPurchaseResponse.cs" />
@@ -127,7 +125,6 @@
     <Compile Include="Services\ReleaseSlug\ReleaseSlugService.cs" />
     <Compile Include="Services\RestrictedByIpAddressGeoLookup.cs" />
     <Compile Include="Services\IGeoLookup.cs" />
-    <Compile Include="Services\LockerCheckService.cs" />
     <Compile Include="Catalogue\ProductCollater.cs" />
     <Compile Include="Services\ReleaseRecommendRequest.cs" />
     <Compile Include="Services\ReleaseRecommendService.cs" />
