@@ -28,18 +28,21 @@ namespace SevenDigital.ApiSupportLayer.Mapping
 				var lockerReleasesList = lockerReleases.ToList();
 
 				var lockerTracks = lockerReleasesList.Select
-					(
-						lockerRelease => lockerRelease.LockerTracks
-					);
+				(
+					lockerRelease => lockerRelease.LockerTracks
+				);
+
 				var lockerTracksAs7DTracks = lockerReleasesList.Select
-					(
-						lockerRelease => lockerRelease.LockerTracks.Select(TrackUtility.MergeInto7dTrack(lockerRelease))
-					);
+				(
+					lockerRelease => lockerRelease.LockerTracks.Select(TrackUtility.MergeInto7dTrack(lockerRelease))
+				);
 
 				var selectedTrack = lockerTracksAs7DTracks.SelectMany(x => x).FirstOrDefault(x => x.Id == request.Id);
 				var selectedLockerTrack = lockerTracks.SelectMany(x => x).FirstOrDefault(x => x.Track.Id == request.Id);
 				if (selectedTrack == null || selectedLockerTrack == null)
-					throw new Exception(string.Format("track {0} not found in lockerTracks", request.Id));
+				{
+					return new PurchasedItem();
+				}
 
 				purchasedItem.Id = selectedTrack.Id;
 				purchasedItem.Title = selectedTrack.Title;
