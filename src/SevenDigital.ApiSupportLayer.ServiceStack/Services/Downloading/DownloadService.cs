@@ -11,7 +11,7 @@ using SevenDigital.ApiSupportLayer.Locker;
 using SevenDigital.ApiSupportLayer.MediaDelivery;
 using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Downloading
 {
 	public class DownloadErrorRequest : ItemRequest
 	{}

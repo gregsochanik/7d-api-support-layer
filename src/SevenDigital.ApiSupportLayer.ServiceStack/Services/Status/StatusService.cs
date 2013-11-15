@@ -1,8 +1,7 @@
 using System;
 using ServiceStack.ServiceInterface;
-using SevenDigital.ApiSupportLayer.ServiceStack.Model;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Status
 {
 	public class StatusService : Service
 	{

@@ -6,6 +6,7 @@ using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
 using SevenDigital.ApiSupportLayer.MediaDelivery;
 using SevenDigital.ApiSupportLayer.ServiceStack.Model;
 using SevenDigital.ApiSupportLayer.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services.Streaming;
 using SevenDigital.ApiSupportLayer.TestData;
 
 namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services

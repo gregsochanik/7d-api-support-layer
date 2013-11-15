@@ -3,7 +3,7 @@ using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.ApiSupportLayer.Catalogue;
 using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Tracks
 {
 	public class TrackService : Service
 	{

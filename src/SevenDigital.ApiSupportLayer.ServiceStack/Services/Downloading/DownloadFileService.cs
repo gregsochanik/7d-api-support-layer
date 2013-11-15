@@ -6,9 +6,8 @@ using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
 using SevenDigital.ApiSupportLayer.Catalogue;
 using SevenDigital.ApiSupportLayer.MediaDelivery;
 using SevenDigital.ApiSupportLayer.Model;
-using SevenDigital.ApiSupportLayer.ServiceStack.Model;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Downloading
 {
 	public class DownloadFileService : Service
 	{

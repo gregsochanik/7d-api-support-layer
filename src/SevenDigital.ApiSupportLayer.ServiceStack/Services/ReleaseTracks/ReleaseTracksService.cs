@@ -2,7 +2,7 @@ using ServiceStack.ServiceInterface;
 using SevenDigital.ApiSupportLayer.Catalogue;
 using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.ReleaseTracks
 {
 	public class ReleaseTracksService : Service
 	{

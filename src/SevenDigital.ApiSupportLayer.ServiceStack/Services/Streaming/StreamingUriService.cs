@@ -4,9 +4,8 @@ using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
 using SevenDigital.ApiSupportLayer.MediaDelivery;
-using SevenDigital.ApiSupportLayer.ServiceStack.Model;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Streaming
 {
 	public class StreamingUriService : Service
 	{

@@ -12,6 +12,7 @@ using SevenDigital.ApiSupportLayer.MediaDelivery;
 using SevenDigital.ApiSupportLayer.Model;
 using SevenDigital.ApiSupportLayer.ServiceStack.Model;
 using SevenDigital.ApiSupportLayer.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services.Downloading;
 using SevenDigital.ApiSupportLayer.TestData;
 
 namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services

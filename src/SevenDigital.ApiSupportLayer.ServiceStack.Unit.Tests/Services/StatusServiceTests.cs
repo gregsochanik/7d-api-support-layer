@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using SevenDigital.ApiSupportLayer.ServiceStack.Model;
 using SevenDigital.ApiSupportLayer.ServiceStack.Services;
+using SevenDigital.ApiSupportLayer.ServiceStack.Services.Status;
 
 namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 {

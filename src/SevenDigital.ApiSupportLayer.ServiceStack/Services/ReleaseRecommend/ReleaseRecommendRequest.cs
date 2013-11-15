@@ -1,4 +1,4 @@
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.ReleaseRecommend
 {
 	public class ReleaseRecommendRequest
 	{

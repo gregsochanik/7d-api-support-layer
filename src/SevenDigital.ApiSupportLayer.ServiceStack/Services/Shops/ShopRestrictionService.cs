@@ -1,7 +1,7 @@
 ﻿using ServiceStack.ServiceInterface;
 using SevenDigital.ApiSupportLayer.ServiceStack.GeoLocation;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Shops
 {
 	public class ShopRestrictionService : Service
 	{

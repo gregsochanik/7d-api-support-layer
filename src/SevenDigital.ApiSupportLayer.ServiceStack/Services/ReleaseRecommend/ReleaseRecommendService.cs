@@ -1,19 +1,18 @@
 using ServiceStack.ServiceInterface;
-using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Wrapper;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.ReleaseRecommend
 {
 	public class ReleaseRecommendService : Service
 	{
-		private readonly IFluentApi<ReleaseRecommend> _recommendApi;
+		private readonly IFluentApi<Api.Schema.ReleaseEndpoint.ReleaseRecommend> _recommendApi;
 
-		public ReleaseRecommendService(IFluentApi<ReleaseRecommend> recommendApi)
+		public ReleaseRecommendService(IFluentApi<Api.Schema.ReleaseEndpoint.ReleaseRecommend> recommendApi)
 		{
 			_recommendApi = recommendApi;
 		}
 
-		public ReleaseRecommend Get(ReleaseRecommendRequest request)
+		public Api.Schema.ReleaseEndpoint.ReleaseRecommend Get(ReleaseRecommendRequest request)
 		{
 			var forReleaseId = _recommendApi.ForReleaseId(request.ReleaseId);
 

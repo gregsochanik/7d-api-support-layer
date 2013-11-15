@@ -4,7 +4,7 @@ using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Services
+namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Tracks
 {
 	public class TrackSearchService : Service
 	{
