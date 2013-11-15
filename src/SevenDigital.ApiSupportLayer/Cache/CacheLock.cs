@@ -1,6 +1,6 @@
 using System;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Cache
+namespace SevenDigital.ApiSupportLayer.Cache
 {
 	public class CacheLock : ICacheLock
 	{

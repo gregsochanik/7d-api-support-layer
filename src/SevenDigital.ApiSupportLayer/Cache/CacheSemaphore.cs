@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Cache
+namespace SevenDigital.ApiSupportLayer.Cache
 {
 	public static class CacheSemaphore
 	{

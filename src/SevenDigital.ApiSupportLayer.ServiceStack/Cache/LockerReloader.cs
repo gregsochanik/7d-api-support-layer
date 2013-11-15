@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using ServiceStack.CacheAccess;
 using SevenDigital.Api.Schema.LockerEndpoint;
 using SevenDigital.Api.Schema.OAuth;
+using SevenDigital.ApiSupportLayer.Cache;
 using SevenDigital.ApiSupportLayer.Catalogue;
 using SevenDigital.ApiSupportLayer.Locker;
 

@@ -33,18 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ServiceStack.Common, Version=3.9.70.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Common.3.9.70\lib\net35\ServiceStack.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Common.3.9.70\lib\net35\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text, Version=3.9.70.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Text.3.9.70\lib\net35\ServiceStack.Text.dll</HintPath>
-    </Reference>
     <Reference Include="SevenDigital.Api.Schema, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.15\lib\net40\SevenDigital.Api.Schema.dll</HintPath>
@@ -79,6 +67,9 @@
     <Compile Include="Authentication\RequestTokenAuthentication.cs" />
     <Compile Include="Basket\BasketHandler.cs" />
     <Compile Include="Basket\BasketRequestHelper.cs" />
+    <Compile Include="Cache\CacheLock.cs" />
+    <Compile Include="Cache\CacheSemaphore.cs" />
+    <Compile Include="Cache\ICacheLock.cs" />
     <Compile Include="Catalogue\CacheKeys.cs" />
     <Compile Include="Catalogue\ICatalogApiFactory.cs" />
     <Compile Include="Catalogue\ICatalogue.cs" />
