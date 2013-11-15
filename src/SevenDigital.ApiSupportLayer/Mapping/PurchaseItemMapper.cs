@@ -14,9 +14,11 @@ namespace SevenDigital.ApiSupportLayer.Mapping
 			var purchasedItem = new PurchasedItem();
 			if (request.Type == PurchaseType.release)
 			{
-				var selectedLockerRelease = lockerReleases.FirstOrDefault(x => x.Release.Id == request.Id);
+				var selectedLockerRelease = lockerReleases.SingleOrDefault(x => x.Release.Id == request.Id);
 				if(selectedLockerRelease == null)
-					throw new Exception(string.Format("release {0} not found in lockerReleases", request.Id));
+				{
+					return new PurchasedItem();
+				}
 
 				purchasedItem.Id = selectedLockerRelease.Release.Id;
 				purchasedItem.Title = selectedLockerRelease.Release.Title;
@@ -37,15 +39,16 @@ namespace SevenDigital.ApiSupportLayer.Mapping
 					lockerRelease => lockerRelease.LockerTracks.Select(TrackUtility.MergeInto7dTrack(lockerRelease))
 				);
 
-				var selectedTrack = lockerTracksAs7DTracks.SelectMany(x => x).FirstOrDefault(x => x.Id == request.Id);
-				var selectedLockerTrack = lockerTracks.SelectMany(x => x).FirstOrDefault(x => x.Track.Id == request.Id);
+				var selectedTrack = lockerTracksAs7DTracks.SelectMany(x => x).SingleOrDefault(x => x.Id == request.Id);
+				var selectedLockerTrack = lockerTracks.SelectMany(x => x).SingleOrDefault(x => x.Track.Id == request.Id);
+
 				if (selectedTrack == null || selectedLockerTrack == null)
 				{
 					return new PurchasedItem();
 				}
 
-				purchasedItem.Id = selectedTrack.Id;
-				purchasedItem.Title = selectedTrack.Title;
+				purchasedItem.Id = selectedLockerTrack.Track.Id;
+				purchasedItem.Title = selectedLockerTrack.Track.Title;
 				purchasedItem.DownloadUrls = selectedLockerTrack.DownloadUrls;
 				purchasedItem.Tracks = new List<Track> { selectedTrack };
 			}

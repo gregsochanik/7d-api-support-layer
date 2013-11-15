@@ -87,25 +87,11 @@ namespace SevenDigital.ApiSupportLayer.Unit.Tests.Mapping
 		}
 
 		[Test]
-		public void Returns_empty_purchasedItem_if_not_found()
+		public void Returns_empty_purchasedItem_if_track_not_found()
 		{
 			var purchaseItemMapper = new PurchaseItemMapper();
-
-			var expectedTrack = new Track
-			{
-				Id = 1
-			};
-
-			var lockerRelease = new LockerRelease
-			{
-				Release = new Release()
-				{
-					Formats = new FormatList { Formats = new List<Format> { new Format { BitRate = "320" } } }
-				},
-				LockerTracks = new List<LockerTrack> { new LockerTrack { Track = expectedTrack, DownloadUrls = new List<DownloadUrl> { new DownloadUrl() { Format = new Format { BitRate = "320" } } } } }
-			};
-
-			var lockerReleases = new List<LockerRelease> { lockerRelease };
+			
+			var lockerReleases = LockerReleases();
 			var itemRequest = new ItemRequest
 			{
 				Type = PurchaseType.track,
@@ -118,5 +104,65 @@ namespace SevenDigital.ApiSupportLayer.Unit.Tests.Mapping
 			Assert.That(purchasedItem.Title, Is.EqualTo(""));
 		}
 
+		[Test]
+		public void Returns_empty_purchasedItem_if_release_not_found()
+		{
+			var purchaseItemMapper = new PurchaseItemMapper();
+
+			var lockerReleases = LockerReleases();
+			var itemRequest = new ItemRequest
+			{
+				Type = PurchaseType.release,
+				Id = -1,
+			};
+
+			var purchasedItem = purchaseItemMapper.Map(itemRequest, lockerReleases);
+
+			Assert.That(purchasedItem.Id, Is.EqualTo(0));
+			Assert.That(purchasedItem.Title, Is.EqualTo(""));
+		}
+
+		private static IEnumerable<LockerRelease> LockerReleases()
+		{
+			var lockerRelease = new LockerRelease
+			{
+				Release = new Release
+				{
+					Formats = new FormatList
+					{
+						Formats = new List<Format>
+						{
+							new Format
+							{
+								BitRate = "320"
+							}
+						}
+					}
+				},
+				LockerTracks = new List<LockerTrack>
+				{
+					new LockerTrack
+					{
+						Track = new Track(),
+						DownloadUrls = new List<DownloadUrl>
+						{
+							new DownloadUrl
+							{
+								Format = new Format
+								{
+									BitRate = "320"
+								}
+							}
+						}
+					}
+				}
+			};
+
+			var lockerReleases = new List<LockerRelease>
+			{
+				lockerRelease
+			};
+			return lockerReleases;
+		}
 	}
 }
