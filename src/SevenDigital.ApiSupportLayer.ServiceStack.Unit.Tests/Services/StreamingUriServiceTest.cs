@@ -46,7 +46,7 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 			var configAuthCredentials = MockRepository.GenerateStub<IOAuthCredentials>();
 			configAuthCredentials.Stub(x => x.ConsumerKey).Return("ConsumerKey");
 			configAuthCredentials.Stub(x => x.ConsumerSecret).Return("ConsumerSecret");
-			var urlSigner = new UrlSigner();
+			var urlSigner = new UrlSigner(new OAuthSignatureGenerator());
 
 			var streamingUriService = new StreamingUriService(urlSigner, configAuthCredentials)
 			{

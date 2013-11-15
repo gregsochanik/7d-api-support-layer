@@ -79,7 +79,7 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 		{
 			_configAuthCredentials.Stub(x => x.ConsumerKey).Return("ConsumerKey");
 			_configAuthCredentials.Stub(x => x.ConsumerSecret).Return("ConsumerSecret");
-			var urlSigner = new UrlSigner();
+			var urlSigner = new UrlSigner(new OAuthSignatureGenerator());
 
 			var downloadTrackService = new DownloadFileService(urlSigner, _configAuthCredentials, _stubbedCatalogue)
 			{
@@ -126,7 +126,7 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 		{
 			_configAuthCredentials.Stub(x => x.ConsumerKey).Return("ConsumerKey");
 			_configAuthCredentials.Stub(x => x.ConsumerSecret).Return("ConsumerSecret");
-			var urlSigner = new UrlSigner();
+			var urlSigner = new UrlSigner(new OAuthSignatureGenerator());
 
 			var downloadTrackService = new DownloadFileService(urlSigner, _configAuthCredentials, _stubbedCatalogue)
 			{
