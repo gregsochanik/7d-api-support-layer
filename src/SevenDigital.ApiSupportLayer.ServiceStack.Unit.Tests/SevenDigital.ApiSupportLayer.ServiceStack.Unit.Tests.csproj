@@ -114,8 +114,6 @@
     <Compile Include="Services\ShopUrlServiceTests.cs" />
     <Compile Include="Services\StatusServiceTests.cs" />
     <Compile Include="Services\StreamingUriServiceTest.cs" />
-    <Compile Include="Services\UserCardServiceAddTests.cs" />
-    <Compile Include="Services\UserCardServiceTests.cs" />
     <Compile Include="Services\UserDeliverItemBuyerTests.cs" />
     <Compile Include="TestData\TestArtist.cs" />
     <Compile Include="TestData\TestFormat.cs" />

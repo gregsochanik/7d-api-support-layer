@@ -1,4 +1,4 @@
-﻿namespace SevenDigital.ApiSupportLayer.ServiceStack.GeoLocation
+namespace SevenDigital.ApiSupportLayer.GeoLocation
 {
 	public interface IGeoLookup
 	{

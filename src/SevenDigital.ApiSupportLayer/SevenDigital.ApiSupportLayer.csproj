@@ -84,6 +84,9 @@
     <Compile Include="Catalogue\ICatalogue.cs" />
     <Compile Include="Exceptions\InvalidBasketIdException.cs" />
     <Compile Include="Basket\IBasketHandler.cs" />
+    <Compile Include="GeoLocation\IGeoLookup.cs" />
+    <Compile Include="GeoLocation\IGeoSettings.cs" />
+    <Compile Include="GeoLocation\StrictGeoSettings.cs" />
     <Compile Include="Locker\ILockerBrowser.cs" />
     <Compile Include="Locker\ILockerCacheAdapter.cs" />
     <Compile Include="Locker\ILockerDateChecker.cs" />

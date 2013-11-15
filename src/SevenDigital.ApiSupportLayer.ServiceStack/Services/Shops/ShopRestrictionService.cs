@@ -1,4 +1,5 @@
 ﻿using ServiceStack.ServiceInterface;
+using SevenDigital.ApiSupportLayer.GeoLocation;
 using SevenDigital.ApiSupportLayer.ServiceStack.GeoLocation;
 
 namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Shops

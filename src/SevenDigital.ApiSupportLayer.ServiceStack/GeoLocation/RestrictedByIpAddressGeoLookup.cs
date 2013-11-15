@@ -1,5 +1,6 @@
 ﻿using SevenDigital.Api.Schema.Territories;
 using SevenDigital.Api.Wrapper;
+using SevenDigital.ApiSupportLayer.GeoLocation;
 using SevenDigital.ApiSupportLayer.ServiceStack.Services.Shops;
 
 namespace SevenDigital.ApiSupportLayer.ServiceStack.GeoLocation
