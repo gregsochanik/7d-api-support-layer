@@ -9,12 +9,6 @@ using SevenDigital.ApiSupportLayer.Catalogue;
 
 namespace SevenDigital.ApiSupportLayer.ServiceStack.Catalogue
 {
-	public interface IFluentApiTriggers
-	{
-		T SingleRequest<T>(IFluentApi<T> fluentApi, string countryCode);
-		T MultipleRequestBasedOnCountryCodeList<T>(IFluentApi<T> fluentApi);
-	}
-
 	public class CachingCatalogue : ICatalogue
 	{
 		private readonly ICatalogApiFactory _factory;

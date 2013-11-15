@@ -26,11 +26,13 @@ namespace SevenDigital.ApiSupportLayer.Purchasing.CardPurchaseRules
 		public PurchaseStatus FulfillPurchase(CardPurchaseRequest request, OAuthAccessToken accessToken)
 		{
 			if (request.CardId <= 0)
+			{
 				return new PurchaseStatus(false, INVALID_CARD_MESSAGE, new List<LockerRelease>());
-			
+			}
+
 			var api = _purchase.ForUser(accessToken.Token, accessToken.Secret)
-			                   .WithParameter("country", request.CountryCode)
-							   .ForPrice(request.Price);
+							.WithParameter("country", request.CountryCode)
+							.ForPrice(request.Price);
 
 			AdjustApiCallBasedOnPurchaseType(api, request);
 

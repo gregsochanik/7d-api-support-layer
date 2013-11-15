@@ -71,8 +71,14 @@
     <Compile Include="Cache\CacheSemaphore.cs" />
     <Compile Include="Cache\ICacheLock.cs" />
     <Compile Include="Catalogue\CacheKeys.cs" />
+    <Compile Include="Catalogue\CatalogueHelper.cs" />
+    <Compile Include="Catalogue\FluentApiExtensions.cs" />
+    <Compile Include="Catalogue\FluentApiTriggers.cs" />
     <Compile Include="Catalogue\ICatalogApiFactory.cs" />
     <Compile Include="Catalogue\ICatalogue.cs" />
+    <Compile Include="Catalogue\IFluentApiTriggers.cs" />
+    <Compile Include="Catalogue\IProductCollater.cs" />
+    <Compile Include="Catalogue\ProductCollater.cs" />
     <Compile Include="Exceptions\InvalidBasketIdException.cs" />
     <Compile Include="Basket\IBasketHandler.cs" />
     <Compile Include="GeoLocation\IGeoLookup.cs" />
@@ -90,6 +96,7 @@
     <Compile Include="Locker\LockerDateChecker.cs" />
     <Compile Include="Locker\LockerRetrieval.cs" />
     <Compile Include="Locker\LockerStats.cs" />
+    <Compile Include="Mapping\IMapper.cs" />
     <Compile Include="Mapping\IPurchaseItemMapper.cs" />
     <Compile Include="Mapping\PurchaseItemMapper.cs" />
     <Compile Include="Mapping\TrackUtility.cs" />

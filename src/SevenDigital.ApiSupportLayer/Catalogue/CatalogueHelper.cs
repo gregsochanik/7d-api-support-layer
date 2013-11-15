@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Catalogue
+namespace SevenDigital.ApiSupportLayer.Catalogue
 {
 	public static class CatalogueHelper
 	{

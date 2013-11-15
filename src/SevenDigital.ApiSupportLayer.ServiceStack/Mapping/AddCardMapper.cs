@@ -1,5 +1,6 @@
 using System;
 using SevenDigital.Api.Schema.ParameterDefinitions.Post;
+using SevenDigital.ApiSupportLayer.Mapping;
 using SevenDigital.ApiSupportLayer.ServiceStack.Model;
 
 namespace SevenDigital.ApiSupportLayer.ServiceStack.Mapping

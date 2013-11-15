@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using SevenDigital.ApiSupportLayer.Catalogue;
 using SevenDigital.ApiSupportLayer.ServiceStack.Catalogue;
 
 namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Cache

@@ -1,6 +1,7 @@
 using System.Net;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
+using ServiceStack.ServiceInterface.Auth;
 using SevenDigital.Api.Schema.OAuth;
 
 namespace SevenDigital.ApiSupportLayer.ServiceStack
@@ -14,7 +15,14 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack
 			{
 				throw new HttpError(HttpStatusCode.Unauthorized, "User not logged in");
 			}
-			return ConversionHelper.Extract7dAccessTokenFromSession(authSession);
+			return Extract7dAccessTokenFromSession(authSession);
+		}
+
+		public static OAuthAccessToken Extract7dAccessTokenFromSession(IAuthSession authSession)
+		{
+			var accessToken = authSession.ProviderOAuthAccess[0].AccessToken;
+			var accessTokenSecret = authSession.ProviderOAuthAccess[0].AccessTokenSecret;
+			return new OAuthAccessToken { Token = accessToken, Secret = accessTokenSecret };
 		}
 	}
 }

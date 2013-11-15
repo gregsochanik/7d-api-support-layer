@@ -4,6 +4,7 @@ using NUnit.Framework;
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper.Exceptions;
 using Rhino.Mocks;
+using SevenDigital.ApiSupportLayer.Catalogue;
 using SevenDigital.ApiSupportLayer.ServiceStack.Catalogue;
 using SevenDigital.ApiSupportLayer.TestData.StubApiWrapper;
 

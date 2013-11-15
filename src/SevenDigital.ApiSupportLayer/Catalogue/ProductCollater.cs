@@ -1,8 +1,7 @@
 using System.Linq;
-using SevenDigital.ApiSupportLayer.Catalogue;
 using SevenDigital.ApiSupportLayer.Model;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Catalogue
+namespace SevenDigital.ApiSupportLayer.Catalogue
 {
 	public class ProductCollater : IProductCollater
 	{

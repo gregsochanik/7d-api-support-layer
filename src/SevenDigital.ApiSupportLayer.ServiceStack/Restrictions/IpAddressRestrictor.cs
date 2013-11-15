@@ -4,7 +4,6 @@ using ServiceStack.Common.Web;
 using ServiceStack.Logging;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.ApiSupportLayer.GeoLocation;
-using SevenDigital.ApiSupportLayer.ServiceStack.GeoLocation;
 
 namespace SevenDigital.ApiSupportLayer.ServiceStack.Restrictions
 {
