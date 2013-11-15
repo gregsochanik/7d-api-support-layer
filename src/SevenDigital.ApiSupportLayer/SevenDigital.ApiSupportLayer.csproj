@@ -65,7 +65,7 @@
     <Compile Include="Authentication\IRequestTokenAuthentication.cs" />
     <Compile Include="Authentication\LoginInvalidException.cs" />
     <Compile Include="Authentication\RequestTokenAuthentication.cs" />
-    <Compile Include="Basket\BasketHandler.cs" />
+    <Compile Include="Basket\PurchaseData.cs" />
     <Compile Include="Basket\BasketRequestHelper.cs" />
     <Compile Include="Cache\CacheLock.cs" />
     <Compile Include="Cache\CacheSemaphore.cs" />
