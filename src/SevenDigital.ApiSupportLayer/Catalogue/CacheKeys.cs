@@ -4,11 +4,11 @@ namespace SevenDigital.ApiSupportLayer.Catalogue
 {
 	public static class CacheKeys
 	{
-		private const string UNLIMITED_STREAMING = "urn:stream:";
-		private const string OAUTH = "urn:oauth:";
-		private const string LOCKER_TOTALITEMS = "urn:locker:total:";
-		private const string LOCKER = "urn:locker:";
-		private const string USER_TOKEN_MAPPING = "urn:usertoken:";
+		private const string UNLIMITED_STREAMING = "urn:Stream:";
+		private const string OAUTH = "urn:OAuth:";
+		private const string LOCKER_TOTALITEMS = "urn:Locker:Total:";
+		private const string LOCKER = "urn:Locker:";
+		private const string USER_TOKEN_MAPPING = "urn:UserToken:";
 
 		private const string TRACK = "urn:Track:{0}:{1}";
 		private const string RELEASE = "urn:Release:{0}:{1}";
@@ -52,7 +52,6 @@ namespace SevenDigital.ApiSupportLayer.Catalogue
 		public static string UserTokenMappingCacheKey(OAuthAccessToken accessToken)
 		{
 			return string.Format("{0}{1}", USER_TOKEN_MAPPING, accessToken.Token);
-
 		}
 	}
 }

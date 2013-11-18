@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SevenDigital.ApiSupportLayer.Cache;
 
 namespace SevenDigital.ApiSupportLayer.Unit.Tests.Cache

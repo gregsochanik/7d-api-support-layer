@@ -17,13 +17,20 @@ namespace SevenDigital.ApiSupportLayer.User
 
 		public bool CheckUserExists(string emailAddress)
 		{
-			var usersFound = _usersApi.WithParameter("emailAddress", emailAddress).Please();
+			var usersFound = _usersApi
+				.WithParameter("emailAddress", emailAddress)
+				.Please();
+
 			return usersFound.UserList.Count > 0;
 		}
 
 		public UserSignup Create(string emailAddress, string password)
 		{
-			var userSignup = _userSignupApi.WithParameter("emailAddress", HttpUtility.UrlEncode(emailAddress)).WithParameter("password", HttpUtility.UrlEncode(password)).Please();
+			var userSignup = _userSignupApi
+				.WithParameter("emailAddress", HttpUtility.UrlEncode(emailAddress))
+				.WithParameter("password", HttpUtility.UrlEncode(password))
+				.Please();
+
 			return userSignup;
 		} 
 	}

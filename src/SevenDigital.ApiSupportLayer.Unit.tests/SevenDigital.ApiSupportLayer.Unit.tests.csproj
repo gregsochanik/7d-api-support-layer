@@ -70,6 +70,7 @@
     <Compile Include="Authentication\ApiThreeLeggedOAuthAuthenticationTests.cs" />
     <Compile Include="Authentication\RequestTokenAuthenticationTests.cs" />
     <Compile Include="Cache\CacheLockTests.cs" />
+    <Compile Include="Catalogue\CacheKeysTest.cs" />
     <Compile Include="Locker\LockerCacheDateCheckerTest.cs" />
     <Compile Include="Locker\LockerCacheTests.cs" />
     <Compile Include="Locker\LockerRetrievalTests.cs" />
