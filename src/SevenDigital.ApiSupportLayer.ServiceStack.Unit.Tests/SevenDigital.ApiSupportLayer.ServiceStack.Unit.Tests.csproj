@@ -105,7 +105,6 @@
     <Compile Include="Services\DownloadFileServiceTests.cs" />
     <Compile Include="Services\ItemRequestExtensionTests.cs" />
     <Compile Include="Services\PriceWatchTests.cs" />
-    <Compile Include="Services\ProductCollaterTests.cs" />
     <Compile Include="Services\ReleaseTracksExtensionTests.cs" />
     <Compile Include="Services\RestrictedByIpAddressGeoLookupTests.cs" />
     <Compile Include="Services\ShopRestrictionServiceTests.cs" />
@@ -117,8 +116,6 @@
     <Compile Include="TestData\TestFormat.cs" />
     <Compile Include="TestData\TestFormatList.cs" />
     <Compile Include="TestData\TestPrice.cs" />
-    <Compile Include="TestData\TestRelease.cs" />
-    <Compile Include="TestData\TestTrack.cs" />
     <Compile Include="Cache\TimedCacheReloadingTests.cs" />
   </ItemGroup>
   <ItemGroup>

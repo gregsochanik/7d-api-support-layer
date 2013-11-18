@@ -113,8 +113,6 @@
     <Compile Include="Services\ReleaseRecommend\ReleaseRecommendService.cs" />
     <Compile Include="Services\ReleaseTracks\ReleaseTracksService.cs" />
     <Compile Include="ServiceSessionExtensions.cs" />
-    <Compile Include="Restrictions\IpAddressRestrictor.cs" />
-    <Compile Include="Restrictions\IRestrictor.cs" />
     <Compile Include="Services\Shops\ShopRestriction.cs" />
     <Compile Include="Services\Shops\ShopRestrictionService.cs" />
     <Compile Include="Services\Shops\ShopUrl.cs" />

@@ -126,6 +126,10 @@
     <Compile Include="Purchasing\PurchaseResponse.cs" />
     <Compile Include="Purchasing\PurchaseResponseHelper.cs" />
     <Compile Include="Purchasing\UserDeliverItemBuyer.cs" />
+    <Compile Include="Restrictions\IpAddressRestrictor.cs" />
+    <Compile Include="Restrictions\IRestrictor.cs" />
+    <Compile Include="Restrictions\Restriction.cs" />
+    <Compile Include="Restrictions\RestrictionType.cs" />
     <Compile Include="User\IUserApi.cs" />
     <Compile Include="User\UserApi.cs" />
   </ItemGroup>

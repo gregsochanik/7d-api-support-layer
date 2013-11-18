@@ -7,10 +7,9 @@ using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.ApiSupportLayer.Catalogue;
 using SevenDigital.ApiSupportLayer.Model;
-using SevenDigital.ApiSupportLayer.ServiceStack.Catalogue;
-using SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.TestData;
+using SevenDigital.ApiSupportLayer.TestData;
 
-namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
+namespace SevenDigital.ApiSupportLayer.Unit.Tests.Catalogue
 {
 	[TestFixture]
 	public class ProductCollaterTests

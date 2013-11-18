@@ -73,11 +73,13 @@
     <Compile Include="Catalogue\FluentApiExtensionTests.cs" />
     <Compile Include="Catalogue\CacheKeysTest.cs" />
     <Compile Include="Catalogue\CatalogueHelperTests.cs" />
+    <Compile Include="Catalogue\ProductCollaterTests.cs" />
     <Compile Include="Locker\LockerCacheDateCheckerTest.cs" />
     <Compile Include="Locker\LockerCacheTests.cs" />
     <Compile Include="Locker\LockerRetrievalTests.cs" />
     <Compile Include="Mapping\PurchaseItemMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Restrictions\IpAddressRestrictorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
