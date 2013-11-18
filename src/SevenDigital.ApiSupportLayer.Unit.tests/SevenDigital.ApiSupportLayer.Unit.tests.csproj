@@ -67,7 +67,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\Class1.cs" />
+    <Compile Include="Authentication\ApiThreeLeggedOAuthAuthenticationTests.cs" />
+    <Compile Include="Authentication\RequestTokenAuthenticationTests.cs" />
     <Compile Include="Locker\LockerCacheDateCheckerTest.cs" />
     <Compile Include="Locker\LockerCacheTests.cs" />
     <Compile Include="Locker\LockerRetrievalTests.cs" />

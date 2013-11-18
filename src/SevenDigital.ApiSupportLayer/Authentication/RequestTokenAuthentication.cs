@@ -25,7 +25,7 @@ namespace SevenDigital.ApiSupportLayer.Authentication
 
 		public Response Authorise(OAuthRequestToken oAuthRequestToken, string username, string password)
 		{
-			string oauthRequesttokenAuthorise = _apiUri.SecureUri + REQUEST_TOKEN_URL;
+			var oauthRequesttokenAuthorise = _apiUri.SecureUri + REQUEST_TOKEN_URL;
 
 			var postParameters = new Dictionary<string, string>
 			{
