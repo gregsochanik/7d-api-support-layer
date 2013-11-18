@@ -6,31 +6,29 @@ namespace SevenDigital.ApiSupportLayer.Cache
 	{
 		public void PerformLockedTask(string lockOn, Action task)
 		{
-			if (!IsLocked(lockOn))
+			if (IsLocked(lockOn))
 			{
-				Lock(lockOn);
-				try
-				{
-					task();
-				}
-				catch (Exception ex)
-				{
-					Unlock(lockOn);
-				}
-				finally
-				{
-					Unlock(lockOn);
-				}
+				return;
 			}
-			else
+
+			Lock(lockOn);
+			try
 			{
+				task();
+			}
+			catch (Exception ex)
+			{
+				Unlock(lockOn);
+			}
+			finally
+			{
+				Unlock(lockOn);
 			}
 		}
 
 		public bool IsLocked(string lockOn)
 		{
-			return CacheSemaphore.Instance.ContainsKey(lockOn)
-			       && CacheSemaphore.Instance[lockOn];
+			return CacheSemaphore.Instance.ContainsKey(lockOn) && CacheSemaphore.Instance[lockOn];
 		}
 
 		private static void Lock(string key)
