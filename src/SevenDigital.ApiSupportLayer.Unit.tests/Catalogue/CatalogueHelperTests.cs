@@ -9,16 +9,10 @@ namespace SevenDigital.ApiSupportLayer.Unit.Tests.Catalogue
 		[Test]
 		public void TestName()
 		{
-			var countriesToCheckInCatalogue = CatalogueHelper.CountriesToCheckInCatalogue;
-
+			var actulCountries = CatalogueHelper.CountriesToCheckInCatalogue;
 			var expectedCountries = new[] {"GB", "US", "DE", "FR"};
-			var enumerator = countriesToCheckInCatalogue.GetEnumerator();
 
-			foreach (var expectedCountry in expectedCountries)
-			{
-				enumerator.MoveNext();
-				Assert.That(enumerator.Current, Is.EqualTo(expectedCountry));
-			}
+			Assert.That(actulCountries, Is.EqualTo(expectedCountries));
 		}
 	}
 }
