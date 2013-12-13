@@ -26,12 +26,21 @@ namespace SevenDigital.ApiSupportLayer.User
 
 		public UserSignup Create(string emailAddress, string password)
 		{
+			return Create(emailAddress, password, "");
+		}
+
+		public UserSignup Create(string emailAddress, string password, string affiliatePartner)
+		{
 			var userSignup = _userSignupApi
 				.WithParameter("emailAddress", HttpUtility.UrlEncode(emailAddress))
-				.WithParameter("password", HttpUtility.UrlEncode(password))
-				.Please();
+				.WithParameter("password", HttpUtility.UrlEncode(password));
 
-			return userSignup;
+			if (!string.IsNullOrEmpty(affiliatePartner))
+			{
+				userSignup = userSignup.WithParameter("affiliatePartner", affiliatePartner);
+			}
+
+			return userSignup.Please();
 		} 
 	}
 }

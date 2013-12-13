@@ -55,6 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.15\lib\net40\SevenDigital.Api.Schema.dll</HintPath>
     </Reference>
+    <Reference Include="SevenDigital.Api.Schema.Premium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SevenDigital.ApiSupportLayer\bin\Debug\SevenDigital.Api.Schema.Premium.dll</HintPath>
+    </Reference>
     <Reference Include="SevenDigital.Api.Wrapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.15\lib\net40\SevenDigital.Api.Wrapper.dll</HintPath>
@@ -80,6 +84,7 @@
     <Compile Include="Mapping\PurchaseItemMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Restrictions\IpAddressRestrictorTests.cs" />
+    <Compile Include="User\UserApiTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

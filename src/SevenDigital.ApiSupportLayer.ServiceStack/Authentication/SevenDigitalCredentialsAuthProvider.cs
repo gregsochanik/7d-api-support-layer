@@ -33,9 +33,11 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Authentication
 		{
 			try
 			{
+				var partnerId = authService.RequestContext.GetHeader("X-7d-partner-id") ?? string.Empty;
+
 				if (!_userApi.CheckUserExists(userName))
 				{
-					_userApi.Create(userName, password);
+					_userApi.Create(userName, password, partnerId);
 				}
 				var oAuthAccessToken = _auth.ForUser(HttpUtility.UrlEncode(userName), HttpUtility.UrlEncode(password));
 

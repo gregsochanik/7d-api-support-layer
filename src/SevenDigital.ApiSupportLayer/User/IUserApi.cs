@@ -6,5 +6,6 @@ namespace SevenDigital.ApiSupportLayer.User
 	{
 		bool CheckUserExists(string emailAddress);
 		UserSignup Create(string emailAddress, string password);
+		UserSignup Create(string emailAddress, string password, string affiliatePartner);
 	}
 }

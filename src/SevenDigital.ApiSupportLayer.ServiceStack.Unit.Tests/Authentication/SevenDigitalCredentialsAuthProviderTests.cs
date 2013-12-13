@@ -46,6 +46,8 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Authentication
 			_oAuthAuthentication.Stub(x => x.ForUser("test", "test")).Throw(new LoginInvalidException());
 			var sevenDigitalCredentialsAuthProvider = new SevenDigitalCredentialsAuthProvider(_oAuthAuthentication, _userApi);
 			var serviceBase = MockRepository.GenerateStub<IServiceBase>();
+			var mockRequestContext = new MockRequestContext();
+			serviceBase.Stub(x => x.RequestContext).Return(mockRequestContext);
 
 			var tryAuthenticate = sevenDigitalCredentialsAuthProvider.TryAuthenticate(serviceBase, "test", "test");
 			Assert.That(tryAuthenticate, Is.False);
