@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
+using System.Web.Routing;
 using ServiceStack.Logging;
+using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Auth;
 using SevenDigital.ApiSupportLayer.Authentication;
@@ -33,7 +35,8 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Authentication
 		{
 			try
 			{
-				var partnerId = authService.RequestContext.GetHeader("X-7d-partner-id") ?? string.Empty;
+				var httpRequest = authService.RequestContext.Get<IHttpRequest>();
+				var partnerId = httpRequest.FormData["affiliatePartner"] ?? string.Empty;
 
 				if (!_userApi.CheckUserExists(userName))
 				{

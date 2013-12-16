@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Specialized;
+using System.Net;
 using System.Web;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -57,13 +58,11 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Authentication
 			_oAuthAuthentication.Stub(x => x.ForUser(null, null)).IgnoreArguments().Return(oAuthAccessToken);
 
 			var serviceBase = MockRepository.GenerateStub<IServiceBase>();
-
-			var loggedInContext = ContextHelper.LoggedInContext();
-			var httpReq = (MockHttpRequest)loggedInContext.Get<IHttpRequest>();
-			httpReq.Headers = new WebHeaderCollection
+			var formData = new NameValueCollection
 			{
-				{"X-7d-partner-id", expectedAffiliatePartnerId}
+				{"affiliatePartner", expectedAffiliatePartnerId}
 			};
+			var loggedInContext = ContextHelper.LoggedInContext(formData);
 
 			serviceBase.Stub(x => x.RequestContext).Return(loggedInContext);
 			var sevenDigitalCredentialsAuthProvider = new SevenDigitalCredentialsAuthProvider(_oAuthAuthentication, _userApi);
