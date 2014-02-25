@@ -32,16 +32,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OAuth">
+      <HintPath>..\..\packages\OAuth.1.0.3\lib\net40\OAuth.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="SevenDigital.Api.Schema, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.15\lib\net40\SevenDigital.Api.Schema.dll</HintPath>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.3.2.1\lib\net40\SevenDigital.Api.Schema.dll</HintPath>
     </Reference>
     <Reference Include="SevenDigital.Api.Wrapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.15\lib\net40\SevenDigital.Api.Wrapper.dll</HintPath>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.3.2.1\lib\net40\SevenDigital.Api.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

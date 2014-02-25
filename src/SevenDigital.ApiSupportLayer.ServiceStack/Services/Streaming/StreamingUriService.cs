@@ -1,37 +1,35 @@
+using System.Collections.Generic;
 using System.Net;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
-using SevenDigital.Api.Wrapper;
-using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
+using SevenDigital.ApiSupportLayer.Authentication;
 using SevenDigital.ApiSupportLayer.MediaDelivery;
 
 namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Streaming
 {
 	public class StreamingUriService : Service
 	{
-		private readonly IUrlSigner _urlSigner;
-		private readonly IOAuthCredentials _configAuthCredentials;
+		private readonly IOAuthSigner _urlSigner;
 
-		public StreamingUriService(IUrlSigner urlSigner, IOAuthCredentials configAuthCredentials)
+		public StreamingUriService(IOAuthSigner urlSigner)
 		{
 			_urlSigner = urlSigner;
-			_configAuthCredentials = configAuthCredentials;
 		}
 
 		public HttpResult Get(StreamingUrlRequest request)
 		{
-			const string streamingEndpoint = StreamingSettings.LOCKER_STREAMING_URL;
-
 			var oAuthAccessToken = this.TryGetOAuthAccessToken();
 
-			var formatId = StreamingSettings.CurrentStreamType.FormatId;
-
-			var url = string.Format("{0}?trackid={1}&formatid={2}&country={3}", streamingEndpoint, request.Id, formatId, request.CountryCode);
-			
+			var parameters = new Dictionary<string, string>
+			{
+				{"trackid", request.Id.ToString()},
+				{"formatid", StreamingSettings.CurrentStreamType.FormatId.ToString()},
+				{"country", request.CountryCode},
+			};
 			return new HttpResult
 			{
 				Headers = {{ "Cache-control", "no-cache" }},
-				Location = _urlSigner.SignGetUrl(url, oAuthAccessToken.Token, oAuthAccessToken.Secret, _configAuthCredentials),
+				Location = _urlSigner.SignGetRequest(StreamingSettings.LOCKER_STREAMING_URL, oAuthAccessToken, parameters),
 				StatusCode = HttpStatusCode.Redirect
 			};
 		}

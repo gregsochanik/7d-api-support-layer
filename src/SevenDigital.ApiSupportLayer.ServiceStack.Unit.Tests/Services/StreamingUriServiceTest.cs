@@ -1,11 +1,11 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using NUnit.Framework;
 using Rhino.Mocks;
+using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Wrapper;
-using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
+using SevenDigital.ApiSupportLayer.Authentication;
 using SevenDigital.ApiSupportLayer.MediaDelivery;
-using SevenDigital.ApiSupportLayer.ServiceStack.Model;
-using SevenDigital.ApiSupportLayer.ServiceStack.Services;
 using SevenDigital.ApiSupportLayer.ServiceStack.Services.Streaming;
 using SevenDigital.ApiSupportLayer.TestData;
 
@@ -14,17 +14,18 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 	[TestFixture]
 	public class StreamingUriServiceTest
 	{
-		private static readonly string _userToken = FakeUserData.FakeAccessToken.Token;
-		private static readonly string _tokenSecret = FakeUserData.FakeAccessToken.Secret;
+		private static readonly OAuthAccessToken _accessToken = new OAuthAccessToken
+		{
+			Token = FakeUserData.FakeAccessToken.Token,
+			Secret = FakeUserData.FakeAccessToken.Secret
+		};
 
 		[Test]
 		public void If_set_up_correctly_signs_the_correct_url()
 		{
-			var configAuthCredentials = MockRepository.GenerateStub<IOAuthCredentials>();
-			
-			var stubbedUrlSigner = MockRepository.GenerateStub<IUrlSigner>();
+			var stubbedUrlSigner = MockRepository.GenerateStub<IOAuthSigner>();
 
-			var streamingUriService = new StreamingUriService(stubbedUrlSigner, configAuthCredentials)
+			var streamingUriService = new StreamingUriService(stubbedUrlSigner)
 			{
 				RequestContext = ContextHelper.LoggedInContext()
 			};
@@ -35,10 +36,26 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 			};
 
 			streamingUriService.Get(streamingUrlRequest);
+			
+			var parameters = new Dictionary<string, string>
+			{
+				{"trackid", streamingUrlRequest.Id.ToString()},
+				{"formatid", StreamingSettings.CurrentStreamType.FormatId.ToString()},
+				{"country", streamingUrlRequest.CountryCode},
+			};
 
-			var expectedUrl = string.Format("{0}?trackid={1}&formatid={2}&country={3}", StreamingSettings.LOCKER_STREAMING_URL, 12345, StreamingSettings.CurrentStreamType.FormatId, streamingUrlRequest.CountryCode);
+			var argumentsForCallsMadeOn = stubbedUrlSigner.GetArgumentsForCallsMadeOn(x => x.SignGetRequest(null, null, null), options => options.IgnoreArguments());
+			Assert.That(argumentsForCallsMadeOn[0][0], Is.EqualTo(StreamingSettings.LOCKER_STREAMING_URL));
 
-			stubbedUrlSigner.AssertWasCalled(x => x.SignGetUrl(expectedUrl, _userToken, _tokenSecret, configAuthCredentials));
+			var oAuthAccessToken = (OAuthAccessToken)(argumentsForCallsMadeOn[0][1]);
+			Assert.That(oAuthAccessToken.Token, Is.EqualTo(_accessToken.Token));
+			Assert.That(oAuthAccessToken.Secret, Is.EqualTo(_accessToken.Secret));
+
+			var actualParams = (Dictionary<string, string>)(argumentsForCallsMadeOn[0][2]);
+
+			Assert.That(actualParams["trackid"], Is.EqualTo(parameters["trackid"]));
+			Assert.That(actualParams["formatid"], Is.EqualTo(parameters["formatid"]));
+			Assert.That(actualParams["country"], Is.EqualTo(parameters["country"]));
 		}
 
 		[Test]
@@ -47,9 +64,9 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 			var configAuthCredentials = MockRepository.GenerateStub<IOAuthCredentials>();
 			configAuthCredentials.Stub(x => x.ConsumerKey).Return("ConsumerKey");
 			configAuthCredentials.Stub(x => x.ConsumerSecret).Return("ConsumerSecret");
-			var urlSigner = new UrlSigner(new OAuthSignatureGenerator());
+			var urlSigner =new CrennaOAuthSigner(configAuthCredentials);
 
-			var streamingUriService = new StreamingUriService(urlSigner, configAuthCredentials)
+			var streamingUriService = new StreamingUriService(urlSigner)
 			{
 				RequestContext = ContextHelper.LoggedInContext()
 			};

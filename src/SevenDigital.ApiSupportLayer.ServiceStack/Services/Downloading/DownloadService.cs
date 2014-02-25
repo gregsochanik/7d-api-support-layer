@@ -1,11 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using ServiceStack.Common.Web;
 using ServiceStack.Logging;
 using ServiceStack.ServiceInterface;
 using SevenDigital.Api.Schema.LockerEndpoint;
-using SevenDigital.Api.Wrapper;
-using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
+using SevenDigital.ApiSupportLayer.Authentication;
 using SevenDigital.ApiSupportLayer.Catalogue;
 using SevenDigital.ApiSupportLayer.Locker;
 using SevenDigital.ApiSupportLayer.MediaDelivery;
@@ -32,16 +32,14 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Downloading
 	[Authenticate]
 	public class DownloadBestFormatService : Service
 	{
-		private readonly IUrlSigner _urlSigner;
-		private readonly IOAuthCredentials _configAuthCredentials;
+		private readonly IOAuthSigner _urlSigner;
 		private readonly ICatalogue _catalogue;
 		private readonly ILockerBrowser _lockerBrowser;
 		private readonly ILog _logger = LogManager.GetLogger("DownloadBestFormatService");
 
-		public DownloadBestFormatService(IUrlSigner urlSigner, IOAuthCredentials configAuthCredentials, ICatalogue catalogue, ILockerBrowser lockerBrowser)
+		public DownloadBestFormatService(IOAuthSigner urlSigner, ICatalogue catalogue, ILockerBrowser lockerBrowser)
 		{
 			_urlSigner = urlSigner;
-			_configAuthCredentials = configAuthCredentials;
 			_catalogue = catalogue;
 			_lockerBrowser = lockerBrowser;
 		}
@@ -58,9 +56,12 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Downloading
 				throw new HttpError(HttpStatusCode.Forbidden, "NotOwned", "You do not own this " + request.Type);
 			}
 
-			var url = BuildDownloadUrl(request, lockerResponse);
+			var url = request.Type == PurchaseType.release
+				? DownloadSettings.DOWNLOAD_RELEASE_URL
+				: DownloadSettings.DOWNLOAD_TRACK_URL;
 
-			string signGetUrl = _urlSigner.SignGetUrl(url, oAuthAccessToken.Token, oAuthAccessToken.Secret, _configAuthCredentials);
+			var parameters = BuildDownloadParameters(request, lockerResponse);
+			var signGetUrl = _urlSigner.SignGetRequest(url, oAuthAccessToken, parameters);
 			return new HttpResult
 			{
 				Headers = { { "Cache-control", "no-cache" } },
@@ -69,46 +70,33 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Services.Downloading
 			};
 		}
 
-		private string BuildDownloadUrl(DownloadRequest request, LockerResponse locker)
+		private Dictionary<string,string> BuildDownloadParameters(ItemRequest request, LockerResponse locker)
 		{
-			string downloadUrl;
+			_logger.InfoFormat("DownloadUrl requested for {0} {1}", request.Id, request.Type);
+
 			if (request.Type == PurchaseType.release)
 			{
-				downloadUrl = BuildReleaseUrl(request);
-			}
-			else
-			{
-				var track = locker.LockerReleases[0].LockerTracks.First(x => x.Track.Id == request.Id);
-				if (track == null)
+				return new Dictionary<string, string>
 				{
-					_logger.ErrorFormat("Could not find track id {0} in users locker", request.Id);
-					throw new HttpError(HttpStatusCode.Forbidden, "NotOwned", "You do not own this " + request.Type);
-				}
-				downloadUrl = BuildTrackUrl(request, track.DownloadUrls[0].Format.Id);
+					{"releaseId", request.Id.ToString()},
+					{"country", request.CountryCode},
+				};
 			}
 
-			_logger.InfoFormat("DownloadUrl requested for {0} {1}", request.Id, request.Type);
-			_logger.Debug(downloadUrl);
-			return downloadUrl;
-		}
-
-		private static string BuildReleaseUrl(ItemRequest request)
-		{
-			return string.Format("{0}?releaseid={1}&country={2}",
-			                     DownloadSettings.DOWNLOAD_RELEASE_URL,
-			                     request.Id,
-			                     request.CountryCode);
-		}
-
-		private string BuildTrackUrl(ItemRequest request, int formatId)
-		{
+			var track = locker.LockerReleases[0].LockerTracks.First(x => x.Track.Id == request.Id);
+			if (track == null)
+			{
+				_logger.ErrorFormat("Could not find track id {0} in users locker", request.Id);
+				throw new HttpError(HttpStatusCode.Forbidden, "NotOwned", "You do not own this " + request.Type);
+			}
 			var aTrack = _catalogue.GetATrack(request.CountryCode, request.Id);
-			return string.Format("{0}?releaseid={1}&trackid={2}&country={3}&formatId={4}",
-										DownloadSettings.DOWNLOAD_TRACK_URL,
-										aTrack.Release.Id,
-										aTrack.Id,
-										request.CountryCode, 
-										formatId);
+			return new Dictionary<string, string>
+			{
+				{"releaseId", aTrack.Release.Id.ToString()},
+				{"trackid", aTrack.Id.ToString()},
+				{"formatid", track.DownloadUrls[0].Format.Id.ToString()},
+				{"country", request.CountryCode},
+			};
 		}
 	}
 }

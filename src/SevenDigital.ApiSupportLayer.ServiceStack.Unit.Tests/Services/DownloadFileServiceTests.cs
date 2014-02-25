@@ -2,16 +2,16 @@
 using System.Net;
 using NUnit.Framework;
 using Rhino.Mocks;
+using ServiceStack.Common.Web;
 using SevenDigital.Api.Schema.Media;
+using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Schema.ReleaseEndpoint;
 using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Wrapper;
-using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
+using SevenDigital.ApiSupportLayer.Authentication;
 using SevenDigital.ApiSupportLayer.Catalogue;
 using SevenDigital.ApiSupportLayer.MediaDelivery;
 using SevenDigital.ApiSupportLayer.Model;
-using SevenDigital.ApiSupportLayer.ServiceStack.Model;
-using SevenDigital.ApiSupportLayer.ServiceStack.Services;
 using SevenDigital.ApiSupportLayer.ServiceStack.Services.Downloading;
 using SevenDigital.ApiSupportLayer.TestData;
 
@@ -23,18 +23,22 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 		private const int EXPECTED_TRACK_ID = 12345;
 		private const int EXPECTED_RELEASE_ID = 54321;
 		private const int EXPECTED_FORMAT_ID = 1;
-		private static readonly string _expectedFakeToken = FakeUserData.FakeAccessToken.Token;
-		private static readonly string _expectedFakeTokenSecret = FakeUserData.FakeAccessToken.Secret;
+
+		private static readonly OAuthAccessToken _accessToken = new OAuthAccessToken
+		{
+			Token = FakeUserData.FakeAccessToken.Token,
+			Secret = FakeUserData.FakeAccessToken.Secret
+		};
 
 		private IOAuthCredentials _configAuthCredentials;
-		private IUrlSigner _stubbedUrlSigner;
+		private IOAuthSigner _stubbedUrlSigner;
 		private ICatalogue _stubbedCatalogue;
 
 		[SetUp]
 		public void SetUp()
 		{
 			_configAuthCredentials = MockRepository.GenerateStub<IOAuthCredentials>();
-			_stubbedUrlSigner = MockRepository.GenerateStub<IUrlSigner>();
+			_stubbedUrlSigner = MockRepository.GenerateStub<IOAuthSigner>();
 			_stubbedCatalogue = MockRepository.GenerateStub<ICatalogue>();
 			_stubbedCatalogue.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(new Track
 			{
@@ -56,7 +60,7 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 		[Test]
 		public void If_set_up_correctly_signs_the_correct_url()
 		{
-			var downloadTrackService = new DownloadFileService(_stubbedUrlSigner, _configAuthCredentials, _stubbedCatalogue)
+			var downloadTrackService = new DownloadFileService(_stubbedUrlSigner, _stubbedCatalogue)
 			{
 				RequestContext = ContextHelper.LoggedInContext()
 			};
@@ -70,9 +74,28 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 
 			downloadTrackService.Get(downloadTrackRequest);
 
-			var expectedUrl = string.Format("{0}?releaseid={1}&trackid={2}&formatid={3}&country={4}", DownloadSettings.DOWNLOAD_TRACK_URL, EXPECTED_RELEASE_ID, EXPECTED_TRACK_ID, EXPECTED_FORMAT_ID, downloadTrackRequest.CountryCode);
+			var parameters = new Dictionary<string, string>
+			{
+				{"releaseId", EXPECTED_RELEASE_ID.ToString()},
+				{"trackid", EXPECTED_TRACK_ID.ToString()},
+				{"formatid",EXPECTED_FORMAT_ID.ToString()},
+				{"country", downloadTrackRequest.CountryCode},
+			};
 
-			_stubbedUrlSigner.AssertWasCalled(x => x.SignGetUrl(expectedUrl, _expectedFakeToken, _expectedFakeTokenSecret, _configAuthCredentials));
+			var argumentsForCallsMadeOn = _stubbedUrlSigner.GetArgumentsForCallsMadeOn(x => x.SignGetRequest(null, null, null), options => options.IgnoreArguments());
+			Assert.That(argumentsForCallsMadeOn[0][0], Is.EqualTo(DownloadSettings.DOWNLOAD_TRACK_URL));
+
+			var oAuthAccessToken = (OAuthAccessToken) (argumentsForCallsMadeOn[0][1]);
+			Assert.That(oAuthAccessToken.Token, Is.EqualTo(_accessToken.Token));
+			Assert.That(oAuthAccessToken.Secret, Is.EqualTo(_accessToken.Secret));
+
+			var actualParams = (Dictionary<string, string>)(argumentsForCallsMadeOn[0][2]);
+
+			Assert.That(actualParams["releaseId"], Is.EqualTo(parameters["releaseId"]));
+			Assert.That(actualParams["trackid"], Is.EqualTo(parameters["trackid"]));
+			Assert.That(actualParams["formatid"], Is.EqualTo(parameters["formatid"]));
+			Assert.That(actualParams["country"], Is.EqualTo(parameters["country"]));
+
 		}
 
 		[Test]
@@ -80,9 +103,9 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 		{
 			_configAuthCredentials.Stub(x => x.ConsumerKey).Return("ConsumerKey");
 			_configAuthCredentials.Stub(x => x.ConsumerSecret).Return("ConsumerSecret");
-			var urlSigner = new UrlSigner(new OAuthSignatureGenerator());
+			var urlSigner = new CrennaOAuthSigner(_configAuthCredentials);
 
-			var downloadTrackService = new DownloadFileService(urlSigner, _configAuthCredentials, _stubbedCatalogue)
+			var downloadTrackService = new DownloadFileService(urlSigner, _stubbedCatalogue)
 			{
 				RequestContext = ContextHelper.LoggedInContext()
 			};
@@ -103,7 +126,7 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 		[Test]
 		public void If_set_up_correctly_signs_the_correct_url_release()
 		{
-			var downloadTrackService = new DownloadFileService(_stubbedUrlSigner, _configAuthCredentials, _stubbedCatalogue)
+			var downloadTrackService = new DownloadFileService(_stubbedUrlSigner,  _stubbedCatalogue)
 			{
 				RequestContext = ContextHelper.LoggedInContext()
 			};
@@ -116,10 +139,26 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 			};
 
 			downloadTrackService.Get(downloadTrackRequest);
+			
+			var parameters = new Dictionary<string, string>
+			{
+				{"releaseId", EXPECTED_RELEASE_ID.ToString()},
+				{"formatid", EXPECTED_FORMAT_ID.ToString()},
+				{"country", downloadTrackRequest.CountryCode},
+			};
 
-			var expectedUrl = string.Format("{0}?releaseid={1}&formatid={2}&country={3}", DownloadSettings.DOWNLOAD_RELEASE_URL, EXPECTED_RELEASE_ID, EXPECTED_FORMAT_ID, downloadTrackRequest.CountryCode);
+			var argumentsForCallsMadeOn = _stubbedUrlSigner.GetArgumentsForCallsMadeOn(x => x.SignGetRequest(null, null, null), options => options.IgnoreArguments());
+			Assert.That(argumentsForCallsMadeOn[0][0], Is.EqualTo(DownloadSettings.DOWNLOAD_RELEASE_URL));
 
-			_stubbedUrlSigner.AssertWasCalled(x => x.SignGetUrl(expectedUrl, _expectedFakeToken, _expectedFakeTokenSecret, _configAuthCredentials));
+			var oAuthAccessToken = (OAuthAccessToken)(argumentsForCallsMadeOn[0][1]);
+			Assert.That(oAuthAccessToken.Token, Is.EqualTo(_accessToken.Token));
+			Assert.That(oAuthAccessToken.Secret, Is.EqualTo(_accessToken.Secret));
+
+			var actualParams = (Dictionary<string, string>)(argumentsForCallsMadeOn[0][2]);
+
+			Assert.That(actualParams["releaseId"], Is.EqualTo(parameters["releaseId"]));
+			Assert.That(actualParams["formatid"], Is.EqualTo(parameters["formatid"]));
+			Assert.That(actualParams["country"], Is.EqualTo(parameters["country"]));
 		}
 
 		[Test]
@@ -127,9 +166,9 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 		{
 			_configAuthCredentials.Stub(x => x.ConsumerKey).Return("ConsumerKey");
 			_configAuthCredentials.Stub(x => x.ConsumerSecret).Return("ConsumerSecret");
-			var urlSigner = new UrlSigner(new OAuthSignatureGenerator());
+			var urlSigner = new CrennaOAuthSigner(_configAuthCredentials);
 
-			var downloadTrackService = new DownloadFileService(urlSigner, _configAuthCredentials, _stubbedCatalogue)
+			var downloadTrackService = new DownloadFileService(urlSigner, _stubbedCatalogue)
 			{
 				RequestContext = ContextHelper.LoggedInContext()
 			};

@@ -10,7 +10,7 @@ using SevenDigital.Api.Schema.TrackEndpoint;
 using SevenDigital.Api.Schema.User.Purchase;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Exceptions;
-using SevenDigital.Api.Wrapper.Http;
+using SevenDigital.Api.Wrapper.Responses;
 using SevenDigital.ApiSupportLayer.Catalogue;
 using SevenDigital.ApiSupportLayer.Model;
 using SevenDigital.ApiSupportLayer.Purchasing.CardPurchaseRules;
@@ -33,7 +33,7 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 		[Test]
 		public void Succesful_track_Purchase_returns_correct_response()
 		{
-			_stubCatalogueApi.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(new Track()
+			_stubCatalogueApi.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(new Track
 			{
 				Release = new Release
 				{
@@ -41,8 +41,8 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 				}
 			});
 
-			var expectedLocker = new List<LockerRelease>() { new LockerRelease() { Release = new Release() { Title = "my test release" } } };
-			_stubPurchaseApi.Stub(x => x.Please()).Return(new UserPurchaseItem()
+			var expectedLocker = new List<LockerRelease> { new LockerRelease { Release = new Release { Title = "my test release" } } };
+			_stubPurchaseApi.Stub(x => x.Please()).Return(new UserPurchaseItem
 			{
 				LockerReleases = expectedLocker
 			});
@@ -76,8 +76,8 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 				}
 			});
 
-			var expectedLocker = new List<LockerRelease>() { new LockerRelease() { Release = new Release{ Title = "my test release" } } };
-			_stubPurchaseApi.Stub(x => x.Please()).Return(new UserPurchaseItem()
+			var expectedLocker = new List<LockerRelease> { new LockerRelease { Release = new Release{ Title = "my test release" } } };
+			_stubPurchaseApi.Stub(x => x.Please()).Return(new UserPurchaseItem
 			{
 				LockerReleases = expectedLocker
 			});
@@ -117,7 +117,7 @@ namespace SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.Services
 		[Test]
 		public void Api_call_fired_with_correct_price()
 		{
-			_stubCatalogueApi.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(new Track()
+			_stubCatalogueApi.Stub(x => x.GetATrack(null, 0)).IgnoreArguments().Return(new Track
 			{
 				Release = new Release
 				{

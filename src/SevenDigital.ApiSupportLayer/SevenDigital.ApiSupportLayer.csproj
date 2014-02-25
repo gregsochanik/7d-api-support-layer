@@ -33,21 +33,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OAuth">
+      <HintPath>..\..\packages\OAuth.1.0.3\lib\net40\OAuth.dll</HintPath>
+    </Reference>
     <Reference Include="SevenDigital.Api.Schema, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.15\lib\net40\SevenDigital.Api.Schema.dll</HintPath>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.3.2.1\lib\net40\SevenDigital.Api.Schema.dll</HintPath>
     </Reference>
     <Reference Include="SevenDigital.Api.Schema.Premium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SevenDigital.Api.Schema.Premium.1.0.2\lib\net40\SevenDigital.Api.Schema.Premium.dll</HintPath>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.Premium.3.2.1\lib\net40\SevenDigital.Api.Schema.Premium.dll</HintPath>
     </Reference>
     <Reference Include="SevenDigital.Api.Wrapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.15\lib\net40\SevenDigital.Api.Wrapper.dll</HintPath>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.3.2.1\lib\net40\SevenDigital.Api.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="SevenDigital.Api.Wrapper.Premium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.Premium.1.0.2\lib\net40\SevenDigital.Api.Wrapper.Premium.dll</HintPath>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.Premium.3.2.1\lib\net40\SevenDigital.Api.Wrapper.Premium.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -61,7 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\ApiThreeLeggedOAuthAuthentication.cs" />
+    <Compile Include="Authentication\CrennaOAuthSigner.cs" />
     <Compile Include="Authentication\IOAuthAuthentication.cs" />
+    <Compile Include="Authentication\IOAuthSigner.cs" />
     <Compile Include="Authentication\IRequestTokenAuthentication.cs" />
     <Compile Include="Authentication\LoginInvalidException.cs" />
     <Compile Include="Authentication\RequestTokenAuthentication.cs" />
@@ -136,7 +144,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

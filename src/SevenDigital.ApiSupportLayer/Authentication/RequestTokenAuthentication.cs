@@ -1,43 +1,35 @@
+using System;
 using System.Collections.Generic;
+using SevenDigital.Api.Schema.Attributes;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Wrapper;
-using SevenDigital.Api.Wrapper.EndpointResolution.OAuth;
-using SevenDigital.Api.Wrapper.Http;
+using SevenDigital.Api.Wrapper.Responses;
 
 namespace SevenDigital.ApiSupportLayer.Authentication
 {
+	[ApiEndpoint("oauth/requestToken/authorise")]
+	[Serializable]
+	[HttpPost]
+	[OAuthSigned]
+	public class RequestTokenAuthorise
+	{ }
+
 	public class RequestTokenAuthentication : IRequestTokenAuthentication
 	{
-		private readonly IApiUri _apiUri;
-		private readonly IOAuthCredentials _oAuthCredentials;
-		private readonly IUrlSigner _urlSigner;
-		private readonly IHttpClient _httpClient;
-
-		private const string REQUEST_TOKEN_URL = "/oauth/requestToken/authorise";
-
-		public RequestTokenAuthentication(IApiUri apiUri, IOAuthCredentials oAuthCredentials, IUrlSigner urlSigner, IHttpClient httpClient)
+		private readonly IFluentApi<RequestTokenAuthorise> _requestTokenApi;
+		
+		public RequestTokenAuthentication(IFluentApi<RequestTokenAuthorise> requestTokenApi)
 		{
-			_apiUri = apiUri;
-			_oAuthCredentials = oAuthCredentials;
-			_urlSigner = urlSigner;
-			_httpClient = httpClient;
+			_requestTokenApi = requestTokenApi;
 		}
 
 		public Response Authorise(OAuthRequestToken oAuthRequestToken, string username, string password)
 		{
-			var oauthRequesttokenAuthorise = _apiUri.SecureUri + REQUEST_TOKEN_URL;
-
-			var postParameters = new Dictionary<string, string>
-			{
-				{"token", oAuthRequestToken.Token}, 
-				{"username", username}, 
-				{"password", password},
-			};
-
-			var signPostRequest = _urlSigner.SignPostRequest(oauthRequesttokenAuthorise, "", "", _oAuthCredentials, postParameters);
-
-			var postRequest = new PostRequest(oauthRequesttokenAuthorise, new Dictionary<string, string>(), signPostRequest);
-			return _httpClient.Post(postRequest);
+			return _requestTokenApi
+				.WithParameter("token", oAuthRequestToken.Token)
+				.WithParameter("username", username)
+				.WithParameter("password", password)
+				.Response();
 		}
 	}
 }

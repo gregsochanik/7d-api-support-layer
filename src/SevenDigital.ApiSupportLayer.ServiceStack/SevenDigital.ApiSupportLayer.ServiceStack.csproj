@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OAuth">
+      <HintPath>..\..\packages\OAuth.1.0.3\lib\net40\OAuth.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\ServiceStack.3.9.71\lib\net35\ServiceStack.dll</HintPath>
@@ -66,19 +72,19 @@
     </Reference>
     <Reference Include="SevenDigital.Api.Schema, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.15\lib\net40\SevenDigital.Api.Schema.dll</HintPath>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.3.2.1\lib\net40\SevenDigital.Api.Schema.dll</HintPath>
     </Reference>
     <Reference Include="SevenDigital.Api.Schema.Premium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SevenDigital.Api.Schema.Premium.1.0.2\lib\net40\SevenDigital.Api.Schema.Premium.dll</HintPath>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.Premium.3.2.1\lib\net40\SevenDigital.Api.Schema.Premium.dll</HintPath>
     </Reference>
     <Reference Include="SevenDigital.Api.Wrapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.2.0.15\lib\net40\SevenDigital.Api.Wrapper.dll</HintPath>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.3.2.1\lib\net40\SevenDigital.Api.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="SevenDigital.Api.Wrapper.Premium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.Premium.1.0.2\lib\net40\SevenDigital.Api.Wrapper.Premium.dll</HintPath>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.Premium.3.2.1\lib\net40\SevenDigital.Api.Wrapper.Premium.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

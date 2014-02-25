@@ -5,6 +5,7 @@ using Rhino.Mocks;
 using SevenDigital.Api.Schema;
 using SevenDigital.Api.Wrapper.Exceptions;
 using SevenDigital.Api.Wrapper.Http;
+using SevenDigital.Api.Wrapper.Responses;
 using SevenDigital.ApiSupportLayer.GeoLocation;
 using SevenDigital.ApiSupportLayer.Restrictions;
 

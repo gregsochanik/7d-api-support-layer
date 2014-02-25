@@ -1,5 +1,5 @@
 using SevenDigital.Api.Schema.OAuth;
-using SevenDigital.Api.Wrapper.Http;
+using SevenDigital.Api.Wrapper.Responses;
 
 namespace SevenDigital.ApiSupportLayer.Authentication
 {

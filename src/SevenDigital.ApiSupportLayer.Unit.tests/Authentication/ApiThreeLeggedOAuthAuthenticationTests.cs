@@ -5,6 +5,7 @@ using Rhino.Mocks;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Http;
+using SevenDigital.Api.Wrapper.Responses;
 using SevenDigital.ApiSupportLayer.Authentication;
 
 namespace SevenDigital.ApiSupportLayer.Unit.Tests.Authentication
