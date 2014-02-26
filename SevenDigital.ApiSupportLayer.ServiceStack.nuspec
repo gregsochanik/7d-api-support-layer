@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>SevenDigital.ApiSupportLayer.ServiceStack</id>
+    <version>3.2.1</version>
+    <authors>7digital</authors>
+    <owners>7digital</owners>
+    <projectUrl>https://github.com/gregsochanik/7d-api-support-layer</projectUrl>
+	<iconUrl>https://1.gravatar.com/avatar/793d9bae7c57fb6375a9e5bb2ecd6061</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Abstractions and helpers for using the 7digital api</description>
+    <copyright>Copyright 7digital Media Ltd. 2013</copyright>
+    <tags>7digital sevendigital music api premium</tags>
+    <dependencies>
+		<dependency id="SevenDigital.ApiSupportLayer" version="3.2.1" />
+		<dependency id="ServiceStack" version="3.9.71" />
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="src\SevenDigital.ApiSupportLayer\bin\Release\SevenDigital.ApiSupportLayer.ServiceStack.dll" target="lib\net40" /> 
+	<file src="src\SevenDigital.ApiSupportLayer\bin\Release\SevenDigital.ApiSupportLayer.ServiceStackpdb" target="lib\net40" /> 
+  </files>
+</package>
