@@ -3,11 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenDigital.ApiSupportLayer", "src\SevenDigital.ApiSupportLayer\SevenDigital.ApiSupportLayer.csproj", "{DF7B03FF-EA22-4E39-B98E-9F53A7BAC3EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenDigital.ApiSupportLayer.ServiceStack", "src\SevenDigital.ApiSupportLayer.ServiceStack\SevenDigital.ApiSupportLayer.ServiceStack.csproj", "{638E1164-34A9-465D-ACEE-E3C2042DCF79}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenDigital.ApiSupportLayer.TestData", "src\SevenDigital.ApiSupportLayer.TestData\SevenDigital.ApiSupportLayer.TestData.csproj", "{B000AF1F-D190-4D1F-A528-FC44475D8243}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests", "src\SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests\SevenDigital.ApiSupportLayer.ServiceStack.Unit.Tests.csproj", "{5EA9B28B-0B80-4580-BE7A-0A65FE0170F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenDigital.ApiSupportLayer.Unit.tests", "src\SevenDigital.ApiSupportLayer.Unit.tests\SevenDigital.ApiSupportLayer.Unit.tests.csproj", "{AEEE31C1-C09E-4EB4-A282-1A1F10096B5F}"
 EndProject
@@ -28,18 +24,10 @@ Global
 		{DF7B03FF-EA22-4E39-B98E-9F53A7BAC3EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF7B03FF-EA22-4E39-B98E-9F53A7BAC3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF7B03FF-EA22-4E39-B98E-9F53A7BAC3EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{638E1164-34A9-465D-ACEE-E3C2042DCF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{638E1164-34A9-465D-ACEE-E3C2042DCF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{638E1164-34A9-465D-ACEE-E3C2042DCF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{638E1164-34A9-465D-ACEE-E3C2042DCF79}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B000AF1F-D190-4D1F-A528-FC44475D8243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B000AF1F-D190-4D1F-A528-FC44475D8243}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B000AF1F-D190-4D1F-A528-FC44475D8243}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B000AF1F-D190-4D1F-A528-FC44475D8243}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5EA9B28B-0B80-4580-BE7A-0A65FE0170F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EA9B28B-0B80-4580-BE7A-0A65FE0170F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EA9B28B-0B80-4580-BE7A-0A65FE0170F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EA9B28B-0B80-4580-BE7A-0A65FE0170F3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AEEE31C1-C09E-4EB4-A282-1A1F10096B5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AEEE31C1-C09E-4EB4-A282-1A1F10096B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEEE31C1-C09E-4EB4-A282-1A1F10096B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
