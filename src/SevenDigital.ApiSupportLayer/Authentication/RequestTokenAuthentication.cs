@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using SevenDigital.Api.Schema.Attributes;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Wrapper;
@@ -11,6 +10,7 @@ namespace SevenDigital.ApiSupportLayer.Authentication
 	[Serializable]
 	[HttpPost]
 	[OAuthSigned]
+	[RequireSecure]
 	public class RequestTokenAuthorise
 	{ }
 
