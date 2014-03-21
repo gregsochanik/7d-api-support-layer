@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SevenDigital.ApiSupportLayer</id>
-    <version>3.2.1</version>
+    <version>3.2.3</version>
     <authors>7digital</authors>
     <owners>7digital</owners>
     <projectUrl>https://github.com/gregsochanik/7d-api-support-layer</projectUrl>
@@ -12,7 +12,7 @@
     <copyright>Copyright 7digital Media Ltd. 2013</copyright>
     <tags>7digital sevendigital music api premium</tags>
     <dependencies>
-		<dependency id="SevenDigital.Api.Wrapper.Premium" version="3.2.1" />
+		<dependency id="SevenDigital.Api.Wrapper.Premium" version="3.2.3" />
     </dependencies>
   </metadata>
   <files>

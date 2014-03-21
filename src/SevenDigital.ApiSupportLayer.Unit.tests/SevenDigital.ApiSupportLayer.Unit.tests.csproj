@@ -49,17 +49,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\SevenDigital.Api.Wrapper.3.2.1\lib\net40\SevenDigital.Api.Schema.dll</HintPath>
     </Reference>
-    <Reference Include="SevenDigital.Api.Schema.Premium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SevenDigital.Api.Schema.Premium, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.Premium.3.2.1\lib\net40\SevenDigital.Api.Schema.Premium.dll</HintPath>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.Premium.3.2.3\lib\net40\SevenDigital.Api.Schema.Premium.dll</HintPath>
     </Reference>
     <Reference Include="SevenDigital.Api.Wrapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\SevenDigital.Api.Wrapper.3.2.1\lib\net40\SevenDigital.Api.Wrapper.dll</HintPath>
     </Reference>
-    <Reference Include="SevenDigital.Api.Wrapper.Premium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SevenDigital.Api.Wrapper.Premium, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.Premium.3.2.1\lib\net40\SevenDigital.Api.Wrapper.Premium.dll</HintPath>
+      <HintPath>..\..\packages\SevenDigital.Api.Wrapper.Premium.3.2.3\lib\net40\SevenDigital.Api.Wrapper.Premium.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -1,19 +1,10 @@
-using System;
-using SevenDigital.Api.Schema.Attributes;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Wrapper;
 using SevenDigital.Api.Wrapper.Responses;
+using SevenDigital.Api.Schema.Premium.OAuth;
 
 namespace SevenDigital.ApiSupportLayer.Authentication
 {
-	[ApiEndpoint("oauth/requestToken/authorise")]
-	[Serializable]
-	[HttpPost]
-	[OAuthSigned]
-	[RequireSecure]
-	public class RequestTokenAuthorise
-	{ }
-
 	public class RequestTokenAuthentication : IRequestTokenAuthentication
 	{
 		private readonly IFluentApi<RequestTokenAuthorise> _requestTokenApi;
