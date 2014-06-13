@@ -84,56 +84,26 @@
     <Compile Include="Catalogue\ICatalogApiFactory.cs" />
     <Compile Include="Catalogue\ICatalogue.cs" />
     <Compile Include="Catalogue\IFluentApiTriggers.cs" />
-    <Compile Include="Catalogue\IProductCollater.cs" />
-    <Compile Include="Catalogue\ProductCollater.cs" />
     <Compile Include="Exceptions\InvalidBasketIdException.cs" />
-    <Compile Include="Basket\IBasketHandler.cs" />
     <Compile Include="GeoLocation\IGeoLookup.cs" />
     <Compile Include="GeoLocation\IGeoSettings.cs" />
     <Compile Include="GeoLocation\StrictGeoSettings.cs" />
-    <Compile Include="Locker\ILockerBrowser.cs" />
     <Compile Include="Locker\ILockerCacheAdapter.cs" />
     <Compile Include="Locker\ILockerDateChecker.cs" />
     <Compile Include="Locker\ILockerReloader.cs" />
     <Compile Include="Locker\ILockerRetrieval.cs" />
     <Compile Include="Locker\ITimedCacheReloading.cs" />
     <Compile Include="Locker\IUserTokenCache.cs" />
-    <Compile Include="Locker\LockerBrowser.cs" />
     <Compile Include="Locker\LockerCacheAdapter.cs" />
     <Compile Include="Locker\LockerDateChecker.cs" />
     <Compile Include="Locker\LockerRetrieval.cs" />
     <Compile Include="Locker\LockerStats.cs" />
     <Compile Include="Mapping\IMapper.cs" />
-    <Compile Include="Mapping\IPurchaseItemMapper.cs" />
-    <Compile Include="Mapping\PurchaseItemMapper.cs" />
     <Compile Include="Mapping\TrackUtility.cs" />
     <Compile Include="MediaDelivery\MimeTypeFormatCombination.cs" />
     <Compile Include="MediaDelivery\StreamingSettings.cs" />
-    <Compile Include="Model\CardBasketPurchaseRequest.cs" />
-    <Compile Include="Model\CardPurchaseRequest.cs" />
-    <Compile Include="Model\ItemRequestExtension.cs" />
-    <Compile Include="Model\PurchasedItem.cs" />
-    <Compile Include="Model\IHasCountryCode.cs" />
-    <Compile Include="Model\IHasId.cs" />
-    <Compile Include="Model\ItemRequest.cs" />
-    <Compile Include="Model\PurchaseRequest.cs" />
-    <Compile Include="Model\PurchaseStatus.cs" />
-    <Compile Include="Model\PurchaseType.cs" />
-    <Compile Include="Model\ReleaseAndTracks.cs" />
-    <Compile Include="Model\ReleaseAndTracksExtension.cs" />
-    <Compile Include="Model\ReleaseTracksRequest.cs" />
-    <Compile Include="Model\TrackRequest.cs" />
     <Compile Include="Model\TrackSearchRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Purchasing\CardPurchaseRules\ApiCardPurchaseRule.cs" />
-    <Compile Include="Purchasing\CardPurchaseRules\ICardPurchaseRule.cs" />
-    <Compile Include="Purchasing\CardPurchaseRules\StubCardPurchaseRule.cs" />
-    <Compile Include="Purchasing\IItemBuyer.cs" />
-    <Compile Include="Purchasing\IPriceWatch.cs" />
-    <Compile Include="Purchasing\PriceWatch.cs" />
-    <Compile Include="Purchasing\PurchaseResponse.cs" />
-    <Compile Include="Purchasing\PurchaseResponseHelper.cs" />
-    <Compile Include="Purchasing\UserDeliverItemBuyer.cs" />
     <Compile Include="Restrictions\IpAddressRestrictor.cs" />
     <Compile Include="Restrictions\IRestrictor.cs" />
     <Compile Include="Restrictions\Restriction.cs" />
@@ -145,6 +115,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Purchasing\CardPurchaseRules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

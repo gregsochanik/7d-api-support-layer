@@ -2,7 +2,6 @@ using System;
 using System.Xml;
 using SevenDigital.Api.Schema.OAuth;
 using SevenDigital.Api.Wrapper;
-using SevenDigital.Api.Wrapper.Http;
 using SevenDigital.Api.Wrapper.Responses;
 
 namespace SevenDigital.ApiSupportLayer.Authentication
