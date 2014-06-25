@@ -85,9 +85,6 @@
     <Compile Include="Catalogue\ICatalogue.cs" />
     <Compile Include="Catalogue\IFluentApiTriggers.cs" />
     <Compile Include="Exceptions\InvalidBasketIdException.cs" />
-    <Compile Include="GeoLocation\IGeoLookup.cs" />
-    <Compile Include="GeoLocation\IGeoSettings.cs" />
-    <Compile Include="GeoLocation\StrictGeoSettings.cs" />
     <Compile Include="Locker\ILockerCacheAdapter.cs" />
     <Compile Include="Locker\ILockerDateChecker.cs" />
     <Compile Include="Locker\ILockerReloader.cs" />
@@ -113,6 +110,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="GeoLocation\" />
     <Folder Include="Purchasing\CardPurchaseRules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
