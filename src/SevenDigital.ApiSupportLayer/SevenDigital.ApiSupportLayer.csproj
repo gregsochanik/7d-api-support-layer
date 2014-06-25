@@ -104,10 +104,6 @@
     <Compile Include="MediaDelivery\StreamingSettings.cs" />
     <Compile Include="Model\TrackSearchRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Restrictions\IpAddressRestrictor.cs" />
-    <Compile Include="Restrictions\IRestrictor.cs" />
-    <Compile Include="Restrictions\Restriction.cs" />
-    <Compile Include="Restrictions\RestrictionType.cs" />
     <Compile Include="User\IUserApi.cs" />
     <Compile Include="User\UserApi.cs" />
   </ItemGroup>
