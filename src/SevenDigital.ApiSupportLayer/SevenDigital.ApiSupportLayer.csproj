@@ -110,7 +110,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GeoLocation\" />
     <Folder Include="Purchasing\CardPurchaseRules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
