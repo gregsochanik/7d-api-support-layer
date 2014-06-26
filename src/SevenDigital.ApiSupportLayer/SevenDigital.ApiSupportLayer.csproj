@@ -81,7 +81,6 @@
     <Compile Include="Catalogue\CatalogueHelper.cs" />
     <Compile Include="Catalogue\FluentApiExtensions.cs" />
     <Compile Include="Catalogue\FluentApiTriggers.cs" />
-    <Compile Include="Catalogue\ICatalogApiFactory.cs" />
     <Compile Include="Catalogue\ICatalogue.cs" />
     <Compile Include="Catalogue\IFluentApiTriggers.cs" />
     <Compile Include="Exceptions\InvalidBasketIdException.cs" />
